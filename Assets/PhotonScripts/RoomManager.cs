@@ -65,7 +65,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
+        if (code == "RandomCode1234") {
+            PhotonNetwork.JoinRandomOrCreateRoom();
+        }
+        else{
         PhotonNetwork.JoinOrCreateRoom(code, null, null);
+        }
         status = connectionStatus.Joining;
         Debug.Log("Joining Room: " + code);
     }

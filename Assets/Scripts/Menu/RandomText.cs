@@ -1,27 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class RandomText : MonoBehaviour
 {
-    public List<string> randomText;
+    [SerializeField] List<string> randomText;
+    [SerializeField] TextMeshProUGUI tmpUG;
 
-    public TextMeshProUGUI tmpUG;
-
-    public int randomTextNumber;
-
-    public int minNum;
-    public int maxNum;
-
-    public void chooseRandom(){
-        randomTextNumber = Random.Range(minNum, maxNum);
-
-        tmpUG.text = randomText[randomTextNumber];
+    private void Start()
+    {
+        chooseRandom();
     }
 
-    void Start(){
-        randomTextNumber = Random.Range(minNum, maxNum);
-        chooseRandom();
+    public void chooseRandom()
+    {
+        int randomTextNumber = Random.Range(0, randomText.Count);
+        tmpUG.text = randomText[randomTextNumber];
     }
 }

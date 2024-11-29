@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class CodeHolder : MonoBehaviour
+using UnityEngine.SceneManagement;
+public class JoinRandom : MonoBehaviour
 {
     public string namePP;
     public string codePP;
@@ -18,16 +18,8 @@ public class CodeHolder : MonoBehaviour
         code = PlayerPrefs.GetString(codePP);
     }
 
-    public void SetCodeAndName(){
-        PlayerPrefs.SetString(namePP, newName);
-        PlayerPrefs.SetString(codePP, newCode);
-    }
-
-    public void changeCode(string theNewCode){
-        newCode = "Raft" + theNewCode;
-    }
-
-    public void changeName(string theNewName){
-        newName = theNewName;
+    public void JoinRandomRoom(){
+        PlayerPrefs.SetString(codePP, "RandomCode1234");
+        SceneManager.LoadScene("Raft");
     }
 }
