@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-
 public class IntroTimer : MonoBehaviour
 {
     public float introTime;
@@ -20,7 +19,6 @@ public class IntroTimer : MonoBehaviour
         while (timer < introTime && !introSkipped)
         {
             timer += Time.deltaTime;
-
             if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
             {
                 introSkipped = true;

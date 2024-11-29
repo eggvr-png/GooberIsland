@@ -15,7 +15,7 @@ public class CodeHolder : MonoBehaviour
 
     public void GetCodeAndName(){
         name = PlayerPrefs.GetString(namePP);
-        code = PlayerPrefs.GetString(codePP);
+        code = PlayerPrefs.GetString(codePP, "RandomCode1234");
     }
 
     public void SetCodeAndName(){
