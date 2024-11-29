@@ -260,14 +260,14 @@ RectTransform:
   m_GameObject: {fileID: 302760725}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5608393, y: 0.5608393, z: 0.5608393}
+  m_LocalScale: {x: 0.2694328, y: 0.2694328, z: 0.2694328}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 946877379}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -73, y: 11}
+  m_AnchoredPosition: {x: 43, y: -30}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &302760727
@@ -901,7 +901,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 690143770}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -913,8 +913,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.000061035156, y: 0}
+  m_SizeDelta: {x: -0.00012207031, y: 0.000061035156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &690143772
 MonoBehaviour:
@@ -1259,7 +1259,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 747395464}
         m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
-        m_MethodName: switchSceneDelayed
+        m_MethodName: ssdm
         m_Mode: 4
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1319,7 +1319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c92e14cbd1e4c7da93f676faf65551f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: noIntroMenu
+  sceneName: Menu
 --- !u!1 &802184519
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,7 +1791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &946877379
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1812,7 +1812,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -803, y: -20}
+  m_AnchoredPosition: {x: -810, y: -20}
   m_SizeDelta: {x: -977.3036, y: -572.9736}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &946877380
@@ -1823,7 +1823,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946877378}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 76c18ef66db82715580c862fe368341a, type: 2}
   m_CullingMode: 0
@@ -2011,6 +2011,7 @@ MonoBehaviour:
   tutorialWin: {fileID: 946877378}
   title: {fileID: 736625715}
   body: {fileID: 1314249477}
+  hideKey: 104
 --- !u!114 &999325913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3846,9 +3847,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbed: 0
+  grabPoint: {fileID: 156439136}
   grabPrompt: goober
   putdownPrompt: un-goober
-  grabPoint: {fileID: 156439136}
 --- !u!136 &1342080731
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4543,7 +4544,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1523659155}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ENV
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4866,9 +4867,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbed: 0
+  grabPoint: {fileID: 156439136}
   grabPrompt: Grab
   putdownPrompt: Drop
-  grabPoint: {fileID: 0}
 --- !u!54 &1784643470
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5429,12 +5430,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 1864612254}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
 --- !u!23 &1864612254
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6578,7 +6579,7 @@ PrefabInstance:
     - target: {fileID: 5830425016988197002, guid: 98613a5969a0bbbc6babebfe22f1d03f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6919706555058387000, guid: 98613a5969a0bbbc6babebfe22f1d03f,
         type: 3}

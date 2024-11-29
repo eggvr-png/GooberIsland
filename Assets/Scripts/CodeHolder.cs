@@ -24,7 +24,7 @@ public class CodeHolder : MonoBehaviour
     }
 
     public void changeCode(string theNewCode){
-        newCode = "Raft" + theNewCode;
+        newCode = theNewCode;
     }
 
     public void changeName(string theNewName){

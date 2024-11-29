@@ -392,7 +392,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "2b359ae2c34945669fea04d4664cdf64",
     "m_Id": 0,
-    "m_DisplayName": "Pixel Size",
+    "m_DisplayName": "PS",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -789,10 +789,10 @@
     "m_Guid": {
         "m_GuidSerialized": "d4eeaf18-09f0-40c9-aea9-c6df4e5c81df"
     },
-    "m_Name": "Pixel Size",
+    "m_Name": "PS",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Pixel Size",
-    "m_DefaultReferenceName": "_Pixel_Size",
+    "m_RefNameGeneratedByDisplayName": "PS",
+    "m_DefaultReferenceName": "_PS",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,

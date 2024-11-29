@@ -9,6 +9,7 @@ using UnityEngine;
 [InitializeOnLoad]
 public class DiscordWebhookNotifier
 {
+    // if you spam this, i will find you and kill u.
     private static string webhookUrl = "https://discord.com/api/webhooks/1312133353935343686/Ih9qLjCTTvEHzFSKClfBiKso-GrUl9mPFz-D7guUN8svoWN0Y7fovlIlBbo0A0i8bKH";
 
     static DiscordWebhookNotifier()

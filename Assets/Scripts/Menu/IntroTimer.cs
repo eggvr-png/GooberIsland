@@ -5,6 +5,7 @@ public class IntroTimer : MonoBehaviour
     public float introTime;
     public GameObject intro;
     public GameObject menu;
+    public GameObject allStartingScreens;
 
     public AudioLowPassFilter filter;
     public AudioReverbFilter filter2;
@@ -26,8 +27,7 @@ public class IntroTimer : MonoBehaviour
 
             yield return null;
         }
-
-        if (introSkipped || timer >= introTime)
+        if (introSkipped)
         {
             intro.SetActive(false);
             menu.SetActive(true);
@@ -38,6 +38,28 @@ public class IntroTimer : MonoBehaviour
             {
                 introMusic.time = introTime; 
             }
+        }
+        if (timer >= introTime){
+            intro.SetActive(false);
+            menu.SetActive(true);
+            Destroy(filter);
+            Destroy(filter2);
+        }
+    }
+
+    public void SkipAll(){
+        introMusic.gameObject.SetActive(true);
+        Destroy(filter);
+        Destroy(filter2);
+        introMusic.time = introTime;
+        allStartingScreens.SetActive(false);
+        menu.SetActive(true);
+    }
+
+    void Start(){
+        if (PlayerPrefs.GetInt("RTMFG") == 1){
+            PlayerPrefs.SetInt("RTMFG", 0);
+            SkipAll();
         }
     }
 

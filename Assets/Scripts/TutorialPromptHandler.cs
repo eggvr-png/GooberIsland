@@ -10,16 +10,25 @@ public class TutorialPromptHandler : MonoBehaviour
     public TextMeshProUGUI title;
     public TextMeshProUGUI body;
 
+    public KeyCode hideKey;
+
+    bool isTutPromptActive;
+
     public void sendTutorialPrompt(string promptTitle, string promptBody)
     {
         title.text = promptTitle;
         body.text = promptBody;
-        tutorialWin.SetActive(true);  
-        StartCoroutine(holdTime());
+        tutorialWin.SetActive(true); 
+        isTutPromptActive = true;
     }
-    
-    public IEnumerator holdTime(){
-        yield return new WaitForSeconds(7f);
-        tutorialWin.SetActive(false);
+
+    // is this good for preformence? no. probally not. does it work? yea. yea it does
+    void Update(){
+        if (Input.GetKey(hideKey)){
+            if (isTutPromptActive){
+                isTutPromptActive = false;
+                tutorialWin.SetActive(false);
+            }
+        }
     }
 }
