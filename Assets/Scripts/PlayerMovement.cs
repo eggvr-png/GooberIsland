@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
+    public InteractionSystem interactionSystem;
+
     void Awake() {
         rb = GetComponent<Rigidbody>();
     }
@@ -54,6 +56,7 @@ public class PlayerMovement : MonoBehaviour {
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        interactionSystem = FindObjectOfType<InteractionSystem>();
     }
 
     
@@ -168,6 +171,7 @@ public class PlayerMovement : MonoBehaviour {
     
     private float desiredX;
     private void Look() {
+        if (interactionSystem.IsRotatingObject) return;
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 

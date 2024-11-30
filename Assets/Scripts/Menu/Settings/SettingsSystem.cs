@@ -43,7 +43,7 @@ public class SettingsSystem : MonoBehaviour
     // settings loader
     private void loadSettings(){
         // loads pixel density
-        float loadedPixelDensity = PlayerPrefs.GetFloat("PixelDensity",384);
+        float loadedPixelDensity = PlayerPrefs.GetFloat("PixelDensity",256);
         pixelSlider.value = loadedPixelDensity;
         pixelInput.text = loadedPixelDensity.ToString();
     }

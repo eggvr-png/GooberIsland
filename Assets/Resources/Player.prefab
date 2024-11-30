@@ -585,6 +585,7 @@ MonoBehaviour:
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 200
+  interactionSystem: {fileID: 0}
 --- !u!114 &2260120822065374597
 MonoBehaviour:
   m_ObjectHideFlags: 0
