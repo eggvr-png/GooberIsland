@@ -7,16 +7,8 @@ using TMPro;
 
 public class InteractionSystem : MonoBehaviourPunCallbacks
 {
-    /// <summary>
-    /// this is a old script from the orignal goober island
-    /// well besides the new parts of it
-    /// im not really planning on changing how it works
-    /// i will try to optimize it at a later date
-    /// dont call me yandere dev because of that. and what i mean is that yandere did optimize code to good
-    /// im not a good coder so my code is that optimized
-    /// sorry
-    /// and also hi asset ripper
-    /// </summary>
+    // never add the interaction in here. i swear, i was going crazy on why i couldnt replace
+    // with the old script since the rotation script thingy made gave lot of bugs.
 
     Ray ray;
     [Header("References")]
@@ -29,32 +21,9 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
     public float waitTime = 0.2f;
     public bool abletoInteract;
 
-    // Variables for handling grabbed object
-    private GameObject grabbedObject;
-    private float holdDistance = 2.0f;
-    private float minHoldDistance = 1.0f;
-    private float maxHoldDistance = 5.0f;
-
-    // Public properties to check from other scripts
-    public bool IsObjectHeld
-    {
-        get { return grabbedObject != null; }
-    }
-
-    public bool IsRotatingObject
-    {
-        get { return grabbedObject != null && Input.GetKey(KeyCode.R); }
-    }
-
     private void Update()
     {
         CheckForCollision();
-
-        // Handle input for the grabbed object
-        if (grabbedObject != null)
-        {
-            HandleGrabbedObject();
-        }
     }
 
     void CheckForCollision()
@@ -120,17 +89,6 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     {
                         script.interact();
                         StartCoroutine(wait());
-
-                        // Update grabbedObject reference
-                        if (script.grabbed)
-                        {
-                            grabbedObject = hit.collider.gameObject;
-                            holdDistance = Vector3.Distance(transform.position, grabbedObject.transform.position);
-                        }
-                        else
-                        {
-                            grabbedObject = null;
-                        }
                     }
                     else
                     {
@@ -143,31 +101,6 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
         {
             rm.inUI.SetActive(false);
             rm.inText.text = "";
-        }
-    }
-
-    private void HandleGrabbedObject()
-    {
-        // Handle scroll wheel to adjust hold distance
-        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
-        if (scrollInput != 0f)
-        {
-            holdDistance += scrollInput * 2.0f; // Adjust multiplier as needed
-            holdDistance = Mathf.Clamp(holdDistance, minHoldDistance, maxHoldDistance);
-        }
-
-        // Update position of the grabbed object
-        grabbedObject.transform.position = transform.position + transform.forward * holdDistance;
-
-        // Handle rotation when 'R' is held
-        if (Input.GetKey(KeyCode.R))
-        {
-            float rotationSpeed = 5f; // Adjust as needed
-            float mouseX = Input.GetAxis("Mouse X") * rotationSpeed;
-            float mouseY = -Input.GetAxis("Mouse Y") * rotationSpeed;
-
-            grabbedObject.transform.Rotate(transform.up, mouseX, Space.World);
-            grabbedObject.transform.Rotate(transform.right, mouseY, Space.World);
         }
     }
 

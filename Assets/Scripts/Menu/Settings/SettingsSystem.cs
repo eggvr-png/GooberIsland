@@ -8,10 +8,18 @@ using UnityEngine.UI;
 public class SettingsSystem : MonoBehaviour
 {
     [Header("Pixelation Settings")]
-    public Material pixelFSS;
     [SerializeField] private float pixelyness;
+    [Space]
+    public Material pixelFSS;
     public Slider pixelSlider;
     public TMP_InputField pixelInput;
+    [Header("Control Settings")]
+    [SerializeField] private int mouseSens;
+    public Slider mSSlider;
+    public TMP_InputField mSInput;
+    [Space]
+    public KeyCode crouchKey;
+    public KeyCode sprintKey;
 
     // hey look at me not using a update function for this. this means im not a dumbo!!!!
     void Start(){
@@ -40,11 +48,19 @@ public class SettingsSystem : MonoBehaviour
         }
     }
 
+    // controls
+
     // settings loader
     private void loadSettings(){
         // loads pixel density
         float loadedPixelDensity = PlayerPrefs.GetFloat("PixelDensity",256);
-        pixelSlider.value = loadedPixelDensity;
-        pixelInput.text = loadedPixelDensity.ToString();
+        if (loadedPixelDensity == 0f){
+            pixelSlider.value = 200f;
+            pixelInput.text = "200";
+        }
+        else {
+            pixelSlider.value = loadedPixelDensity;
+            pixelInput.text = loadedPixelDensity.ToString();
+        }
     }
 }

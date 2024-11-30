@@ -4263,7 +4263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &683320169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6372,10 +6372,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6530995bcf61264f783a75d7dfce4ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pixelFSS: {fileID: 2100000, guid: 834bf8da42dfeafa4be2f871cc72d368, type: 2}
   pixelyness: 0
+  pixelFSS: {fileID: 2100000, guid: 834bf8da42dfeafa4be2f871cc72d368, type: 2}
   pixelSlider: {fileID: 1983996821}
   pixelInput: {fileID: 1668034753}
+  mouseSens: 0
+  mSSlider: {fileID: 0}
+  mSInput: {fileID: 0}
+  crouchKey: 0
+  sprintKey: 0
 --- !u!4 &1030814950
 Transform:
   m_ObjectHideFlags: 0

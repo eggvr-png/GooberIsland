@@ -89,6 +89,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         cameraHolder.GetComponent<MoveCamera>().enabled = true;
         player.GetComponent<PlayerMovement>().playerCam = camera.transform;
         player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<Rigidbody>().isKinematic = false;
         ps.GetComponent<PlayerSetup>().IsLocalPlayer();
         cffp.Check();
         ps.GetComponent<PlayerSetup>().setNameForAll();

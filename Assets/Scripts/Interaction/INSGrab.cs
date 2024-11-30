@@ -1,6 +1,7 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.LookDev;
 
@@ -27,12 +28,12 @@ public class INSGrab : MonoBehaviourPunCallbacks
         if (grabbed)
         {
             grabbed = false;
-            Release();
+            this.GetComponentInParent<PhotonView>().RPC("Release", RpcTarget.All);
         }
         else
         {
             grabbed = true;
-            Grab();
+            this.GetComponentInParent<PhotonView>().RPC("Grab", RpcTarget.All);
         }
     }
 
@@ -44,13 +45,13 @@ public class INSGrab : MonoBehaviourPunCallbacks
             rb.isKinematic = true;
         }
     }
-
+    [PunRPC]
     private void Grab()
     {
         rb.isKinematic = true;
 
     }
-
+    [PunRPC]
     private void Release()
     {
         rb.isKinematic = false;
