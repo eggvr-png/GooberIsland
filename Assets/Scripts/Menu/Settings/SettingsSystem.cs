@@ -23,7 +23,7 @@ public class SettingsSystem : MonoBehaviour
     public void changePixelyness(float newPixelyness){
         pixelyness = newPixelyness;
         PlayerPrefs.SetFloat("PixelDensity", newPixelyness);
-        pixelFSS.SetFloat("_PS", pixelyness + 0.5f);
+        pixelFSS.SetFloat("_PS", (512 - pixelyness)+ 0.5f);
     }
 
     private void cpd(){
@@ -35,15 +35,15 @@ public class SettingsSystem : MonoBehaviour
         int newPixelyness;
         int.TryParse(input, out newPixelyness);
         pixelSlider.value = newPixelyness;
-        if (newPixelyness > 500){
-            pixelInput.text = "500";
+        if (newPixelyness > 512){
+            pixelInput.text = "512";
         }
     }
 
     // settings loader
     private void loadSettings(){
         // loads pixel density
-        float loadedPixelDensity = PlayerPrefs.GetFloat("PixelDensity");
+        float loadedPixelDensity = PlayerPrefs.GetFloat("PixelDensity",384);
         pixelSlider.value = loadedPixelDensity;
         pixelInput.text = loadedPixelDensity.ToString();
     }
