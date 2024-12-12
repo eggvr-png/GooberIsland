@@ -6,6 +6,7 @@ TagManager:
   tags:
   - INS ED
   - INS Grab
+  - Store
   layers:
   - Default
   - TransparentFX

@@ -96,6 +96,42 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     }
                 }
             }
+            else if (hit.collider.gameObject.tag == "Store")
+            {
+                rm.inUI.SetActive(true);
+
+                OpenCloseStore script = hit.collider.transform.gameObject.GetComponent<OpenCloseStore>();
+
+                if (script.opened)
+                {
+                    rm.inText.text = script.close;
+                }
+                else
+                {
+                    rm.inText.text = script.open;
+                }
+                
+
+                if (PlayerPrefs.GetInt("FI") == 0)
+                {
+                    tph.sendTutorialPrompt("Interactions", "To interact with an interactable, use E");
+                    PlayerPrefs.SetInt("FI", 1);
+                }
+
+                if (Input.GetKey(interactKey))
+                {
+                    if (abletoInteract)
+                    {
+                        script.interact();
+                        StartCoroutine(wait());
+                        return;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
         }
         else
         {

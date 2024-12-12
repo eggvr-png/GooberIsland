@@ -5,6 +5,7 @@ using Photon.Pun;
 using Unity.Mathematics;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -69,10 +70,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
             PhotonNetwork.JoinRandomOrCreateRoom();
         }
         else{
-        PhotonNetwork.JoinOrCreateRoom(code, null, null);
+        PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name + code, null, null);
         }
         status = connectionStatus.Joining;
-        Debug.Log("Joining Room: " + code);
+        Debug.Log("Joining Room: " + SceneManager.GetActiveScene().name + code);
     }
 
     public override void OnJoinedRoom()

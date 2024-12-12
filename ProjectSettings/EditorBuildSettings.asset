@@ -11,10 +11,17 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Raft.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: bb1b8c1452b74fa40b88475b634a24f7
   - enabled: 0
     path: Assets/Scenes/noIntroMenu.unity
     guid: efbe820fcee8848299a037cec4129e13
   - enabled: 0
     path: Assets/Scenes/Tutorial.unity
     guid: cf8ec6ab2116780c7afab30316fdf86f
-  m_configObjects: {}
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 9e468456b8681a420b926bafbf5082ab,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 2b3b950d6325b11a0be06fb4cd47036f,
+      type: 2}
