@@ -93,10 +93,10 @@ public class SettingsSystem : MonoBehaviour
         Screen.fullScreen = changeTo;
         Debug.Log("Fullscreen " + changeTo.ToString());
         if (changeTo){
-            PlayerPrefs.SetInt("fullsSettings", 0);
+            PlayerPrefs.SetInt("fullsSettings", 1);
         }
         else {
-            PlayerPrefs.SetInt("fullsSettings", 1);
+            PlayerPrefs.SetInt("fullsSettings", 0);
         }
     }
 
@@ -183,7 +183,7 @@ public class SettingsSystem : MonoBehaviour
         }
         // loads fullscreen
         int fullscreen = PlayerPrefs.GetInt("fullsSettings");
-        if (fullscreen == 0){
+        if (fullscreen == 1){
             fullscreenToggle.isOn = true;
         }
         else {

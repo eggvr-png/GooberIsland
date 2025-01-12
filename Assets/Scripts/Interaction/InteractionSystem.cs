@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using Unity.VisualScripting;
 
 public class InteractionSystem : MonoBehaviourPunCallbacks
 {
@@ -76,6 +77,46 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                 {
                     rm.inText.text = script.grabPrompt;
                 }
+
+                if (PlayerPrefs.GetInt("FI") == 0)
+                {
+                    tph.sendTutorialPrompt("Interactions", "To interact with an interactable, use E");
+                    PlayerPrefs.SetInt("FI", 1);
+                }
+
+                if (Input.GetKey(interactKey))
+                {
+                    if (abletoInteract)
+                    {
+                        script.interact();
+                        StartCoroutine(wait());
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+
+                if (Input.GetMouseButton(0)){
+                    if (abletoInteract)
+                    {
+                        if(script.grabbed){
+                            script.ThrowRelease();
+                            StartCoroutine(wait());
+                        }
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+            else if (hit.collider.gameObject.tag == "INS Talk")
+            {
+                rm.inUI.SetActive(true);
+                INSTalk script = hit.collider.transform.gameObject.GetComponent<INSTalk>();
+
+                rm.inText.text = "Talk";
 
                 if (PlayerPrefs.GetInt("FI") == 0)
                 {

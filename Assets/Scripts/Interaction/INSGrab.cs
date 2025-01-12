@@ -17,6 +17,7 @@ public class INSGrab : MonoBehaviourPunCallbacks
     private Rigidbody rb;
     public string grabPrompt;
     public string putdownPrompt;
+    public GameObject cameras;
 
     private void Start()
     {
@@ -33,6 +34,7 @@ public class INSGrab : MonoBehaviourPunCallbacks
         else
         {
             grabbed = true;
+            this.GetComponentInParent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
             this.GetComponentInParent<PhotonView>().RPC("Grab", RpcTarget.All);
         }
     }
@@ -55,5 +57,14 @@ public class INSGrab : MonoBehaviourPunCallbacks
     private void Release()
     {
         rb.isKinematic = false;
+    }
+    public void ThrowRelease(){
+        grabbed = false;
+        this.GetComponentInParent<PhotonView>().RPC("Release", RpcTarget.All);
+
+        Vector3 camPosOrSmth = cameras.transform.forward;
+        camPosOrSmth.Normalize();
+
+        rb.AddForce(camPosOrSmth * 600, ForceMode.Force);
     }
 }
