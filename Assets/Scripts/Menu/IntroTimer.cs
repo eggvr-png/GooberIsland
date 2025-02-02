@@ -5,6 +5,7 @@ public class IntroTimer : MonoBehaviour
     public float introTime;
     public GameObject intro;
     public GameObject menu;
+    public GameObject maxPlayers;
     public GameObject allStartingScreens;
 
     public AudioLowPassFilter filter;
@@ -60,6 +61,11 @@ public class IntroTimer : MonoBehaviour
         if (PlayerPrefs.GetInt("RTMFG") == 1){
             PlayerPrefs.SetInt("RTMFG", 0);
             SkipAll();
+        }
+        if (PlayerPrefs.GetInt("RTMFMP") == 1){
+            PlayerPrefs.SetInt("RTMFMP", 0);
+            SkipAll();
+            maxPlayers.SetActive(true);
         }
     }
 

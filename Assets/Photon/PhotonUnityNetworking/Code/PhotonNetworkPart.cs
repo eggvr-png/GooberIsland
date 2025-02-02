@@ -61,6 +61,39 @@ namespace Photon.Pun
             }
         }
 
+        public static void RemoveBufferedRpcs(PhotonView view = null, string methodName = null, int[] callersActorNumbers = null, params object[] parameters)
+       {
+           Hashtable filter = new Hashtable(3);
+           if (view != null)
+           {
+               filter[keyByteZero] = view.ViewID;
+           }
+           if (!string.IsNullOrEmpty(methodName))
+           {
+               // send name or shortcut (if available)
+               int shortcut;
+               if (rpcShortcuts.TryGetValue(methodName, out shortcut))
+               {
+                   filter[keyByteFive] = (byte)shortcut; // LIMITS RPC COUNT
+               }
+               else
+               {
+                   filter[keyByteThree] = methodName;
+               }
+           }
+           if (parameters != null && parameters.Length > 0)
+           {
+               filter[keyByteFour] = parameters;
+           }
+           RaiseEventOptions raiseEventOptions = new RaiseEventOptions();
+           raiseEventOptions.CachingOption = EventCaching.RemoveFromRoomCache;
+           if (callersActorNumbers != null)
+           {
+               raiseEventOptions.TargetActors = callersActorNumbers;
+           }
+           PhotonNetwork.RaiseEventInternal(PunEvent.RPC, filter, raiseEventOptions, SendOptions.SendReliable);
+       }
+
         /// <summary>
         /// Returns a new iterable collection of current photon views.
         /// </summary>

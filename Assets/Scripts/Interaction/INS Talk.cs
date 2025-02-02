@@ -28,5 +28,8 @@ public class INSTalk : MonoBehaviourPunCallbacks
     public IEnumerator debounce(){
         yield return new WaitForSeconds(talkingSecs);
         interactable = true;
+        rm.tbtHolder.SetActive(false);
+        rm.talkBox.gameObject.SetActive(false);
+        rm.tbtHolder.SetActive(false);
     }
 }

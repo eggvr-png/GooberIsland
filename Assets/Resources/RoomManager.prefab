@@ -52,14 +52,18 @@ MonoBehaviour:
   playerPrefab: {fileID: 2962008037067395727, guid: b9a31f827eacca645b8ea02277ca575b,
     type: 3}
   spawn: {fileID: 172078062761138263}
-  player: {fileID: 0}
+  player: {fileID: 2962008037067395727, guid: b9a31f827eacca645b8ea02277ca575b, type: 3}
   cameraHolder: {fileID: 0}
   camera: {fileID: 0}
   codeAndNameHolder: {fileID: 158527994521982254}
   connectingCamera: {fileID: 0}
   connectingCanvas: {fileID: 0}
+  hostMenu: {fileID: 0}
   inText: {fileID: 0}
   inUI: {fileID: 0}
+  tbtHolder: {fileID: 0}
+  talkBox: {fileID: 0}
+  talktext: {fileID: 0}
   inSys: {fileID: 0}
   cffp: {fileID: 0}
 --- !u!114 &158527994521982254

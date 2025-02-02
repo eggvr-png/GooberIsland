@@ -13,7 +13,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     [Header("Room Settings")]
     [SerializeField]private string code;
-    [SerializeField]private string name;
+    [SerializeField]private string username;
     public enum connectionStatus{
         NotConnected,
         Connecting,
@@ -30,7 +30,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GameObject player;
     [Space]
     public GameObject cameraHolder;
-    public GameObject camera;
+    public GameObject mainCamera;
     [Header("Code & Name")]
     public CodeHolder codeAndNameHolder;
     [Header("Connecting Screen")]
@@ -48,6 +48,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Header("Other")]
     public InteractionSystem inSys;
     public CheckForFirstPlay cffp;
+    [Space]
+    public LobbySettings ls;
 
     // connects to servers
     void Start(){
@@ -85,9 +87,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         base.OnJoinedRoom();
         status = connectionStatus.InLobby;
         Debug.Log("Joined Lobby");
-        // deletes connecting screens
-        Destroy(connectingCamera);
-        Destroy(connectingCanvas);
         // spawns in player
         player = PhotonNetwork.Instantiate(playerPrefab.name, spawn.position, Quaternion.identity);
         PlayerSetup ps = player.GetComponent<PlayerSetup>();
@@ -95,7 +94,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         cameraHolder.GetComponent<MoveCamera>().player = player.transform.GetChild(2);
         cameraHolder.SetActive(true);
         cameraHolder.GetComponent<MoveCamera>().enabled = true;
-        player.GetComponent<PlayerMovement>().playerCam = camera.transform;
+        player.GetComponent<PlayerMovement>().playerCam = mainCamera.transform;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<Rigidbody>().isKinematic = false;
         ps.GetComponent<PlayerSetup>().IsLocalPlayer();
@@ -106,6 +105,25 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient){
             hostMenu.SetActive(true);
         }
+        StartCoroutine(finshJoin());
+    }
+
+    public IEnumerator finshJoin(){
+        // adds a 0.5 second delay to joining so buffered rpcs can run!
+        yield return new WaitForSeconds(0.5f);
+        // here we check if the lobby is over player max
+        if (PhotonNetwork.CurrentRoom.PlayerCount > ls.maxPlayers){
+            // disconnect player first since if we dont, then the player will still be in the lobby although they switched scenes
+            PhotonNetwork.Destroy(player);
+            PhotonNetwork.Disconnect();
+            // set a playerpref to tell the client that HEY this person disconnected due to max players!
+            PlayerPrefs.SetInt("RTMFMP", 1);
+            Debug.Log("Disconnecting: Lobby Full");
+            SceneManager.LoadScene(0);
+        }
+        // finally, we delete connecting screen
+        Destroy(connectingCamera);
+        Destroy(connectingCanvas);
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)
