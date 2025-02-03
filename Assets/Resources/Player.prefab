@@ -782,10 +782,10 @@ MonoBehaviour:
   interactionText: {fileID: 0}
   INs: {fileID: 0}
   ns: {fileID: 3267511618336221741}
-  smr: {fileID: 2548843427296284297}
-  green: {fileID: 2100000, guid: 72654abca877f36439012be8ea9a0b71, type: 2}
-  blue: {fileID: 2100000, guid: d7eba5c0939d90e418a0f22028acf457, type: 2}
-  pink: {fileID: 2100000, guid: b9fd0c00fa0c06c4da1310f981bace18, type: 2}
+  green: {r: 0, g: 0, b: 0, a: 0}
+  blue: {r: 0, g: 0, b: 0, a: 0}
+  pink: {r: 0, g: 0, b: 0, a: 0}
+  color: {fileID: 0}
 --- !u!114 &3267511618336221741
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -8,16 +8,7 @@ using System;
 
 public class JoinRandom : MonoBehaviourPunCallbacks
 {
-    public string namePP;
-    public string codePP;
-
-    [Header("Code/Name")]
-    public string name = "Goober";
-    public string code = "CFC12423";
-    [Header("New Code/Name")]
-    public string newName;
-    public string newCode;
-
+    string code;
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -51,8 +42,7 @@ public class JoinRandom : MonoBehaviourPunCallbacks
     }
 
     public void JoinRandomRoom(){
-        name = PlayerPrefs.GetString(namePP);
-        PlayerPrefs.SetString(codePP, code);
+        InterSceneDataKeeper.Instance.roomCode = code;
         SceneManager.LoadScene("Raft");
     }
 }

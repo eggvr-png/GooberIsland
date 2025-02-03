@@ -31,8 +31,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Space]
     public GameObject cameraHolder;
     public GameObject mainCamera;
-    [Header("Code & Name")]
-    public CodeHolder codeAndNameHolder;
     [Header("Connecting Screen")]
     public GameObject connectingCamera;
     public GameObject connectingCanvas;
@@ -55,9 +53,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     void Start(){
         Connect();
         status = connectionStatus.Connecting;
-        codeAndNameHolder.GetCodeAndName();
-        code = codeAndNameHolder.code;
-        name = codeAndNameHolder.name;
+        code = InterSceneDataKeeper.Instance.roomCode;
+        name = InterSceneDataKeeper.Instance.playerName;
     }
 
     public void Connect(){
@@ -79,6 +76,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
+        
         // hmm, i think its totally not obvious what this does!
         PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name + code, null, null);
         status = connectionStatus.Joining;
