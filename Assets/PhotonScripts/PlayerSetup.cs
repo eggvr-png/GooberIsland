@@ -12,7 +12,10 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     public TextMeshProUGUI interactionText;
     public InteractionSystem INs;
     public NamingSystem ns;
-
+    public Color green;
+    public Color blue;
+    public Color pink;
+    public Material color;
     public void IsLocalPlayer(){
         modelToDisable.SetActive(false);
     }

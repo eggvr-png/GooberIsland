@@ -49,6 +49,7 @@ MonoBehaviour:
   - startGame
   - ThrowRelease
   - changeMaxPlayer
+  - changePlayerColor
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

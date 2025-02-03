@@ -17,6 +17,11 @@ public class SettingsSystem : MonoBehaviour
     [Header("Graphics Settings")]
     [SerializeField] public int qualitySetting;
     public TMP_Dropdown qualityChooser;
+    [Space]
+    public TMP_Dropdown resChooser;
+    // janky alert!1!!
+    public TextMeshProUGUI resText;
+    public Resolution[] resolutions;
     [Header("VSync Settings")]
     public Toggle vsyncToggle;
     [Header("Fullscreen Settings")]
@@ -38,6 +43,17 @@ public class SettingsSystem : MonoBehaviour
         fullscreenToggle.onValueChanged.AddListener(delegate {changeFullscreen(fullscreenToggle.isOn);});
         mvolSlider.onValueChanged.AddListener(delegate {changeMVolume(mvolSlider.value);});
         svolSlider.onValueChanged.AddListener(delegate {changeSVolume(svolSlider.value);});
+        resChooser.onValueChanged.AddListener(delegate {changeRes(resChooser.value);});
+        // here we get all compatable resolutions
+        resolutions = Screen.resolutions;
+        var resolutionList =  new List<TMP_Dropdown.OptionData>();
+        foreach (Resolution resolution in resolutions){
+            string resString = resolution.width + "x" + resolution.height;
+            resolutionList.Add(new TMP_Dropdown.OptionData(resString));
+        }
+        // clear dropdown just in case i did a dummy
+        resChooser.ClearOptions();
+        resChooser.AddOptions(resolutionList);
         loadSettings();
     }
 
@@ -74,6 +90,12 @@ public class SettingsSystem : MonoBehaviour
         qualitySetting = qSetting;
     }
 
+    public void changeRes(int res){
+        Screen.SetResolution(resolutions[res].width, resolutions[res].height, fullscreenToggle.isOn);
+        PlayerPrefs.SetInt("width", resolutions[res].width);
+        PlayerPrefs.SetInt("height", resolutions[res].height);
+    }
+
     // vsync
     public void changeVSync(bool changeTo){
         if (changeTo){
@@ -93,10 +115,10 @@ public class SettingsSystem : MonoBehaviour
         Screen.fullScreen = changeTo;
         Debug.Log("Fullscreen " + changeTo.ToString());
         if (changeTo){
-            PlayerPrefs.SetInt("fullsSettings", 1);
+            PlayerPrefs.SetInt("fullsSettings", 0);
         }
         else {
-            PlayerPrefs.SetInt("fullsSettings", 0);
+            PlayerPrefs.SetInt("fullsSettings", 1);
         }
     }
 
@@ -183,7 +205,7 @@ public class SettingsSystem : MonoBehaviour
         }
         // loads fullscreen
         int fullscreen = PlayerPrefs.GetInt("fullsSettings");
-        if (fullscreen == 1){
+        if (fullscreen == 0){
             fullscreenToggle.isOn = true;
         }
         else {
@@ -203,6 +225,14 @@ public class SettingsSystem : MonoBehaviour
         }
         else {
             svolSlider.value = savedsVol;
+        }
+        // loads resolution
+        if (PlayerPrefs.GetInt("width") != 0 && PlayerPrefs.GetInt("height") == 0){
+            Screen.SetResolution(PlayerPrefs.GetInt("width"), PlayerPrefs.GetInt("height"), fullscreenToggle.isOn);
+            int width = PlayerPrefs.GetInt("width");
+            int height = PlayerPrefs.GetInt("height");
+            // is this really janky even if there on a diffrent moniter so the res is wrong? yes. yes it is. do i care. no. no i do not.
+            resText.text = width.ToString() + "x" + height.ToString();
         }
     }
 }
