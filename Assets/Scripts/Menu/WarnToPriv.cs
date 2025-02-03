@@ -15,7 +15,15 @@ public class WarnToPriv : MonoBehaviour
     public PlayfabManager pf;
 
     public IEnumerator fadeToPriv(){
-        yield return new WaitForSeconds(3);
+        float waitTime = 3;
+        float elapsedTime = 0;
+        while (elapsedTime < waitTime) {
+            if (Input.GetKey(KeyCode.Space)) {
+                break;
+            }
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
         int acceptedPriv = PlayerPrefs.GetInt("priv");
         if (acceptedPriv == 0){
             warning.gameObject.SetActive(false);

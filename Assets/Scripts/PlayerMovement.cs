@@ -167,6 +167,7 @@ public class PlayerMovement : MonoBehaviour {
     
     private float desiredX;
     private void Look() {
+        //if (Input.GetKey(KeyCode.R)) return; //type of code to annoy you months later
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 

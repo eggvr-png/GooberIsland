@@ -62,6 +62,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void Connect(){
         Debug.Log("Connecting!");
+        if (PhotonNetwork.IsConnected){
+            PhotonNetwork.Disconnect();
+        }
         PhotonNetwork.ConnectUsingSettings();
     }
 

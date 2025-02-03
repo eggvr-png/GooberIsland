@@ -40,7 +40,7 @@ public class LobbySettingsChanger : MonoBehaviour
 
     // open menu code
     private void OpenCloseMenu(){
-        if (Input.GetKey(menuKey)){
+        if (Input.GetKeyDown(menuKey)){
             if (!menuDebounce) {
                 if (!menuOpen){
                     if (PhotonNetwork.IsMasterClient){

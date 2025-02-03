@@ -27,7 +27,7 @@ public class pause : MonoBehaviour
     }
 
     void Update(){
-        if (Input.GetKey(pauseKey)){
+        if (Input.GetKeyDown(pauseKey)){
             if (pm.status == RoomManager.connectionStatus.InLobby){
                 if (!paused){
                     if (!debounce){
@@ -35,6 +35,7 @@ public class pause : MonoBehaviour
                         mainAudioListener.enabled = false;
                         pm.player.GetComponent<PlayerMovement>().enabled = false;
                         pauseAudioListener.SetActive(true);
+                        Camera.main.clearFlags = CameraClearFlags.Nothing; // Stop clearing old frames
                         paused = true;
                         UnlockMouse();
                         StartCoroutine(debouncer());
@@ -46,6 +47,7 @@ public class pause : MonoBehaviour
                         mainAudioListener.enabled = true;
                         pm.player.GetComponent<PlayerMovement>().enabled = true;
                         pauseAudioListener.SetActive(false);
+                        Camera.main.clearFlags = CameraClearFlags.Skybox; // Resume clearing old frames
                         paused = false;
                         LockMouse();
                         StartCoroutine(debouncer());
@@ -66,6 +68,7 @@ public class pause : MonoBehaviour
         mainAudioListener.enabled = true;
         pm.player.GetComponent<PlayerMovement>().enabled = true;
         pauseAudioListener.SetActive(false);
+        Camera.main.clearFlags = CameraClearFlags.Skybox; // Resume clearing old frames
         paused = false;
         LockMouse();
     }

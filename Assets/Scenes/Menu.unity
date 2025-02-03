@@ -579,6 +579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orignalMenu: {fileID: 1909495790}
   newMenu: {fileID: 1986196630}
+  isEscape: 0
 --- !u!1 &101748204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,6 +1288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orignalMenu: {fileID: 1909495790}
   newMenu: {fileID: 1572392252}
+  isEscape: 0
 --- !u!114 &216352190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2170,7 +2172,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: too lazy. sorry.
+  m_text: '- Can press escape to go back in menu
+
+    - Can skip warning with space
+
+    -
+    Can join random room
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b78c1a83a62c302187c5fe06df6ecfb, type: 2}
   m_sharedMaterial: {fileID: 1614167361358533777, guid: 7b78c1a83a62c302187c5fe06df6ecfb,
@@ -5561,6 +5570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orignalMenu: {fileID: 742025938}
   newMenu: {fileID: 1088465667}
+  isEscape: 1
 --- !u!114 &596493499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6450,7 +6460,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Join Last
+  m_text: 'Join Random
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b78c1a83a62c302187c5fe06df6ecfb, type: 2}
   m_sharedMaterial: {fileID: 1614167361358533777, guid: 7b78c1a83a62c302187c5fe06df6ecfb,
@@ -7119,6 +7131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orignalMenu: {fileID: 1620143406}
   newMenu: {fileID: 1909495790}
+  isEscape: 1
 --- !u!114 &720206571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11021,6 +11034,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orignalMenu: {fileID: 1909495790}
   newMenu: {fileID: 1620143406}
+  isEscape: 0
 --- !u!1 &1187226362
 GameObject:
   m_ObjectHideFlags: 0
@@ -13410,6 +13424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orignalMenu: {fileID: 1713108090}
   newMenu: {fileID: 1504031034}
+  isEscape: 0
 --- !u!114 &1405805207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14447,7 +14462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   namePP: EmptyName
-  codePP: 
+  codePP: code
   name: Goober
   code: CFC12423
   newName: 
@@ -16335,6 +16350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orignalMenu: {fileID: 1088465667}
   newMenu: {fileID: 742025938}
+  isEscape: 0
 --- !u!1 &1803345349
 GameObject:
   m_ObjectHideFlags: 0
@@ -16866,6 +16882,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orignalMenu: {fileID: 1986196630}
   newMenu: {fileID: 1909495790}
+  isEscape: 1
 --- !u!114 &1821459485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17252,7 +17269,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Verison: b3.1'
+  m_text: 'Verison: b3.2'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b78c1a83a62c302187c5fe06df6ecfb, type: 2}
   m_sharedMaterial: {fileID: 1614167361358533777, guid: 7b78c1a83a62c302187c5fe06df6ecfb,
@@ -17527,6 +17544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orignalMenu: {fileID: 1981031352}
   newMenu: {fileID: 498715381}
+  isEscape: 0
 --- !u!1 &1969108125
 GameObject:
   m_ObjectHideFlags: 0
@@ -17583,6 +17601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   orignalMenu: {fileID: 1572392252}
   newMenu: {fileID: 1909495790}
+  isEscape: 1
 --- !u!114 &1969108128
 MonoBehaviour:
   m_ObjectHideFlags: 0
