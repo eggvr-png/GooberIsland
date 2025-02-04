@@ -29,6 +29,9 @@ public class pause : MonoBehaviour
     }
 
     void Update(){
+        if (main == null){
+            main = Camera.main;
+        }
         if (Input.GetKeyDown(pauseKey)){
             if (pm.status == RoomManager.connectionStatus.InLobby){
                 if (!paused){

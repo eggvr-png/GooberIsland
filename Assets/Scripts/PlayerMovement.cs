@@ -40,6 +40,8 @@ public class PlayerMovement : MonoBehaviour {
     //Input
     float x, y;
     bool jumping, sprinting, crouching;
+
+    public static bool allowMouseMovement = true;
     
     //Sliding
     private Vector3 normalVector = Vector3.up;
@@ -167,7 +169,7 @@ public class PlayerMovement : MonoBehaviour {
     
     private float desiredX;
     private void Look() {
-        //if (Input.GetKey(KeyCode.R)) return; //type of code to annoy you months later
+        if (!allowMouseMovement) return;
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 
@@ -266,5 +268,4 @@ public class PlayerMovement : MonoBehaviour {
     private void StopGrounded() {
         grounded = false;
     }
-    
 }

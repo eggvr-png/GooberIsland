@@ -51,7 +51,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     PlayerPrefs.SetInt("FI", 1);
                 }
 
-                if (Input.GetKey(interactKey))
+                if (Input.GetKeyDown(interactKey))
                 {
                     if (abletoInteract)
                     {
@@ -84,7 +84,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     PlayerPrefs.SetInt("FI", 1);
                 }
 
-                if (Input.GetKey(interactKey))
+                if (Input.GetKeyDown(interactKey))
                 {
                     if (abletoInteract)
                     {
@@ -124,7 +124,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     PlayerPrefs.SetInt("FI", 1);
                 }
 
-                if (Input.GetKey(interactKey))
+                if (Input.GetKeyDown(interactKey))
                 {
                     if (abletoInteract)
                     {
@@ -159,7 +159,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     PlayerPrefs.SetInt("FI", 1);
                 }
 
-                if (Input.GetKey(interactKey))
+                if (Input.GetKeyDown(interactKey))
                 {
                     if (abletoInteract)
                     {
