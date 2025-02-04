@@ -10,10 +10,9 @@ public class NamingSystem : MonoBehaviourPunCallbacks
     public string playerName;
     [Header("Refrences")]
     public TextMeshPro nameText;
-    public string namePP;
 
     void Start(){
-        playerName = PlayerPrefs.GetString(namePP);
+        playerName = InterSceneDataKeeper.Instance.name;
     }
 
     [PunRPC]

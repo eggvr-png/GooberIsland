@@ -54,7 +54,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         Connect();
         status = connectionStatus.Connecting;
         code = InterSceneDataKeeper.Instance.roomCode;
-        name = InterSceneDataKeeper.Instance.playerName;
+        username = InterSceneDataKeeper.Instance.playerName;
     }
 
     public void Connect(){
@@ -98,10 +98,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         player.GetComponent<PlayerMovement>().playerCam = mainCamera.transform;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<Rigidbody>().isKinematic = false;
-        ps.GetComponent<PlayerSetup>().IsLocalPlayer();
+        ps.IsLocalPlayer();
         // checks for first play
         cffp.Check();
-        ps.GetComponent<PlayerSetup>().setNameForAll();
+        ps.setNameForAll();
+        player.GetComponent<PhotonView>().RPC("changePlayerColor", RpcTarget.AllBuffered);
         // check if player is host
         if (PhotonNetwork.IsMasterClient){
             hostMenu.SetActive(true);
