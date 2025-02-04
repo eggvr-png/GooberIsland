@@ -20,6 +20,7 @@ public class INSGrab : MonoBehaviourPunCallbacks
     public GameObject cameras;
     
     public float holdDistance = 3f;
+    float ogHoldDistance;
     public float minDistance = 1f;
     public float maxDistance = 10f;
     Vector3 originalGrabPos;
@@ -27,6 +28,7 @@ public class INSGrab : MonoBehaviourPunCallbacks
     {
         rb = GetComponent<Rigidbody>();
         originalGrabPos = grabPoint.localPosition;
+        ogHoldDistance = holdDistance;
     }
 
     public void interact()
@@ -41,6 +43,8 @@ public class INSGrab : MonoBehaviourPunCallbacks
         else
         {
             grabbed = true;
+            GetComponent<Collider>().excludeLayers = 0;
+            holdDistance = ogHoldDistance;
             this.GetComponentInParent<PhotonView>().TransferOwnership(PhotonNetwork.LocalPlayer.ActorNumber);
             this.GetComponentInParent<PhotonView>().RPC("Grab", RpcTarget.All);
         }
@@ -83,7 +87,7 @@ public class INSGrab : MonoBehaviourPunCallbacks
         rb.isKinematic = false;
     }
     public void ThrowRelease(){
-        grabbed = false;
+        interact(); //disable grabbed
         this.GetComponentInParent<PhotonView>().RPC("Release", RpcTarget.All);
         Vector3 camPosOrSmth = cameras.transform.forward;
         camPosOrSmth.Normalize();

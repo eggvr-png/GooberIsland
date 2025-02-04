@@ -2355,6 +2355,12 @@ MonoBehaviour:
   grabPrompt: goober
   putdownPrompt: un-goober
   cameras: {fileID: 1520848707}
+  holdDistance: 3
+  minDistance: 1
+  maxDistance: 10
+  localPlayerLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!136 &1342080731
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3002,6 +3008,7 @@ Transform:
   - {fileID: 1859521644}
   - {fileID: 2041492713}
   - {fileID: 1418256903}
+  - {fileID: 2042187948}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1657139821 stripped
@@ -3113,6 +3120,12 @@ MonoBehaviour:
   grabPrompt: Grab
   putdownPrompt: Drop
   cameras: {fileID: 1520848707}
+  holdDistance: 3
+  minDistance: 1
+  maxDistance: 10
+  localPlayerLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!54 &1784643470
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3936,6 +3949,12 @@ MonoBehaviour:
   grabPrompt: Grab
   putdownPrompt: Drop
   cameras: {fileID: 1520848707}
+  holdDistance: 3
+  minDistance: 1
+  maxDistance: 10
+  localPlayerLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!54 &1859521650
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4730,12 +4749,12 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1523659155}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8540416c71fbf92ef8923f1ac7738940,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.11739399
+      value: 0.117393985
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8540416c71fbf92ef8923f1ac7738940,
         type: 3}
@@ -4745,22 +4764,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8540416c71fbf92ef8923f1ac7738940,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.11739399
+      value: 0.117393985
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8540416c71fbf92ef8923f1ac7738940,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.097
+      value: -2.0610785
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8540416c71fbf92ef8923f1ac7738940,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -322.774
+      value: 1.7460022
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8540416c71fbf92ef8923f1ac7738940,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1404.379
+      value: 5.2995605
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8540416c71fbf92ef8923f1ac7738940,
         type: 3}
@@ -4901,6 +4920,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1342080733}
   m_SourcePrefab: {fileID: 100100000, guid: 8540416c71fbf92ef8923f1ac7738940, type: 3}
+--- !u!4 &2042187948 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8540416c71fbf92ef8923f1ac7738940,
+    type: 3}
+  m_PrefabInstance: {fileID: 2042187947}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &772201332348440950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5486,6 +5511,5 @@ SceneRoots:
   - {fileID: 772201332348440950}
   - {fileID: 1280549606}
   - {fileID: 1275148125}
-  - {fileID: 2042187947}
   - {fileID: 1890858441}
   - {fileID: 1852232123}

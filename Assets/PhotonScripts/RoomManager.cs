@@ -55,6 +55,18 @@ public class RoomManager : MonoBehaviourPunCallbacks
         status = connectionStatus.Connecting;
         code = InterSceneDataKeeper.Instance.roomCode;
         username = InterSceneDataKeeper.Instance.playerName;
+
+        //bad code, needed for bad quality mode
+        if (QualitySettings.GetQualityLevel() == 0){
+            foreach (Renderer rend in FindObjectsOfType<Renderer>()){
+                foreach (Material mat in rend.materials){
+                    if (mat.HasProperty("_Color")) {
+                        mat.EnableKeyword("_EMISSION");
+                        mat.SetColor("_EmissionColor", mat.color);
+                    }
+                }
+            }
+        }
     }
 
     public void Connect(){

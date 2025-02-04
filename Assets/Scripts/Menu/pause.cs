@@ -14,7 +14,7 @@ public class pause : MonoBehaviour
 
     public KeyCode pauseKey;
 
-    bool paused;
+    public static bool paused; // from now you can see if you are paused by just typing pause.paused and its a bool (i didnt name them)
 
     bool debounce;
 

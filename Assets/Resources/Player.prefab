@@ -693,6 +693,9 @@ MonoBehaviour:
   - {fileID: 417122451709904829}
   - {fileID: 2460940933861707208}
   - {fileID: 3724362585895062623}
+  localPlayerLayer:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!114 &3267511618336221741
 MonoBehaviour:
   m_ObjectHideFlags: 0

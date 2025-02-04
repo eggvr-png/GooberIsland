@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour {
 
     
     private void FixedUpdate() {
+        
         Movement();
     }
 
@@ -75,7 +76,7 @@ public class PlayerMovement : MonoBehaviour {
         y = Input.GetAxisRaw("Vertical");
         jumping = Input.GetButton("Jump");
         crouching = Input.GetKey(KeyCode.LeftControl);
-      
+        
         //Crouching
         if (Input.GetKeyDown(KeyCode.LeftControl))
             StartCrouch();
@@ -99,6 +100,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void Movement() {
+        
         //Extra gravity
         rb.AddForce(Vector3.down * Time.deltaTime * 10);
         
