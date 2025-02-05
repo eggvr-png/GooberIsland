@@ -171,4 +171,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
             hostMenu.SetActive(true);
         }
     }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        base.OnDisconnected(cause);
+        if (status == connectionStatus.InLobby){
+            status = connectionStatus.NotConnected;
+            InterSceneDataKeeper.errorText = cause.ToString() +"\n something with photon";
+            SceneManager.LoadScene(0);
+
+        }
+    }
 }

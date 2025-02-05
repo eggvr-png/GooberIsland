@@ -1,4 +1,6 @@
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 //this will store all the data between scenes so that we dont use playerprefs cuz thats weird or something idk
 public class InterSceneDataKeeper : MonoBehaviour
 {
@@ -8,6 +10,7 @@ public class InterSceneDataKeeper : MonoBehaviour
 
     public string playerName;
 
+    public static string errorText;
     
 
     private void Awake()
@@ -19,7 +22,19 @@ public class InterSceneDataKeeper : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(Instance);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            
         }
     }
+
+    void Update()
+    {
+        if (errorText != null && SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            SceneManager.LoadScene(0);
+        }
+    }
+
 }
