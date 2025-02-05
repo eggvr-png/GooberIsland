@@ -14946,8 +14946,8 @@ MonoBehaviour:
   menu: {fileID: 683320168}
   maxPlayers: {fileID: 1713108090}
   allStartingScreens: {fileID: 1339495894}
-  filter: {fileID: 2032339059}
-  filter2: {fileID: 2032339060}
+  filter: {fileID: 0}
+  filter2: {fileID: 0}
   introMusic: {fileID: 2032339056}
 --- !u!114 &1339495900
 MonoBehaviour:
@@ -21368,8 +21368,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2032339057}
   - component: {fileID: 2032339056}
-  - component: {fileID: 2032339059}
-  - component: {fileID: 2032339060}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -21489,54 +21487,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!169 &2032339059
-AudioLowPassFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2032339055}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_LowpassResonanceQ: 1
-  lowpassLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0.11323329
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!164 &2032339060
-AudioReverbFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2032339055}
-  m_Enabled: 1
-  m_DryLevel: 0
-  m_Room: -1000
-  m_RoomHF: -151
-  m_DecayTime: 7.56
-  m_DecayHFRatio: 0.91
-  m_ReflectionsLevel: -626
-  m_ReverbLevel: 774
-  m_ReverbDelay: 0.03
-  m_Diffusion: 100
-  m_Density: 100
-  m_HFReference: 5000
-  m_RoomLF: 0
-  m_LFReference: 250
-  m_ReflectionsDelay: 0
-  m_ReverbPreset: 26
 --- !u!1 &2050051038
 GameObject:
   m_ObjectHideFlags: 0
