@@ -9,6 +9,7 @@ using System;
 public class JoinRandom : MonoBehaviourPunCallbacks
 {
     string code;
+    /*
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -35,14 +36,14 @@ public class JoinRandom : MonoBehaviourPunCallbacks
         }else{
             code = UnityEngine.Random.Range(1000, 9999).ToString();
         }
-    }
+    }*/
 
     public void GetCodeAndName()
     {
     }
 
     public void JoinRandomRoom(){
-        InterSceneDataKeeper.Instance.roomCode = code;
+        InterSceneDataKeeper.Instance.roomCode = null;
         SceneManager.LoadScene("Raft");
     }
 }

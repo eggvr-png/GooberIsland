@@ -12,9 +12,10 @@ using Unity.VisualScripting;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     [Header("Room Settings")]
-    [SerializeField]private string code;
-    [SerializeField]private string username;
-    public enum connectionStatus{
+    [SerializeField] private string code;
+    [SerializeField] private string username;
+    public enum connectionStatus
+    {
         NotConnected,
         Connecting,
         ConnectedToServers,
@@ -50,17 +51,22 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public LobbySettings ls;
 
     // connects to servers
-    void Start(){
+    void Start()
+    {
         Connect();
         status = connectionStatus.Connecting;
         code = InterSceneDataKeeper.Instance.roomCode;
         username = InterSceneDataKeeper.Instance.playerName;
 
         //bad code, needed for bad quality mode
-        if (QualitySettings.GetQualityLevel() == 0){
-            foreach (Renderer rend in FindObjectsOfType<Renderer>()){
-                foreach (Material mat in rend.materials){
-                    if (mat.HasProperty("_Color")) {
+        if (QualitySettings.GetQualityLevel() == 0)
+        {
+            foreach (Renderer rend in FindObjectsOfType<Renderer>())
+            {
+                foreach (Material mat in rend.materials)
+                {
+                    if (mat.HasProperty("_Color"))
+                    {
                         mat.EnableKeyword("_EMISSION");
                         mat.SetColor("_EmissionColor", mat.color);
                     }
@@ -69,9 +75,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void Connect(){
+    public void Connect()
+    {
         Debug.Log("Connecting!");
-        if (PhotonNetwork.IsConnected){
+        if (PhotonNetwork.IsConnected)
+        {
             PhotonNetwork.Disconnect();
         }
         PhotonNetwork.ConnectUsingSettings();
@@ -88,18 +96,27 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
-        
-        // hmm, i think its totally not obvious what this does!
-        PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name + code, null, null);
+        if (code != null)
+        {
+            // hmm, i think its totally not obvious what this does!
+            PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name + code, null, new TypedLobby(SceneManager.GetActiveScene().name, LobbyType.Default));
+            Debug.Log("Joining Room: " + SceneManager.GetActiveScene().name + code);
+        }
+        else
+        {
+            PhotonNetwork.JoinRandomOrCreateRoom(null, 0, MatchmakingMode.FillRoom, new TypedLobby(SceneManager.GetActiveScene().name, LobbyType.Default));
+            Debug.Log("Joining Random Room!");
+        }
+
         status = connectionStatus.Joining;
-        Debug.Log("Joining Room: " + SceneManager.GetActiveScene().name + code);
+
     }
 
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
         status = connectionStatus.InLobby;
-        Debug.Log("Joined Lobby");
+        Debug.Log("Joined Lobby: " + PhotonNetwork.CurrentRoom.Name);
         // spawns in player
         player = PhotonNetwork.Instantiate(playerPrefab.name, spawn.position, Quaternion.identity);
         PlayerSetup ps = player.GetComponent<PlayerSetup>();
@@ -116,17 +133,20 @@ public class RoomManager : MonoBehaviourPunCallbacks
         ps.setNameForAll();
         player.GetComponent<PhotonView>().RPC("changePlayerColor", RpcTarget.AllBuffered);
         // check if player is host
-        if (PhotonNetwork.IsMasterClient){
+        if (PhotonNetwork.IsMasterClient)
+        {
             hostMenu.SetActive(true);
         }
         StartCoroutine(finshJoin());
     }
 
-    public IEnumerator finshJoin(){
+    public IEnumerator finshJoin()
+    {
         // adds a 0.5 second delay to joining so buffered rpcs can run!
         yield return new WaitForSeconds(0.5f);
         // here we check if the lobby is over player max
-        if (PhotonNetwork.CurrentRoom.PlayerCount > ls.maxPlayers){
+        if (PhotonNetwork.CurrentRoom.PlayerCount > ls.maxPlayers)
+        {
             // disconnect player first since if we dont, then the player will still be in the lobby although they switched scenes
             PhotonNetwork.Destroy(player);
             PhotonNetwork.Disconnect();
@@ -145,8 +165,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
         base.OnMasterClientSwitched(newMasterClient);
 
         Debug.Log("Master Client Changed.");
-        
-        if (PhotonNetwork.IsMasterClient){
+
+        if (PhotonNetwork.IsMasterClient)
+        {
             hostMenu.SetActive(true);
         }
     }
