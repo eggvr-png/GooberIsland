@@ -30,12 +30,6 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     }
 
     void Start(){
-        
-    }
-
-    public override void OnJoinedRoom()
-    {
-        base.OnJoinedRoom();
         if (photonView.IsMine)
         {
             ExitGames.Client.Photon.Hashtable props = new ExitGames.Client.Photon.Hashtable();
@@ -48,7 +42,6 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             
         }
         UpdateColor();
-
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)

@@ -57,7 +57,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         status = connectionStatus.Connecting;
         code = InterSceneDataKeeper.Instance.roomCode;
         username = InterSceneDataKeeper.Instance.playerName;
-
+        PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = Application.version;
         //bad code, needed for bad quality mode
         if (QualitySettings.GetQualityLevel() == 0)
         {
@@ -131,7 +131,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // checks for first play
         cffp.Check();
         ps.setNameForAll();
-        player.GetComponent<PhotonView>().RPC("changePlayerColor", RpcTarget.AllBuffered);
         // check if player is host
         if (PhotonNetwork.IsMasterClient)
         {
