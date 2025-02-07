@@ -12,7 +12,7 @@ public class NameSystem : MonoBehaviour
     [Header("In Game Settings")]
     public TextMeshPro nametag;
     [Header("Menu Settings")]
-    public string namePlayerPref;
+    string namePlayerPref = "playerName";
     public PlayfabManager playfab;
 
     public void SaveName(string newName){

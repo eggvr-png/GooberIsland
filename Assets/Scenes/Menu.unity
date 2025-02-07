@@ -2810,30 +2810,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'hello! been awhile since a update so, heres a (early) valentines day one!1!!
+  m_text: '-Fixed name not saving/showing
 
+    -no longer can join empty code
 
-    -
-    Lobby Settings! You can now be forever alone if ya wanna!
+    -fixed
+    small bugs
 
-    - Goober Color
-    Picker (changes the limbs, not body)
-
-    - Grabbables can now be rotated and
-    moved forward and back words (R Key, Scroll Wheel)
-
-    - Voice Chat (my ears
-    are bleeding)
-
-    - Resolution Picker
-
-    - Able to skip warning and intro
-    [no pesky epelispy warning!1!!]
-
-    - Can back outta menus via [ESC]
-
-    -
-    Remade the lobby joining menu. [kinda obvious since player colors exist!]'
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b78c1a83a62c302187c5fe06df6ecfb, type: 2}
   m_sharedMaterial: {fileID: 1614167361358533777, guid: 7b78c1a83a62c302187c5fe06df6ecfb,
@@ -17232,6 +17216,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037b802f45d451851a426044db90168e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  codeInput: {fileID: 1064688540}
+  nameInput: {fileID: 1600625969}
+  joinButton: {fileID: 1151913449}
+  joinRandomButton: {fileID: 387612027}
 --- !u!114 &1572392255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19673,10 +19661,6 @@ MonoBehaviour:
       m_Calls: []
   m_text: '<< Bug Fixes >>
 
-    - Fixed player names [again]
-
-    - Readded pixelation
-    effect to High Fedelity quality.
 
 '
   m_isRightToLeft: 0
