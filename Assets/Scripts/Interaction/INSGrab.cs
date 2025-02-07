@@ -42,6 +42,7 @@ public class INSGrab : MonoBehaviourPunCallbacks
         }
         else
         {
+            if (rb.isKinematic) return;
             grabbed = true;
             GetComponent<Collider>().excludeLayers = 0;
             holdDistance = ogHoldDistance;
