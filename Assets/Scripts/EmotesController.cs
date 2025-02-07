@@ -16,7 +16,6 @@ public class EmotesController : MonoBehaviourPunCallbacks
     {
         View = GetComponent<PhotonView>();
         mainCamera = Camera.main;
-
     }
 
     public void PlayEmote(string emoteName)
