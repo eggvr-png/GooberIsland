@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
-using UnityEditor;
+using TMPro;
 
 public class PlayfabManager : MonoBehaviour
 {
+    public TextMeshProUGUI playfabId;
     public void Login(){
         var request = new LoginWithCustomIDRequest{
             CustomId = SystemInfo.deviceUniqueIdentifier,
@@ -22,5 +21,7 @@ public class PlayfabManager : MonoBehaviour
 
     void OnLoginSuccess(LoginResult result){
         Debug.Log("Logged into Playfab :D");
+
+        playfabId.text = result.PlayFabId;
     }
 }
