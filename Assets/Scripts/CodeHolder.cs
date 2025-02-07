@@ -14,6 +14,8 @@ public class CodeHolder : MonoBehaviour
     void Start()
     {
         InterSceneDataKeeper.Instance.playerName = PlayerPrefs.GetString("playerName");
+        if (nameInput)
+        nameInput.text = InterSceneDataKeeper.Instance.playerName;
     }
     void Update(){
         if (joinButton == null || joinRandomButton == null) return;
