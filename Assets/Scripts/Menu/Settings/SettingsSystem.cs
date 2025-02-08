@@ -66,6 +66,8 @@ public class SettingsSystem : MonoBehaviour
     }
 
     // tbh i dunno why this is here lol
+    // i cant tell if put this here or not, but idfk lol
+    // nvm its for the input text by the slider i think
     private void cpd(){
         changePixelyness(pixelSlider.value);
         pixelInput.text = pixelyness.ToString();
@@ -188,7 +190,7 @@ public class SettingsSystem : MonoBehaviour
         // loads quality
         int qSetting = PlayerPrefs.GetInt("qSetting");
         if (qSetting == 0){
-            qualityChooser.value = 1;
+            qualityChooser.value = 2;
         }
         else {
             qualityChooser.value = qSetting - 1;
@@ -229,10 +231,6 @@ public class SettingsSystem : MonoBehaviour
         // loads resolution
         if (PlayerPrefs.GetInt("width") != 0 && PlayerPrefs.GetInt("height") == 0){
             Screen.SetResolution(PlayerPrefs.GetInt("width"), PlayerPrefs.GetInt("height"), fullscreenToggle.isOn);
-            int width = PlayerPrefs.GetInt("width");
-            int height = PlayerPrefs.GetInt("height");
-            // is this really janky even if there on a diffrent moniter so the res is wrong? yes. yes it is. do i care. no. no i do not.
-            resText.text = width.ToString() + "x" + height.ToString();
         }
     }
 }

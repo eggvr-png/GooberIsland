@@ -18,6 +18,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     public Material green;
     public Material blue;
     public Material pink;
+    public Material yellow;
 
     public Renderer[] renderers;
 
@@ -67,6 +68,11 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             else if (savedColor == 3){
                 foreach (Renderer r in renderers){
                     r.material = pink;
+                }
+            }
+            else if (savedColor == 4){
+                foreach (Renderer r in renderers){
+                    r.material = yellow;
                 }
             }
         }

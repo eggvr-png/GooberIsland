@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class CodeHolder : MonoBehaviour
 {
@@ -11,9 +12,13 @@ public class CodeHolder : MonoBehaviour
     public Button joinButton;
     public Button joinRandomButton;
 
+    public TextMeshProUGUI nameThingy;
+
+    public PlayfabManager pfm;
+
     void Start()
     {
-        InterSceneDataKeeper.Instance.playerName = PlayerPrefs.GetString("playerName");
+        InterSceneDataKeeper.Instance.playerName = PlayerPrefs.GetString("playerUsername");
         if (nameInput)
         nameInput.text = InterSceneDataKeeper.Instance.playerName;
     }
@@ -27,7 +32,14 @@ public class CodeHolder : MonoBehaviour
     }
 
     public void changeName(string theNewName){
-        InterSceneDataKeeper.Instance.playerName = theNewName;
-        PlayerPrefs.SetString("playerName", theNewName);
+        if (nameInput.text.Length < 3){
+            nameThingy.text = "name must be 3-25 characters";
+        }
+        else {
+            InterSceneDataKeeper.Instance.playerName = theNewName;
+            nameThingy.text = "";
+            PlayerPrefs.SetString("playerUsername", theNewName);
+            pfm.submitPlayerName(theNewName);
+        }
     }
 }

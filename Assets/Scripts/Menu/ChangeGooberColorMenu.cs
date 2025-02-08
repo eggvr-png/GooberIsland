@@ -10,6 +10,8 @@ public class ChangeGooberColorMenu : MonoBehaviour
     public Color blue;
     public Color pink;
 
+    public Color yellow;
+
     public RawImage limbs;
 
     void Start(){
@@ -23,6 +25,9 @@ public class ChangeGooberColorMenu : MonoBehaviour
         }
         else if (savedColor == 3){
             limbs.color = pink;
+        }
+        else if (savedColor == 4){
+            limbs.color = yellow;
         }
     }
 
@@ -40,4 +45,10 @@ public class ChangeGooberColorMenu : MonoBehaviour
         limbs.color = pink;
         PlayerPrefs.SetInt("color", 3);
     }
+
+    public void changeYellow(){
+        limbs.color = yellow;
+        PlayerPrefs.SetInt("color", 4);
+    }
 }
+
