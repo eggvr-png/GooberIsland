@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.InputSystem;
 
 public class InteractionSystem : MonoBehaviourPunCallbacks
 {
@@ -16,15 +17,26 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
     public Transform rayLength;
     public RoomManager rm;
     public TutorialPromptHandler tph;
+    public GameObject[] keycodes;
     [Header("Settings")]
     public KeyCode interactKey = KeyCode.E;
 
     public float waitTime = 0.2f;
     public bool abletoInteract;
 
+    bool invis;
+
     INSGrab lastGrababble;
 
     bool didnothitgrab;
+
+    Gamepad gamepad;
+
+    void Start(){
+        gamepad = Gamepad.current;
+
+        CheckIfController();
+    }
 
     private void Update()
     {
@@ -35,43 +47,51 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
 
     void stillHoldingGrabbable(){
         if (lastGrababble != null){
-            rm.inUI.SetActive(true);
-            if (lastGrababble.grabbed){
-                rm.inText.text = lastGrababble.putdownPrompt;
-                rm.inText.text = lastGrababble.grabPrompt;
-            }
-
-            if (Input.GetKeyDown(interactKey))
-            {
-                if (abletoInteract)
-                {
-                    lastGrababble.interact();
-                    StartCoroutine(wait());
-
-                    lastGrababble = null;
-                    rm.inUI.SetActive(false);
+            if (!invis)
+                rm.inUI.SetActive(true);
+                if (lastGrababble.grabbed){
+                    rm.inText.text = lastGrababble.putdownPrompt;
+                    rm.inText.text = lastGrababble.grabPrompt;
                 }
-                else
-                {
-                    return;
-                }
-            }
 
-            if (Input.GetMouseButton(0)){
+                if (Input.GetKeyDown(interactKey) || Input.GetKeyDown(KeyCode.JoystickButton3))
+                {
                     if (abletoInteract)
                     {
-                        if(lastGrababble.grabbed){
-                            lastGrababble.ThrowRelease();
-                            StartCoroutine(wait());
-                            lastGrababble = null;
-                            rm.inUI.SetActive(false);
-                        }
+                        lastGrababble.interact();
+                        StartCoroutine(wait());
+
+                        lastGrababble = null;
+                        rm.inUI.SetActive(false);
                     }
                     else
                     {
                         return;
                     }
                 }
+
+                if (Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.JoystickButton4)){
+                        if (abletoInteract)
+                        {
+                            if(lastGrababble.grabbed){
+                                lastGrababble.ThrowRelease();
+                                StartCoroutine(wait());
+                                lastGrababble = null;
+                                rm.inUI.SetActive(false);
+                            }
+                        }
+                        else
+                        {
+                            return;
+                        }
+                    }
+        }
+    }
+
+    void CheckIfController(){
+        if (gamepad != null){
+            keycodes[0].SetActive(false);
+            keycodes[1].SetActive(true);
         }
     }
 
@@ -79,6 +99,12 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
     {
         if (Physics.Linecast(transform.position, rayLength.position, out RaycastHit hit))
         {
+            if (hit.collider.gameObject.tag == "InvisBarrier") {
+                invis = true;
+            }
+            else {
+                invis = false;
+            }
             if (hit.collider.gameObject.tag == "INS ED")
             {
                 rm.inUI.SetActive(true);
@@ -99,7 +125,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     PlayerPrefs.SetInt("FI", 1);
                 }
 
-                if (Input.GetKeyDown(interactKey))
+                if (Input.GetKeyDown(interactKey) || Input.GetKeyDown(KeyCode.JoystickButton3))
                 {
                     if (abletoInteract)
                     {
@@ -133,7 +159,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     PlayerPrefs.SetInt("FI", 1);
                 }
 
-                if (Input.GetKeyDown(interactKey))
+                if (Input.GetKeyDown(interactKey) || Input.GetKeyDown(KeyCode.JoystickButton3))
                 {
                     if (abletoInteract)
                     {
@@ -153,7 +179,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     }
                 }
 
-                if (Input.GetMouseButton(0)){
+                if (Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.JoystickButton4)){
                     if (abletoInteract)
                     {
                         if(script.grabbed){
@@ -186,7 +212,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     PlayerPrefs.SetInt("FI", 1);
                 }
 
-                if (Input.GetKeyDown(interactKey))
+                if (Input.GetKeyDown(interactKey) || Input.GetKeyDown(KeyCode.JoystickButton3))
                 {
                     if (abletoInteract)
                     {
@@ -221,7 +247,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                     PlayerPrefs.SetInt("FI", 1);
                 }
 
-                if (Input.GetKeyDown(interactKey))
+                if (Input.GetKeyDown(interactKey) || Input.GetKeyDown(KeyCode.JoystickButton3))
                 {
                     if (abletoInteract)
                     {

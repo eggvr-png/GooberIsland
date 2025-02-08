@@ -17537,7 +17537,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 803026007}
         m_TargetAssemblyTypeName: ChangeGooberColorMenu, Assembly-CSharp
-        m_MethodName: changePink
+        m_MethodName: changeYellow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -23123,7 +23123,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: e5aa79a884d9354a5b9c96e62b6f5d18,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: a5e13806e7a52d6fbbf8d2a58d5cd798, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.334
   m_Pitch: 1

@@ -2,6 +2,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -75,6 +76,11 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
         TryStopEmote();
+
+        float x = Input.GetAxis("RightStick X");
+        float y = Input.GetAxis("RightStick Y");
+
+        Debug.Log($"Right Stick X: {x}, Right Stick Y: {y}");
     }
     //if moving fast enough stop emote
     void TryStopEmote()
@@ -93,12 +99,12 @@ public class PlayerMovement : MonoBehaviour
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
         jumping = Input.GetButton("Jump");
-        crouching = Input.GetKey(KeyCode.LeftControl);
+        crouching = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Joystick1Button9);
 
         //Crouching
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Joystick1Button9))
             StartCrouch();
-        if (Input.GetKeyUp(KeyCode.LeftControl))
+        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.Joystick1Button9))
             StopCrouch();
     }
 
@@ -123,7 +129,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
-
         //Extra gravity
         rb.AddForce(Vector3.down * Time.deltaTime * 10);
 
@@ -198,21 +203,33 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private float desiredX;
+
+    // thank you gpt to help me figure this out (no i didnt use it to code this, i just used it for help)
     private void Look()
     {
         if (!allowMouseMovement) return;
+
+        // Mouse input
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 
-        //Find current look rotation
-        Vector3 rot = playerCam.transform.localRotation.eulerAngles;
-        desiredX = rot.y + mouseX;
+        // Joystick input
+        float joystickX = Input.GetAxis("RightStick X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+        float joystickY = Input.GetAxis("RightStick Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 
-        //Rotate, and also make sure we dont over- or under-rotate.
-        xRotation -= mouseY;
+        // Combine inputs (use either mouse or joystick)
+        float finalX = mouseX + joystickX;
+        float finalY = mouseY + joystickY;
+
+        // Find current look rotation
+        Vector3 rot = playerCam.transform.localRotation.eulerAngles;
+        desiredX = rot.y + finalX;
+
+        // Rotate, and also make sure we don’t over- or under-rotate
+        xRotation -= finalY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        //Perform the rotations
+        // Perform the rotations
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
     }

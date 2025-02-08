@@ -2413,7 +2413,7 @@ GameObject:
   - component: {fileID: 1418256904}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: InvisBarrier
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -5084,6 +5084,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 772201332348440950}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &772201332348440954 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 928299998266221163, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 772201332348440950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &772201332348440955 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2976714660101270931, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 772201332348440950}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3713135029780956462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5117,6 +5129,21 @@ PrefabInstance:
       propertyPath: abletoInteract
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 627149604714146258, guid: 5cbf887cd341a9f8ebf2742ca08f8a62,
+        type: 3}
+      propertyPath: keycodes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 627149604714146258, guid: 5cbf887cd341a9f8ebf2742ca08f8a62,
+        type: 3}
+      propertyPath: keycodes.Array.data[0]
+      value: 
+      objectReference: {fileID: 772201332348440955}
+    - target: {fileID: 627149604714146258, guid: 5cbf887cd341a9f8ebf2742ca08f8a62,
+        type: 3}
+      propertyPath: keycodes.Array.data[1]
+      value: 
+      objectReference: {fileID: 772201332348440954}
     - target: {fileID: 4304933498160470351, guid: 5cbf887cd341a9f8ebf2742ca08f8a62,
         type: 3}
       propertyPath: preview
