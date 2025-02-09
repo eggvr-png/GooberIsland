@@ -8,6 +8,10 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using Unity.VisualScripting;
+using UnityEditor;
+using UnityEngine.XR;
+using UnityEngine.InputSystem.XR;
+using UnityEngine.XR.OpenXR.NativeTypes;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -32,6 +36,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Space]
     public GameObject cameraHolder;
     public GameObject mainCamera;
+    [Space]
+    public Transform leftHand;
+    public Transform rightHand;
     [Header("Connecting Screen")]
     public GameObject connectingCamera;
     public GameObject connectingCanvas;
@@ -50,6 +57,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Space]
     public LobbySettings ls;
 
+    Animator playerAnims;
+
     // connects to servers
     void Start()
     {
@@ -58,7 +67,9 @@ public class RoomManager : MonoBehaviourPunCallbacks
         code = InterSceneDataKeeper.Instance.roomCode;
         username = InterSceneDataKeeper.Instance.playerName;
         PhotonNetwork.PhotonServerSettings.AppSettings.AppVersion = Application.version;
+
         //bad code, needed for bad quality mode
+        //bad code for a bad mode? makes sense!
         if (QualitySettings.GetQualityLevel() == 0)
         {
             foreach (Renderer rend in FindObjectsOfType<Renderer>())
@@ -71,6 +82,23 @@ public class RoomManager : MonoBehaviourPunCallbacks
                         mat.SetColor("_EmissionColor", mat.color);
                     }
                 }
+            }
+        }
+
+        if (!XRSettings.isDeviceActive){
+            mainCamera.GetComponent<TrackedPoseDriver>().enabled = false;
+        }
+    }
+
+    void Update(){
+        if (status == connectionStatus.InLobby){
+            if (XRSettings.isDeviceActive){
+                var ps = player.GetComponent<PlayerSetup>();
+            ps.left.position = leftHand.position;
+            ps.right.position = rightHand.position;
+            
+            ps.left.rotation = leftHand.rotation;
+            ps.right.rotation = rightHand.rotation;
             }
         }
     }
@@ -127,6 +155,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         player.GetComponent<PlayerMovement>().playerCam = mainCamera.transform;
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<Rigidbody>().isKinematic = false;
+
+        playerAnims = player.GetComponent<Animator>();
+        playerAnims.enabled = false;
+
         ps.IsLocalPlayer();
         // checks for first play
         cffp.Check();

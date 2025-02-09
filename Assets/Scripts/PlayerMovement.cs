@@ -41,9 +41,11 @@ public class PlayerMovement : MonoBehaviour
 
     //Input
     float x, y;
-    bool jumping, sprinting, crouching;
+    [SerializeField]bool jumping, sprinting, crouching;
 
     public static bool allowMouseMovement = true;
+
+    public InputActionProperty jumpAction;
 
     //Sliding
     private Vector3 normalVector = Vector3.up;
@@ -76,11 +78,6 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
         TryStopEmote();
-
-        float x = Input.GetAxis("RightStick X");
-        float y = Input.GetAxis("RightStick Y");
-
-        Debug.Log($"Right Stick X: {x}, Right Stick Y: {y}");
     }
     //if moving fast enough stop emote
     void TryStopEmote()
@@ -98,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
     {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
-        jumping = Input.GetButton("Jump");
+        jumping = Input.GetButton("Jump") || jumpAction.action.ReadValue<bool>();
         crouching = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Joystick1Button9);
 
         //Crouching

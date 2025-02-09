@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using UnityEngine.XR;
 
 public class SettingsSystem : MonoBehaviour
 {
@@ -178,15 +179,17 @@ public class SettingsSystem : MonoBehaviour
     // settings loader
     private void loadSettings(){
         // loads pixel density
-        float loadedPixelDensity = PlayerPrefs.GetFloat("PixelDensity");
-        if (loadedPixelDensity == 0f){
-            pixelSlider.value = 200f;
-            pixelInput.text = "200";
-        }
-        else {
-            pixelSlider.value = loadedPixelDensity;
-            pixelInput.text = loadedPixelDensity.ToString();
-        }
+        if (!XRSettings.isDeviceActive){
+            float loadedPixelDensity = PlayerPrefs.GetFloat("PixelDensity");
+            if (loadedPixelDensity == 0f){
+                pixelSlider.value = 200f;
+                pixelInput.text = "200";
+            }
+            else {
+                pixelSlider.value = loadedPixelDensity;
+                pixelInput.text = loadedPixelDensity.ToString();
+            }
+        {
         // loads quality
         int qSetting = PlayerPrefs.GetInt("qSetting");
         if (qSetting == 0){
@@ -233,4 +236,5 @@ public class SettingsSystem : MonoBehaviour
             Screen.SetResolution(PlayerPrefs.GetInt("width"), PlayerPrefs.GetInt("height"), fullscreenToggle.isOn);
         }
     }
-}
+        }
+}}

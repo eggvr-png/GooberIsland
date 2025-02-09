@@ -22,6 +22,9 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
 
     public Renderer[] renderers;
 
+    public Transform left;
+    public Transform right;
+
     public void IsLocalPlayer(){
         modelToDisable.SetActive(false);
     }
@@ -49,6 +52,10 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     {
         base.OnPlayerEnteredRoom(newPlayer);
         UpdateColor();
+    }
+
+    void Update(){
+        
     }
 
     void UpdateColor(){
