@@ -3,6 +3,9 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
+using Unity.XR.Oculus;
+using easyInputs;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -78,7 +81,8 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         Look();
         TryStopEmote();
-    }
+
+        Debug.Log(EasyInputs.GetPrimaryButtonDown(EasyHand.LeftHand).ToString());
     //if moving fast enough stop emote
     void TryStopEmote()
     {
@@ -86,7 +90,7 @@ public class PlayerMovement : MonoBehaviour
         {
             emotesController.StopEmote();
         }
-    }
+    }}
 
     /// <summary>
     /// Find user input. Should put this in its own class but im lazy
@@ -95,13 +99,20 @@ public class PlayerMovement : MonoBehaviour
     {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
-        jumping = Input.GetButton("Jump") || jumpAction.action.ReadValue<bool>();
-        crouching = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Joystick1Button9);
+        if (!XRSettings.isDeviceActive)
+            jumping = Input.GetButton("Jump");
+        else 
+            jumping = EasyInputs.GetPrimaryButtonDown(EasyHand.RightHand);
+
+        if (!XRSettings.isDeviceActive)
+            crouching = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Joystick1Button9);
+        else
+            crouching = EasyInputs.GetThumbStickButtonDown(EasyHand.LeftHand);
 
         //Crouching
-        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Joystick1Button9))
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Joystick1Button9) || crouching)
             StartCrouch();
-        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.Joystick1Button9))
+        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.Joystick1Button9) || !crouching)
             StopCrouch();
     }
 
