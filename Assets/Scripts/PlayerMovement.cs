@@ -54,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
+    bool vr;
+
 
     EmotesController emotesController;
     void Awake()
@@ -67,6 +69,9 @@ public class PlayerMovement : MonoBehaviour
         playerScale = transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        if (XRSettings.isDeviceActive){
+            vr = true;
+        }
     }
 
 
@@ -82,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
         Look();
         TryStopEmote();
 
-        Debug.Log(EasyInputs.GetPrimaryButtonDown(EasyHand.LeftHand).ToString());
+        crouching = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Joystick1Button9) || Input.GetKey(KeyCode.JoystickButton9);
     //if moving fast enough stop emote
     void TryStopEmote()
     {
@@ -105,35 +110,33 @@ public class PlayerMovement : MonoBehaviour
             jumping = EasyInputs.GetPrimaryButtonDown(EasyHand.RightHand);
 
         if (!XRSettings.isDeviceActive)
-            crouching = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Joystick1Button9);
+            crouching = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Joystick1Button9) || Input.GetKey(KeyCode.JoystickButton9);
         else
-            crouching = EasyInputs.GetThumbStickButtonDown(EasyHand.LeftHand);
+            this.GetComponentInParent<CapsuleCollider>().height = playerCam.transform.position.y;
+        
 
         //Crouching
-        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.Joystick1Button9) || crouching)
+        if (Input.GetKeyDown(KeyCode.LeftControl) || Input.GetKeyDown(KeyCode.JoystickButton9))
             StartCrouch();
-        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.Joystick1Button9) || !crouching)
+        if (Input.GetKeyUp(KeyCode.LeftControl) || Input.GetKeyUp(KeyCode.JoystickButton9))
             StopCrouch();
     }
 
-    private void StartCrouch()
-    {
+    private void StartCrouch() {
         transform.localScale = crouchScale;
         transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-        if (rb.velocity.magnitude > 0.5f)
-        {
-            if (grounded)
-            {
+        if (rb.velocity.magnitude > 0.5f) {
+            if (grounded) {
                 rb.AddForce(orientation.transform.forward * slideForce);
             }
         }
     }
 
-    private void StopCrouch()
-    {
+    private void StopCrouch() {
         transform.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
+
 
     private void Movement()
     {
