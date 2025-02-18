@@ -101,18 +101,17 @@ public class PlayerMovement : MonoBehaviour
     /// Find user input. Should put this in its own class but im lazy
     /// </summary>
     private void MyInput()
-    {
-        x = Input.GetAxisRaw("Horizontal");
-        y = Input.GetAxisRaw("Vertical");
-        if (!XRSettings.isDeviceActive)
+    {   
+        if (!XRSettings.isDeviceActive){
+            x = Input.GetAxisRaw("Horizontal");
+            y = Input.GetAxisRaw("Vertical");
             jumping = Input.GetButton("Jump");
-        else 
+        }
+        else {
+            x = EasyInputs.GetThumbStick2DAxis(EasyHand.LeftHand).x;
+            y = EasyInputs.GetThumbStick2DAxis(EasyHand.LeftHand).y;
             jumping = EasyInputs.GetPrimaryButtonDown(EasyHand.RightHand);
-
-        if (!XRSettings.isDeviceActive)
-            crouching = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.Joystick1Button9) || Input.GetKey(KeyCode.JoystickButton9);
-        else
-            this.GetComponentInParent<CapsuleCollider>().height = playerCam.transform.position.y;
+        }
         
 
         //Crouching

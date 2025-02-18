@@ -33,11 +33,6 @@ namespace easyInputs
         /// <summary>
         /// Get's If The Trigger Button Is Touched. Only Works On Quest And You Need To Build For It To Work
         /// </summary>
-        public static bool GetTriggerButtonTouched(EasyHand easyHand)
-        {
-            GetInputBool(easyHand, OculusUsages.indexTouch, out bool ButtonDown);
-            return ButtonDown;
-        }
 
         /// <summary>
         /// Get's If The Grip Button Float.
