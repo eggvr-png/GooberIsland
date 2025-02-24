@@ -23,6 +23,8 @@ public class INSGrab : MonoBehaviourPunCallbacks
     float ogHoldDistance;
     public float minDistance = 1f;
     public float maxDistance = 10f;
+    [Header("speed (default is 10)")]
+    public float speed = 10f;
     Vector3 originalGrabPos;
     private void Start()
     {
@@ -63,7 +65,7 @@ public class INSGrab : MonoBehaviourPunCallbacks
                 holdDistance = Mathf.Clamp(holdDistance, minDistance, maxDistance);
             }
             grabPoint.position = cameras.transform.position + cameras.transform.forward * holdDistance;
-            transform.position = Vector3.Lerp(transform.position, grabPoint.position, Time.deltaTime * 10f);
+            transform.position = Vector3.Lerp(transform.position, grabPoint.position, Time.deltaTime * speed);
             rb.isKinematic = true;
             if (Input.GetKey(KeyCode.R))
             {

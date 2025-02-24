@@ -6,6 +6,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 using UnityEngine.XR;
+using Photon.Voice.Unity.Demos;
+using UnityEngine.XR.Management;
+using UnityEditor;
 
 public class SettingsSystem : MonoBehaviour
 {
@@ -35,6 +38,8 @@ public class SettingsSystem : MonoBehaviour
     public Slider svolSlider;
     public TMP_InputField svolInput;
     public AudioMixer saudioMixer;
+    [Header("VR Settings")]
+    public Toggle vrToggle;
 
     // hey look at me not using a update function for this. this means im not a dumbo!!!!
     void Start(){
@@ -45,6 +50,7 @@ public class SettingsSystem : MonoBehaviour
         mvolSlider.onValueChanged.AddListener(delegate {changeMVolume(mvolSlider.value);});
         svolSlider.onValueChanged.AddListener(delegate {changeSVolume(svolSlider.value);});
         resChooser.onValueChanged.AddListener(delegate {changeRes(resChooser.value);});
+        vrToggle.onValueChanged.AddListener(delegate {enableVR(vrToggle.isOn);});
         // here we get all compatable resolutions
         resolutions = Screen.resolutions;
         var resolutionList =  new List<TMP_Dropdown.OptionData>();
@@ -175,9 +181,30 @@ public class SettingsSystem : MonoBehaviour
         }
     }
 
+    // vr
+    void enableVR(bool toggle){
+        if (toggle){
+            Debug.Log("startin vr, gimeme a few :D");
+            var xrManager = XRGeneralSettings.Instance.Manager;
+
+            xrManager.InitializeLoader();
+            xrManager.StartSubsystems();
+        }
+        else {
+            Debug.Log("stopping vr. hold on a sec :/");
+            var xrManager = XRGeneralSettings.Instance.Manager;
+
+            xrManager.StopSubsystems();
+            xrManager.DeinitializeLoader();
+        }
+    }
 
     // settings loader
     private void loadSettings(){
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            vrToggle.gameObject.SetActive(false);
+        }
         // loads pixel density
         if (!XRSettings.isDeviceActive){
             float loadedPixelDensity = PlayerPrefs.GetFloat("PixelDensity");
