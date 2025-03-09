@@ -12,6 +12,7 @@ using UnityEditor;
 using UnityEngine.XR;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.OpenXR.NativeTypes;
+using Fragsurf.Movement;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
@@ -34,9 +35,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Space]
     public GameObject player;
     [Space]
-    public GameObject cameraHolder;
-    public GameObject mainCamera;
-    [Space]
     public Transform leftHand;
     public Transform rightHand;
     [Header("Connecting Screen")]
@@ -54,8 +52,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Header("Other")]
     public InteractionSystem inSys;
     public CheckForFirstPlay cffp;
-    [Space]
-    public LobbySettings ls;
+    public pause pMenu;
 
     Animator playerAnims;
 
@@ -83,10 +80,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
                     }
                 }
             }
-        }
-
-        if (!XRSettings.isDeviceActive){
-            mainCamera.GetComponent<TrackedPoseDriver>().enabled = false;
         }
     }
 
@@ -149,16 +142,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         player = PhotonNetwork.Instantiate(playerPrefab.name, spawn.position, Quaternion.identity);
         PlayerSetup ps = player.GetComponent<PlayerSetup>();
         // enables movement and other stuff
-        cameraHolder.GetComponent<MoveCamera>().player = player.transform.GetChild(2);
-        cameraHolder.SetActive(true);
-        cameraHolder.GetComponent<MoveCamera>().enabled = true;
-        player.GetComponent<PlayerMovement>().playerCam = mainCamera.transform;
-        player.GetComponent<PlayerMovement>().enabled = true;
-        player.GetComponent<Rigidbody>().isKinematic = false;
-
-        playerAnims = player.GetComponent<Animator>();
-        playerAnims.enabled = false;
-
+        pMenu.GetCamAndOther(player.GetComponent<PlayerSetup>().playercamera, player.GetComponent<SurfCharacter>());
         ps.IsLocalPlayer();
         // checks for first play
         cffp.Check();
@@ -199,7 +183,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
             status = connectionStatus.NotConnected;
             InterSceneDataKeeper.errorText = cause.ToString() +"\n something with photon";
             SceneManager.LoadScene(0);
-
         }
     }
 }

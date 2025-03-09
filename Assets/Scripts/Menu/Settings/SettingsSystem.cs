@@ -50,7 +50,7 @@ public class SettingsSystem : MonoBehaviour
         mvolSlider.onValueChanged.AddListener(delegate {changeMVolume(mvolSlider.value);});
         svolSlider.onValueChanged.AddListener(delegate {changeSVolume(svolSlider.value);});
         resChooser.onValueChanged.AddListener(delegate {changeRes(resChooser.value);});
-        vrToggle.onValueChanged.AddListener(delegate {enableVR(vrToggle.isOn);});
+        // vrToggle.onValueChanged.AddListener(delegate {enableVR(vrToggle.isOn);});
         // here we get all compatable resolutions
         resolutions = Screen.resolutions;
         var resolutionList =  new List<TMP_Dropdown.OptionData>();
@@ -148,7 +148,7 @@ public class SettingsSystem : MonoBehaviour
         float textValue = sliderVal * 10;
         textValue = Mathf.Round(textValue);
         textValue = textValue / 10;
-        svolInput.text = sliderVal.ToString();
+        svolInput.text = textValue.ToString();
     }
 
     public void changeMVolWithInput(string input){

@@ -28,8 +28,6 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
 
     INSGrab lastGrababble;
 
-    bool didnothitgrab;
-
     Gamepad gamepad;
 
     void Start(){
@@ -41,52 +39,8 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
     private void Update()
     {
         CheckForCollision();
-        stillHoldingGrabbable();
     }
 
-
-    void stillHoldingGrabbable(){
-        if (lastGrababble != null){
-            if (!invis)
-                rm.inUI.SetActive(true);
-                if (lastGrababble.grabbed){
-                    rm.inText.text = lastGrababble.putdownPrompt;
-                    rm.inText.text = lastGrababble.grabPrompt;
-                }
-
-                if (Input.GetKeyDown(interactKey) || Input.GetKeyDown(KeyCode.JoystickButton3))
-                {
-                    if (abletoInteract)
-                    {
-                        lastGrababble.interact();
-                        StartCoroutine(wait());
-
-                        lastGrababble = null;
-                        rm.inUI.SetActive(false);
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-
-                if (Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.JoystickButton4)){
-                        if (abletoInteract)
-                        {
-                            if(lastGrababble.grabbed){
-                                lastGrababble.ThrowRelease();
-                                StartCoroutine(wait());
-                                lastGrababble = null;
-                                rm.inUI.SetActive(false);
-                            }
-                        }
-                        else
-                        {
-                            return;
-                        }
-                    }
-        }
-    }
 
     void CheckIfController(){
         if (gamepad != null){
@@ -140,7 +94,6 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
             }
             else if (hit.collider.gameObject.tag == "INS Grab")
             {
-                didnothitgrab = false;
                 rm.inUI.SetActive(true);
                 INSGrab script = hit.collider.transform.gameObject.GetComponent<INSGrab>();
 
@@ -163,7 +116,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
                 {
                     if (abletoInteract)
                     {
-                        script.interact();
+                        script.interact(rayLength);
                         StartCoroutine(wait());
 
                         if (script.grabbed != false){
@@ -266,7 +219,7 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
         {
             rm.inUI.SetActive(false);
             rm.inText.text = "";
-            didnothitgrab = true;
+
         }
     }
 

@@ -12,8 +12,6 @@ public class DebugMenu : MonoBehaviourPunCallbacks
     public TextMeshProUGUI pingTMP;
     public TextMeshProUGUI maxPlayerTMP;
 
-    public LobbySettings ls;
-
     private float pollingTime = 1f;
     private float time;
     private int frames;
@@ -32,7 +30,5 @@ public class DebugMenu : MonoBehaviourPunCallbacks
         float ping;
         ping = PhotonNetwork.GetPing();
         pingTMP.text = ping.ToString() + "MS";
-        // lobby max
-        maxPlayerTMP.text = ls.maxPlayers.ToString() + " player max";
     }
 }

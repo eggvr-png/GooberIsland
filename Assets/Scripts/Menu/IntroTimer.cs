@@ -12,6 +12,8 @@ public class IntroTimer : MonoBehaviour
     public AudioReverbFilter filter2;
     public AudioSource introMusic;
 
+    public bool introStarted;
+
     private bool introSkipped = false;
 
     private IEnumerator Intro()
@@ -71,6 +73,7 @@ public class IntroTimer : MonoBehaviour
 
     public void startIntro() 
     {
+        introStarted = true;
         StartCoroutine(Intro());
     }
 }

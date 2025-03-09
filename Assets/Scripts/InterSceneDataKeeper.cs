@@ -15,6 +15,7 @@ public class InterSceneDataKeeper : MonoBehaviour
 
     private void Awake()
     {
+        Application.targetFrameRate = -1;
         if (Instance == null)
         {
             Instance = this;
@@ -27,6 +28,14 @@ public class InterSceneDataKeeper : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             
         }
+    }
+
+    public void SaveCode(string value){
+        roomCode = value;
+    }
+
+    public void SaveUser(string value){
+        playerName = value;
     }
 
     void Update()

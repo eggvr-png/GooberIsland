@@ -3642,7 +3642,6 @@ MonoBehaviour:
   fpsTMP: {fileID: 5232197009333271855}
   pingTMP: {fileID: 7047229688984350533}
   maxPlayerTMP: {fileID: 3857261447981553076}
-  ls: {fileID: 0}
 --- !u!1 &6027718258407208653
 GameObject:
   m_ObjectHideFlags: 0
@@ -4592,7 +4591,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3436018444343694953
 RectTransform:
   m_ObjectHideFlags: 0

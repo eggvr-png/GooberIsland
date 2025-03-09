@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class EmotesController : MonoBehaviourPunCallbacks
 {
-    Animator animator;
-    PhotonView View;
+    public Animator animator;
+    public PhotonView View;
 
     Camera mainCamera;
     // Save the currently playing emote names
@@ -14,7 +14,6 @@ public class EmotesController : MonoBehaviourPunCallbacks
 
     void Awake()
     {
-        View = GetComponent<PhotonView>();
         mainCamera = Camera.main;
     }
 
@@ -34,17 +33,11 @@ public class EmotesController : MonoBehaviourPunCallbacks
         }
     }
 
-    void Start()
-    {
-        animator = GetComponent<Animator>();
-        animator.StopPlayback();
-    }
-
     [PunRPC]
     void PlayEmoteRPC(string emoteName)
     {
         if (photonView.IsMine) {
-            GetComponent<PlayerSetup>().modelToDisable.SetActive(true);
+            //GetComponent<PlayerSetup>().modelToDisable.SetActive(true);
             transform.GetComponentInChildren<Camera>().enabled = true;
             mainCamera.enabled = false;
         }
@@ -57,7 +50,7 @@ public class EmotesController : MonoBehaviourPunCallbacks
     void StopEmoteRPC()
     {
         if (photonView.IsMine) {
-            GetComponent<PlayerSetup>().modelToDisable.SetActive(false);
+            //GetComponent<PlayerSetup>().modelToDisable.SetActive(false);
             transform.GetComponentInChildren<Camera>().enabled = false;
             mainCamera.enabled = true;
         }

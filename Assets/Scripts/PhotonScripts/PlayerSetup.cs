@@ -4,10 +4,11 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine;
+using Fragsurf.Movement;
 
 public class PlayerSetup : MonoBehaviourPunCallbacks
 {
-    public GameObject modelToDisable;
+    public GameObject[] modelToDisable;
 
     public GameObject interactionUI;
     public TextMeshProUGUI interactionText;
@@ -25,8 +26,18 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     public Transform left;
     public Transform right;
 
+    public Animator animator;
+
+    public SurfCharacter playerMovement;
+    public GameObject playercameraholder;
+    public Camera playercamera;
+
     public void IsLocalPlayer(){
-        modelToDisable.SetActive(false);
+        foreach (GameObject parts in modelToDisable){
+            parts.SetActive(false);
+        }
+        playercameraholder.SetActive(true);
+        playerMovement.enabled = true;
     }
 
     public void setNameForAll(){
@@ -82,6 +93,26 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
                     r.material = yellow;
                 }
             }
+        }
+    }
+
+    //I HATE ANIMATOR VIEWS AHHHHHHHHHHHHHH
+    [PunRPC]
+    public void running(bool isTrue){
+        if (isTrue){
+            animator.SetBool("Running", true);
+        }
+        else {
+            animator.SetBool("Running", false);
+        }
+    }
+    [PunRPC]
+    public void jumping(bool isTrue){
+        if (isTrue){
+            animator.SetBool("Jumping", true);
+        }
+        else {
+            animator.SetBool("Jumping", false);
         }
     }
 }

@@ -13,7 +13,7 @@ public class INSGrab : MonoBehaviourPunCallbacks
     /// </summary>
     
     public bool grabbed;
-    public Transform grabPoint;
+    private Transform grabPoint;
     private Rigidbody rb;
     public string grabPrompt;
     public string putdownPrompt;
@@ -29,16 +29,15 @@ public class INSGrab : MonoBehaviourPunCallbacks
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        originalGrabPos = grabPoint.localPosition;
-        ogHoldDistance = holdDistance;
     }
 
-    public void interact()
-    {
+    public void interact(Transform currentgrabPoint)
+    {   
+        grabPoint = currentgrabPoint;
         if (grabbed)
         {
             grabbed = false;
-            PlayerMovement.allowMouseMovement = true;
+            //PlayerMovement.allowMouseMovement = true;
             grabPoint.localPosition = originalGrabPos;
             this.GetComponentInParent<PhotonView>().RPC("Release", RpcTarget.All);
         }
@@ -69,13 +68,13 @@ public class INSGrab : MonoBehaviourPunCallbacks
             rb.isKinematic = true;
             if (Input.GetKey(KeyCode.R))
             {
-                PlayerMovement.allowMouseMovement = false;
+                //PlayerMovement.allowMouseMovement = false;
                 float rotX = Input.GetAxis("Mouse X") * 5f;
                 float rotY = Input.GetAxis("Mouse Y") * 5f;
                 transform.Rotate(cameras.transform.up, -rotX, Space.World);
                 transform.Rotate(cameras.transform.right, rotY, Space.World);
             }else{
-                PlayerMovement.allowMouseMovement = true;
+                //PlayerMovement.allowMouseMovement = true;
             }
         }
     }
@@ -90,7 +89,7 @@ public class INSGrab : MonoBehaviourPunCallbacks
         rb.isKinematic = false;
     }
     public void ThrowRelease(){
-        interact(); //disable grabbed
+        interact(grabPoint); //disable grabbed
         this.GetComponentInParent<PhotonView>().RPC("Release", RpcTarget.All);
         Vector3 camPosOrSmth = cameras.transform.forward;
         camPosOrSmth.Normalize();

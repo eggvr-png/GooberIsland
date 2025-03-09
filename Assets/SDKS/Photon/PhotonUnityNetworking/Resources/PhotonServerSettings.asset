@@ -17,7 +17,7 @@ MonoBehaviour:
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: dc0408e9-3f0d-4eb6-aef9-05438081aaa2
-    AppVersion: b4
+    AppVersion: b4.2
     UseNameServer: 1
     FixedRegion: us
     Server: 
@@ -52,6 +52,8 @@ MonoBehaviour:
   - changePlayerColor
   - PlayEmoteRPC
   - StopEmoteRPC
+  - jumping
+  - running
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

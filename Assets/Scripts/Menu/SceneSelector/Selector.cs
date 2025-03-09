@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.Rendering;
+using Unity.VisualScripting;
+using ExitGames.Demos.DemoPunVoice;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Selector : MonoBehaviour
+public class Selector : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public TextMeshProUGUI tmp;
+    string lastText;
+
+    public void OnPointerEnter(PointerEventData eventData){
+        lastText = tmp.text;
+        tmp.text = "> " + lastText;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void OnPointerExit(PointerEventData eventData){
+        tmp.text = lastText;
+        lastText = "";
     }
 }
