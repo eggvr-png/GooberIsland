@@ -142,7 +142,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         player = PhotonNetwork.Instantiate(playerPrefab.name, spawn.position, Quaternion.identity);
         PlayerSetup ps = player.GetComponent<PlayerSetup>();
         // enables movement and other stuff
-        pMenu.GetCamAndOther(player.GetComponent<PlayerSetup>().playercamera, player.GetComponent<SurfCharacter>());
+        pMenu.GetCamAndOther(player.GetComponent<PlayerSetup>().playercamera, player.GetComponent<SurfCharacter>(), player.GetComponent<PlayerSetup>().al, player.GetComponent<PlayerSetup>().playercameraholder.GetComponent<PlayerAiming>());
         ps.IsLocalPlayer();
         // checks for first play
         cffp.Check();

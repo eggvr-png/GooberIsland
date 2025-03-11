@@ -31,6 +31,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     public SurfCharacter playerMovement;
     public GameObject playercameraholder;
     public Camera playercamera;
+    public AudioListener al;
 
     public void IsLocalPlayer(){
         foreach (GameObject parts in modelToDisable){

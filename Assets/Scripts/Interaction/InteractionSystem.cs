@@ -24,8 +24,6 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
     public float waitTime = 0.2f;
     public bool abletoInteract;
 
-    bool invis;
-
     INSGrab lastGrababble;
 
     Gamepad gamepad;
@@ -53,12 +51,6 @@ public class InteractionSystem : MonoBehaviourPunCallbacks
     {
         if (Physics.Linecast(transform.position, rayLength.position, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.tag == "InvisBarrier") {
-                invis = true;
-            }
-            else {
-                invis = false;
-            }
             if (hit.collider.gameObject.tag == "INS ED")
             {
                 rm.inUI.SetActive(true);

@@ -7,19 +7,19 @@ public class AddRemoveLowPass : MonoBehaviour
     public bool add;
     public bool remove;
 
-    public GameObject audio;
+    public GameObject audioObj;
 
     public void addAudioLowPass(){
         if (add){
-            AudioLowPassFilter lowpass = audio.AddComponent<AudioLowPassFilter>();
-            AudioReverbFilter reverb = audio.AddComponent<AudioReverbFilter>();
+            AudioLowPassFilter lowpass = audioObj.AddComponent<AudioLowPassFilter>();
+            AudioReverbFilter reverb = audioObj.AddComponent<AudioReverbFilter>();
             reverb.reverbPreset = AudioReverbPreset.Psychotic;
             return;
         }
         if (remove){
-            if (audio.GetComponent<AudioLowPassFilter>()){
-                Destroy(audio.GetComponent<AudioLowPassFilter>());
-                Destroy(audio.GetComponent<AudioReverbFilter>());
+            if (audioObj.GetComponent<AudioLowPassFilter>()){
+                Destroy(audioObj.GetComponent<AudioLowPassFilter>());
+                Destroy(audioObj.GetComponent<AudioReverbFilter>());
             }
         }
     }

@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class NameSystem : MonoBehaviour
 {
-    [SerializeField] private string name;
+    [SerializeField] private string username;
     private string savedName;
     [Header("In Game Settings")]
     public TextMeshPro nametag;
@@ -16,8 +16,8 @@ public class NameSystem : MonoBehaviour
     public PlayfabManager playfab;
 
     public void SaveName(string newName){
-        name = newName;
-        PlayerPrefs.SetString(namePlayerPref,name);
+        username = newName;
+        PlayerPrefs.SetString(namePlayerPref,username);
     }
 
     public void GetName(){

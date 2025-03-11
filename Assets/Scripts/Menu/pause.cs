@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
 using Fragsurf.Movement;
+using Photon.Realtime;
+using Unity.VisualScripting;
 
 public class pause : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class pause : MonoBehaviour
     bool debounce;
 
     SurfCharacter playermovement;
+    PlayerAiming pa;
 
     public void LockMouse(){
         Cursor.lockState = CursorLockMode.Locked;
@@ -31,9 +34,11 @@ public class pause : MonoBehaviour
         Cursor.visible = true;
     }
 
-    public void GetCamAndOther(Camera cam, SurfCharacter pm){
+    public void GetCamAndOther(Camera cam, SurfCharacter pm, AudioListener playerListener, PlayerAiming pAim){
         main = cam;
         playermovement = pm;
+        mainAudioListener = playerListener;
+        pa = pAim;
     }
 
     void Update(){
@@ -49,6 +54,8 @@ public class pause : MonoBehaviour
                         pauseAudioListener.SetActive(true);
                         main.clearFlags = CameraClearFlags.Nothing; // Stop clearing old frames
                         paused = true;
+                        playermovement.enabled = false;
+                        pa.enabled = false;
                         UnlockMouse();
                         StartCoroutine(debouncer());
                     }
@@ -60,6 +67,8 @@ public class pause : MonoBehaviour
                         pauseAudioListener.SetActive(false);
                         main.clearFlags = CameraClearFlags.Skybox; // Resume clearing old frames
                         paused = false;
+                        playermovement.enabled = true;
+                        pa.enabled = true;
                         LockMouse();
                         StartCoroutine(debouncer());
                     }
@@ -78,7 +87,9 @@ public class pause : MonoBehaviour
         pauseMenu.SetActive(false);
         mainAudioListener.enabled = true;;
         pauseAudioListener.SetActive(false);
-        main.clearFlags = CameraClearFlags.Skybox; // Resume clearing old frames
+        main.clearFlags = CameraClearFlags.Skybox;
+        playermovement.enabled = true;
+                        pa.enabled = true; // Resume clearing old frames
         paused = false;
         LockMouse();
     }

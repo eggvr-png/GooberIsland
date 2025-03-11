@@ -721,18 +721,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 224405206}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &106251159 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 865968758620909564, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1491583982}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &155866798 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3600636822768925750, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
@@ -745,12 +733,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &156439136 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2923900890296883558, guid: 5cbf887cd341a9f8ebf2742ca08f8a62,
-    type: 3}
-  m_PrefabInstance: {fileID: 3713135029780956462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &224405205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1903,10 +1885,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbed: 0
-  grabPoint: {fileID: 156439136}
   grabPrompt: Grab
   putdownPrompt: Drop
   cameras: {fileID: 1520848707}
+  holdDistance: 3
+  minDistance: 1
+  maxDistance: 10
+  speed: 10
 --- !u!54 &845848905
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2066,12 +2051,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.2522418, y: 3.3413908, z: 2.0605102}
   m_Center: {x: -0.058564078, y: -0.14332406, z: 0.26999712}
---- !u!1 &950401243 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3806255583192022002, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1491583982}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1000618576 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8386567938403965146, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
@@ -2101,8 +2080,6 @@ GameObject:
   - component: {fileID: 1102970250}
   - component: {fileID: 1102970249}
   - component: {fileID: 1102970251}
-  - component: {fileID: 1102970252}
-  - component: {fileID: 1102970253}
   - component: {fileID: 1102970254}
   m_Layer: 0
   m_Name: RoomManager
@@ -2126,13 +2103,12 @@ MonoBehaviour:
   code: 
   username: 
   status: 0
-  playerPrefab: {fileID: 2962008037067395727, guid: b9a31f827eacca645b8ea02277ca575b,
+  playerPrefab: {fileID: 5467285084242854813, guid: a840589249729984398df665ca6e2508,
     type: 3}
   spawn: {fileID: 1102970250}
   player: {fileID: 0}
-  cameraHolder: {fileID: 1657139821}
-  mainCamera: {fileID: 1520848707}
-  codeAndNameHolder: {fileID: 1102970251}
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
   connectingCamera: {fileID: 1191846509}
   connectingCanvas: {fileID: 1004954984}
   hostMenu: {fileID: 1358768324}
@@ -2143,7 +2119,7 @@ MonoBehaviour:
   talktext: {fileID: 1000618576}
   inSys: {fileID: 1520848708}
   cffp: {fileID: 1201560987}
-  ls: {fileID: 0}
+  pMenu: {fileID: 1884286490}
 --- !u!4 &1102970250
 Transform:
   m_ObjectHideFlags: 0
@@ -2153,7 +2129,7 @@ Transform:
   m_GameObject: {fileID: 1102970248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.9, y: -320.34, z: 1405.0021}
+  m_LocalPosition: {x: 0.9, y: -318.072, z: 1405.0021}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2171,43 +2147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 037b802f45d451851a426044db90168e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  namePP: name
-  codePP: code
-  name: Goober
-  code: CFC12423
-  newName: 
-  newCode: 
---- !u!114 &1102970252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1102970248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e24fabeaef9c7e948b3fe582636aa05d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxPlayers: 4
---- !u!114 &1102970253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1102970248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16dea6a1767c41448b386ce833352057, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rm: {fileID: 1102970249}
-  ls: {fileID: 1102970252}
-  menu1: {fileID: 1358768324}
-  menu2: {fileID: 950401243}
-  playerMaxField: {fileID: 106251159}
-  menuKey: 110
+  codeInput: {fileID: 0}
+  nameInput: {fileID: 0}
+  joinButton: {fileID: 0}
+  joinRandomButton: {fileID: 0}
+  nameThingy: {fileID: 0}
+  pfm: {fileID: 0}
 --- !u!114 &1102970254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2867,10 +2812,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbed: 0
-  grabPoint: {fileID: 156439136}
   grabPrompt: Grab
   putdownPrompt: Drop
   cameras: {fileID: 1520848707}
+  holdDistance: 3
+  minDistance: 1
+  maxDistance: 10
+  speed: 10
 --- !u!114 &1269053544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4130,7 +4078,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ls
       value: 
-      objectReference: {fileID: 1102970252}
+      objectReference: {fileID: 0}
     - target: {fileID: 5590195713208836308, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
         type: 3}
       propertyPath: m_IsActive
@@ -4797,12 +4745,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 224405206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1657139821 stripped
+--- !u!1 &1779219278
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8079735349195470439, guid: 5cbf887cd341a9f8ebf2742ca08f8a62,
-    type: 3}
-  m_PrefabInstance: {fileID: 3713135029780956462}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1779219280}
+  - component: {fileID: 1779219279}
+  m_Layer: 0
+  m_Name: DEV ISDK
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1779219279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779219278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec5a42e04c6834dd48c916b6378f58dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomCode: a
+  playerName: a
+--- !u!4 &1779219280
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779219278}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20.13495, y: -318.04092, z: 1394.9183}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1884286488 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6486887543859369574, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
@@ -4813,6 +4801,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29172e0c1c45dca63a67a9b9165a638a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1884286490 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4096703755419819207, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1491583982}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 037ff5d12929c61d09a1f7a7815a6436, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1890858436
@@ -5194,10 +5194,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbed: 0
-  grabPoint: {fileID: 156439136}
   grabPrompt: Grab
   putdownPrompt: Drop
   cameras: {fileID: 1520848707}
+  holdDistance: 3
+  minDistance: 1
+  maxDistance: 10
+  speed: 10
 --- !u!54 &2136857298
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5852,3 +5855,4 @@ SceneRoots:
   - {fileID: 1491583982}
   - {fileID: 1370696468}
   - {fileID: 624726365}
+  - {fileID: 1779219280}

@@ -5190,18 +5190,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 5510337989387613923}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1712203214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712203213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e24fabeaef9c7e948b3fe582636aa05d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1712203215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5224,18 +5212,6 @@ MonoBehaviour:
   sceneViewId: 4
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1712203216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1712203213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16dea6a1767c41448b386ce833352057, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1784643467 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a41d9a22a38c7314a32dcb6981d5f45,
@@ -6965,7 +6941,7 @@ Camera:
     m_Bits: 4294967295
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
+  m_TargetDisplay: 7
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
@@ -7245,7 +7221,7 @@ PrefabInstance:
         type: 3}
       propertyPath: mainAudioListener
       value: 
-      objectReference: {fileID: 1890858437}
+      objectReference: {fileID: 0}
     - target: {fileID: 4096703755419819207, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
         type: 3}
       propertyPath: pauseAudioListener
@@ -7255,7 +7231,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ls
       value: 
-      objectReference: {fileID: 1712203214}
+      objectReference: {fileID: 0}
     - target: {fileID: 5638706043581431365, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
         type: 3}
       propertyPath: m_Name
@@ -7343,7 +7319,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ls
       value: 
-      objectReference: {fileID: 1712203214}
+      objectReference: {fileID: 0}
     - target: {fileID: 5299113463929924832, guid: 078f9a7efb7bfd317bffebfae2f6e9bc,
         type: 3}
       propertyPath: cffp
@@ -7429,14 +7405,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 719332279099002688, guid: 078f9a7efb7bfd317bffebfae2f6e9bc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1712203214}
-    - targetCorrespondingSourceObject: {fileID: 719332279099002688, guid: 078f9a7efb7bfd317bffebfae2f6e9bc,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1712203216}
     - targetCorrespondingSourceObject: {fileID: 719332279099002688, guid: 078f9a7efb7bfd317bffebfae2f6e9bc,
         type: 3}
       insertIndex: -1
