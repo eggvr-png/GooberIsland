@@ -103,6 +103,20 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.Disconnect();
         }
+
+
+        // just for me testing on school wifi. it hates photon
+        #if UNITY_EDITOR
+        
+        if (System.Environment.UserName.Contains("max"))
+        {
+            PhotonNetwork.OfflineMode = true;
+            Debug.Log("Offline mode enabled for user 'max' in Unity Editor.");
+            return;
+        }
+    #endif
+
+
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -111,6 +125,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         Debug.Log("Connected!");
         status = connectionStatus.ConnectedToServers;
+
+        #if UNITY_EDITOR
+        
+        if (System.Environment.UserName.Contains("max"))
+        {
+            Debug.Log("Offline mode enabled for user 'max' in Unity Editor.");
+            PhotonNetwork.JoinRandomRoom();
+            return;
+        }
+    #endif
         PhotonNetwork.JoinLobby();
     }
 

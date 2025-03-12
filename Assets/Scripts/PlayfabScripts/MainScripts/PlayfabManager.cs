@@ -73,7 +73,7 @@ public class PlayfabManager : MonoBehaviour
 
     void OnPlayerDataReceived(GetUserDataResult result){
         Debug.Log("Recived player data :D");
-        if (result.Data != null || result.Data.ContainsKey("KOFI")){
+        if (result.Data != null && result.Data.ContainsKey("KOFI")){
             if (result.Data["KOFI"].Value.ToString() == "1"){
                 Debug.Log("Player is Kofi supporter");
                 kofiColor.SetActive(true);
