@@ -26,7 +26,7 @@ public class SceneSelectorHandler : MonoBehaviour
 
     void Update()
     {
-        if (!intro.introStarted && PlayerPrefs.GetInt("priv") != 0 && !ssEnabled){
+        if (PlayerPrefs.GetInt("priv") != 0 && !ssEnabled){
             if (Input.GetKey(KeyCode.Z)){
                 intro.enabled = false;
                 disclaimer.SetActive(false);

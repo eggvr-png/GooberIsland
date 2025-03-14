@@ -48,9 +48,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Space]
     public GameObject tbtHolder;
     public Image talkBox;
+    public TutorialPromptHandler tph;
     public TextMeshProUGUI talktext;
     [Header("Other")]
-    public InteractionSystem inSys;
+    //public InteractionSystem inSys;
     public CheckForFirstPlay cffp;
     public pause pMenu;
 
@@ -166,8 +167,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         player = PhotonNetwork.Instantiate(playerPrefab.name, spawn.position, Quaternion.identity);
         PlayerSetup ps = player.GetComponent<PlayerSetup>();
         // enables movement and other stuff
-        pMenu.GetCamAndOther(player.GetComponent<PlayerSetup>().playercamera, player.GetComponent<SurfCharacter>(), player.GetComponent<PlayerSetup>().al, player.GetComponent<PlayerSetup>().playercameraholder.GetComponent<PlayerAiming>());
+        pMenu.GetCamAndOther(ps.playercamera, player.GetComponent<SurfCharacter>(), ps.al, ps.playercameraholder.GetComponent<PlayerAiming>());
         ps.IsLocalPlayer();
+        //inSys = ps.INs;
+        //inSys.rm = this;
+        //inSys.tph = tph;
         // checks for first play
         cffp.Check();
         ps.setNameForAll();

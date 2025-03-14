@@ -422,7 +422,6 @@ MonoBehaviour:
   - {fileID: 7629490043834405055}
   interactionUI: {fileID: 0}
   interactionText: {fileID: 0}
-  INs: {fileID: 0}
   ns: {fileID: 1827059771403361892}
   green: {fileID: 2100000, guid: 72654abca877f36439012be8ea9a0b71, type: 2}
   blue: {fileID: 2100000, guid: d7eba5c0939d90e418a0f22028acf457, type: 2}
@@ -503,6 +502,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5467285085316221433}
   - component: {fileID: 5467285085316221432}
+  - component: {fileID: 6609580447274109271}
   m_Layer: 8
   m_Name: Camera holder
   m_TagString: Untagged
@@ -524,6 +524,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5467285083954485881}
+  - {fileID: 8755810145830618164}
   m_Father: {fileID: 5467285084242854812}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5467285085316221432
@@ -548,6 +549,55 @@ MonoBehaviour:
   punchSpringConstant: 65
   punchAngle: {x: 0, y: 0}
   punchAngleVel: {x: 0, y: 0}
+--- !u!114 &6609580447274109271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5467285085316221438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af75a63c6ef0e877d9c72a8364e9d8d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  endPoint: {fileID: 8755810145830618164}
+  interactionUi: {fileID: 0}
+  interactionTextPrompt: {fileID: 0}
+  tags:
+  - INS ED
+  - INS Grab
+--- !u!1 &6291030165147617533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8755810145830618164}
+  m_Layer: 8
+  m_Name: FF
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8755810145830618164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6291030165147617533}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.035}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5467285085316221433}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7286838577913933294
 PrefabInstance:
   m_ObjectHideFlags: 0

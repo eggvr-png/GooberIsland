@@ -1,79 +1,29 @@
-using System.Collections;
 using UnityEngine;
+
 public class IntroTimer : MonoBehaviour
 {
-    public float introTime;
+    [Header("Refrences")]
+    public GameObject warning;
+    public GameObject priv;
     public GameObject intro;
+    [Space]
     public GameObject menu;
-    public GameObject maxPlayers;
-    public GameObject allStartingScreens;
-
-    public AudioLowPassFilter filter;
-    public AudioReverbFilter filter2;
+    [Space]
     public AudioSource introMusic;
+    public AudioSource menuMusic;
 
-    public bool introStarted;
+    bool onWarning = true;
+    bool onPriv;
 
-    private bool introSkipped = false;
-
-    private IEnumerator Intro()
+    void Update()
     {
-        float timer = 0f;
-
-        while (timer < introTime && !introSkipped)
-        {
-            timer += Time.deltaTime;
-            if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
-            {
-                introSkipped = true;
-            }
-
-            yield return null;
-        }
-        if (introSkipped)
-        {
-            intro.SetActive(false);
-            menu.SetActive(true);
-            Destroy(filter);
-            Destroy(filter2);
-
-            if (introMusic != null)
-            {
-                introMusic.time = introTime; 
+        if (Input.anyKey && onWarning){
+            int isPrivDone = PlayerPrefs.GetInt("priv");
+            if (isPrivDone == 1){
+                warning.SetActive(false);
+                intro.SetActive(true);
+                introMusic.Play();
             }
         }
-        if (timer >= introTime){
-            intro.SetActive(false);
-            menu.SetActive(true);
-            Destroy(filter);
-            Destroy(filter2);
-        }
-    }
-
-    public void SkipAll(){
-        introMusic.gameObject.SetActive(true);
-        Destroy(filter);
-        Destroy(filter2);
-        introMusic.time = introTime;
-        allStartingScreens.SetActive(false);
-        menu.SetActive(true);
-    }
-
-    void Start(){
-        if (PlayerPrefs.GetInt("RTMFG") == 1){
-            PlayerPrefs.SetInt("RTMFG", 0);
-            SkipAll();
-        }
-        if (PlayerPrefs.GetInt("RTMFMP") == 1){
-            PlayerPrefs.SetInt("RTMFMP", 0);
-            SkipAll();
-            maxPlayers.SetActive(true);
-        }
-    }
-
-    public void startIntro() 
-    {
-        introStarted = true;
-        StartCoroutine(Intro());
     }
 }

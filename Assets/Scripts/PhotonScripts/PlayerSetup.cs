@@ -12,7 +12,6 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
 
     public GameObject interactionUI;
     public TextMeshProUGUI interactionText;
-    public InteractionSystem INs;
     public NamingSystem ns;
     
     // is this a good way to do the color system. no. do i care? no.
