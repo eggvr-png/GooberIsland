@@ -1,5 +1,4 @@
 // decided to finally remake my crummy ass system for interaction instead of using the piece of trash that was the old one.
-using UnityEditor.EditorTools;
 using UnityEngine;
 using TMPro;
 

@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ChangeMenu : MonoBehaviour
 {
@@ -12,6 +14,10 @@ public class ChangeMenu : MonoBehaviour
     private void Awake()
     {
         lowPassComponent = GetComponent<AddRemoveLowPass>();
+    }
+
+    void Start(){
+        // uhhh. skibidi
     }
 
     private void Update()
