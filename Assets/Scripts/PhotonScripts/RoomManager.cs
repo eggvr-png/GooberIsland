@@ -105,6 +105,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
             PhotonNetwork.Disconnect();
         }
 
+        // turns on offline mode if player isnt connected 2 wifi!1!!
+        int offlineMode = PlayerPrefs.GetInt("offline");
+        if (offlineMode == 1) {
+            PhotonNetwork.OfflineMode = true;
+            Debug.Log("offline mode enabled!");
+            return;
+        }
 
         // just for me testing on school wifi. it hates photon
         #if UNITY_EDITOR
@@ -126,6 +133,13 @@ public class RoomManager : MonoBehaviourPunCallbacks
         base.OnConnectedToMaster();
         Debug.Log("Connected!");
         status = connectionStatus.ConnectedToServers;
+
+        int offlineMode = PlayerPrefs.GetInt("offline");
+        if (offlineMode == 1) {
+            PhotonNetwork.OfflineMode = true;
+            PhotonNetwork.JoinRandomRoom();
+            return;
+        } 
 
         #if UNITY_EDITOR
         
@@ -166,12 +180,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // spawns in player
         player = PhotonNetwork.Instantiate(playerPrefab.name, spawn.position, Quaternion.identity);
         PlayerSetup ps = player.GetComponent<PlayerSetup>();
+        // sets the interaction ui and text to the playersetup so the interaction system can use it
+        ps.getInteractionUI(inUI, inText);
         // enables movement and other stuff
         pMenu.GetCamAndOther(ps.playercamera, player.GetComponent<SurfCharacter>(), ps.al, ps.playercameraholder.GetComponent<PlayerAiming>());
         ps.IsLocalPlayer();
-        //inSys = ps.INs;
-        //inSys.rm = this;
-        //inSys.tph = tph;
         // checks for first play
         cffp.Check();
         ps.setNameForAll();

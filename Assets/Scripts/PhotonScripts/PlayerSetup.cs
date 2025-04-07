@@ -96,23 +96,8 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         }
     }
 
-    //I HATE ANIMATOR VIEWS AHHHHHHHHHHHHHH
-    [PunRPC]
-    public void running(bool isTrue){
-        if (isTrue){
-            animator.SetBool("Running", true);
-        }
-        else {
-            animator.SetBool("Running", false);
-        }
-    }
-    [PunRPC]
-    public void jumping(bool isTrue){
-        if (isTrue){
-            animator.SetBool("Jumping", true);
-        }
-        else {
-            animator.SetBool("Jumping", false);
-        }
+    public void getInteractionUI(GameObject iUi, TextMeshProUGUI iTxt){
+        interactionUI = iUi;
+        interactionText = iTxt;
     }
 }

@@ -4,11 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - INS ED
-  - INS Grab
-  - Store
-  - INS Talk
   - InvisBarrier
+  - INS Radio
   layers:
   - Default
   - TransparentFX

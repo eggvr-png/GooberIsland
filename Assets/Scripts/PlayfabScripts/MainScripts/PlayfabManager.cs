@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Networking;
-using Discord;
 
 public class PlayfabManager : MonoBehaviour
 {
@@ -21,18 +20,6 @@ public class PlayfabManager : MonoBehaviour
     string art1;
     string art2;
     string art3;
-    
-    Discord.Discord discord;
-
-    void Start()
-    {
-        discord = new Discord.Discord(1328464871741853727, (ulong)Discord.CreateFlags.NoRequireDiscord);
-        ChangeActivity("In Menu", "doing.. menu stuff");
-    }
-
-    void Update(){
-        discord.RunCallbacks();
-    }
 
     public void Login(){
         var request = new LoginWithCustomIDRequest{
@@ -119,23 +106,5 @@ public class PlayfabManager : MonoBehaviour
             Texture image = ((DownloadHandlerTexture)request.downloadHandler).texture;
             rawImage.texture = image;
         }
-    }
-
-    // discord rich precense
-
-    void OnDisable()
-    {
-        discord.Dispose();
-    } 
-
-    public void ChangeActivity(string state, string details){
-        var activityManager = discord.GetActivityManager();
-        var activity = new Discord.Activity{
-            State = state,
-            Details = details
-        };
-        activityManager.UpdateActivity(activity, (res) => {
-            Debug.Log("discord activity changed");
-        });
     }
 }

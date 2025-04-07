@@ -5,6 +5,6 @@ using UnityEngine;
 public class PrivacyPolicyAccept : MonoBehaviour
 {
     public void accept(){
-        PlayerPrefs.SetInt("priv", 1);
+        PlayerPrefs.SetInt("privacyPolicyAccept", 1);
     }
 }
