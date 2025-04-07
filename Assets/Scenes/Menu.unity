@@ -10053,7 +10053,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: contuine :D
+  m_text: continue :D
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b78c1a83a62c302187c5fe06df6ecfb, type: 2}
   m_sharedMaterial: {fileID: 1614167361358533777, guid: 7b78c1a83a62c302187c5fe06df6ecfb,
@@ -11326,12 +11326,12 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'goober island has effects that may cause epileptic events, like seziures,
+  m_text: 'goober island has effects that may cause epileptic events, like seizures,
     or black outs.
 
 
-    if you start experiencing symtoms, please stop playing and
-    take a break and talk to a doctor
+    if you start experiencing symptoms, please stop playing
+    and take a break and talk to a doctor
 
 
     thank you :D'
@@ -13626,14 +13626,16 @@ MonoBehaviour:
 
     - MaxNiftyNine
 
+    - Your Average Softmodder
+
     Music Producers:
 
-    - PiggyToon
+    -
+    PiggyToon
 
     - _yujic
 
-    -
-    VAD3r
+    - VAD3r
 
     - Zane Little'
   m_isRightToLeft: 0
@@ -24125,7 +24127,6 @@ MonoBehaviour:
   introAnimator: {fileID: 1344411060}
   menuAnimator: {fileID: 786820076}
   pfManager: {fileID: 1835901045}
-  discord: {fileID: 1835901047}
   introLength: 10.5
 --- !u!1 &1820944751
 GameObject:
