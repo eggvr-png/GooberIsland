@@ -250,6 +250,7 @@ public class SettingsSystem : MonoBehaviour
         }
         else {
             mvolSlider.value = savedVol;
+            changeMVolume(savedVol);
         }
         float savedsVol = PlayerPrefs.GetFloat("sfxVol");
         if (savedsVol == 0){
@@ -257,6 +258,7 @@ public class SettingsSystem : MonoBehaviour
         }
         else {
             svolSlider.value = savedsVol;
+            changeSVolume(savedsVol);
         }
         // loads resolution
         if (PlayerPrefs.GetInt("width") != 0 && PlayerPrefs.GetInt("height") == 0){

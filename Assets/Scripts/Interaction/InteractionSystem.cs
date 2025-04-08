@@ -40,7 +40,7 @@ namespace GooberInteraction{
 
         // heres where all the code for handling the interactables go
         void CheckForInteractables() {
-            if (Physics.Linecast(startPoint.forward, endPoint.position, out RaycastHit objectInfo)){
+            if (Physics.Linecast(startPoint.position, endPoint.position, out RaycastHit objectInfo)){
                 GameObject objectHit = objectInfo.collider.gameObject;
 
                 // Radio

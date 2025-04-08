@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
 public class cuberaycaster : MonoBehaviour
 {
     public GameObject cubeprefab;
     public bool canraycast;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class cuberaycaster : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.R))
         {
-canraycast = !canraycast;
+            canraycast = !canraycast;
         }
 
         if (Input.GetMouseButtonDown(0))
