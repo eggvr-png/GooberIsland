@@ -28,7 +28,7 @@ public class IntroTimer : MonoBehaviour
 
     bool ableToSkip = false;
 
-    bool introSkipped = false;
+    public bool introSkipped = false;
 
     bool fade = false;
 

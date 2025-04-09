@@ -41,6 +41,8 @@ public class SettingsSystem : MonoBehaviour
     [Header("VR Settings")]
     public Toggle vrToggle;
 
+    public bool pausemenu;
+
     // hey look at me not using a update function for this. this means im not a dumbo!!!!
     void Start(){
         pixelSlider.onValueChanged.AddListener(delegate {cpd();});
@@ -61,7 +63,8 @@ public class SettingsSystem : MonoBehaviour
         // clear dropdown just in case i did a dummy
         resChooser.ClearOptions();
         resChooser.AddOptions(resolutionList);
-        loadSettings();
+        if (!pausemenu)
+            loadSettings();
     }
 
     // pixelation settings
@@ -200,7 +203,7 @@ public class SettingsSystem : MonoBehaviour
     }
 
     // settings loader
-    private void loadSettings(){
+    public void loadSettings(){
         if (Application.platform == RuntimePlatform.Android)
         {
             vrToggle.gameObject.SetActive(false);

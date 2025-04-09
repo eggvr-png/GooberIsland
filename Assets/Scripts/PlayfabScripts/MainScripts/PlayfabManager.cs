@@ -5,6 +5,8 @@ using TMPro;
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Networking;
+using JetBrains.Annotations;
+using UnityEngine.InputSystem.Composites;
 
 public class PlayfabManager : MonoBehaviour
 {
@@ -16,6 +18,11 @@ public class PlayfabManager : MonoBehaviour
     public TMP_InputField nameField;
     [Header("Community")]
     public RawImage[] artRawImages;
+    [Header("Menu Stuff")]
+    public GameObject bannedMenu;
+    public IntroTimer intro;
+    [Space]
+    public TextMeshProUGUI banTimeText;
 
     string art1;
     string art2;
@@ -29,7 +36,7 @@ public class PlayfabManager : MonoBehaviour
                 GetPlayerProfile = true
             }
         };
-        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnError);
+        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginError);
     }
 
     void getPlayerData(){
@@ -49,7 +56,18 @@ public class PlayfabManager : MonoBehaviour
 
     // Errors & Success
     void OnError(PlayFabError error){
-        Debug.Log("FUCK, AN PLAYFAB ERROR: " + error.GenerateErrorReport() + "  >:(");
+        Debug.Log("SHOOT, A PLAYFAB ERROR: " + error.GenerateErrorReport() + "  >:(");
+    }
+
+    void OnLoginError(PlayFabError error){
+        if (error.Error == PlayFabErrorCode.AccountBanned){
+            Debug.Log("player is banned >:0");
+            StartCoroutine(musicPitchDown());
+            bannedMenu.SetActive(true);
+        }
+        else {
+            Debug.Log("SHOOT, A PLAYFAB ERROR: " + error.GenerateErrorReport() + "  >:(");
+        }
     }
 
     void OnLoginSuccess(LoginResult result){
@@ -107,4 +125,17 @@ public class PlayfabManager : MonoBehaviour
             rawImage.texture = image;
         }
     }
+
+    IEnumerator musicPitchDown(){
+        yield return new WaitForSeconds(10.5f);
+        int i = 0;
+        if (!intro.introSkipped){
+            while (i != 100) {
+                intro.introMusic.pitch = intro.introMusic.pitch - 0.01f;
+                ++i;
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
+    }
+
 }

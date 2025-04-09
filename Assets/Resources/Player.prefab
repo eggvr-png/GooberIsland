@@ -348,7 +348,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5467285083954485886}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70b26e0c59453a34ca5d0631d7cf1955, type: 3}
   m_Name: 
@@ -356,6 +356,9 @@ MonoBehaviour:
   cubeprefab: {fileID: 6192848993113698459, guid: d5a34f9d18d7b154ea1dcd812fffaeab,
     type: 3}
   canraycast: 0
+  unplaceableLayer: 15
+  red: {fileID: 2100000, guid: d14eea6c8114b6e12b8ee7ac9ebdbfb7, type: 2}
+  white: {fileID: 2100000, guid: 1911cbaef7b600ace9530fe9bcb36325, type: 2}
 --- !u!1 &5467285084242854813
 GameObject:
   m_ObjectHideFlags: 0
