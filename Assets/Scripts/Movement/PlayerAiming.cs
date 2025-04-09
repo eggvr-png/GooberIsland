@@ -30,6 +30,8 @@ public class PlayerAiming : MonoBehaviour
 	[HideInInspector]
 	public Vector2 punchAngleVel;
 
+	public static bool allowMouseMovement = true;
+
 	private void Start()
 	{
 		// Lock the mouse
@@ -44,6 +46,9 @@ public class PlayerAiming : MonoBehaviour
 			return;
 
 		DecayPunchAngle();
+
+		if (!allowMouseMovement)
+			return;
 
 		// Input
 		float xMovement = Input.GetAxisRaw("Mouse X") * horizontalSensitivity * sensitivityMultiplier;

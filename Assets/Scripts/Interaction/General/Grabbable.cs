@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
+using Photon.Realtime;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ public class Grabbable : MonoBehaviourPunCallbacks
     Rigidbody rb;
     Transform gp;
 
+    bool isRotating;
     void Start()
     {
         // gets the grabbables rigidbody since it doesnt need 2 be public
@@ -31,6 +33,26 @@ public class Grabbable : MonoBehaviourPunCallbacks
     {
         if (interacting) {
             transform.position = Vector3.Lerp(transform.position, gp.position, Time.deltaTime * 10);
+
+            if (Input.GetKey(KeyCode.Q)){ // i was gonna make rotation r but the place ment system uses r, fix later -max
+                PlayerAiming.allowMouseMovement = false;
+                isRotating = true;
+
+                float xMovement = Input.GetAxisRaw("Mouse X");
+		        float yMovement = Input.GetAxisRaw("Mouse Y");
+
+                transform.Rotate(gp.up, xMovement * 5f, Space.World);
+                transform.Rotate(gp.right, yMovement * 5f, Space.World);
+                
+            }
+            else {
+                if (isRotating){
+                    PlayerAiming.allowMouseMovement = true;
+                }
+
+                isRotating = false;
+            }
+
         }
     }
 
