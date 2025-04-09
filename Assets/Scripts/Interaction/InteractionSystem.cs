@@ -49,7 +49,7 @@ namespace GooberInteraction{
                     interactionUi.SetActive(true);
                     Radio interactionScript = objectHit.GetComponent<Radio>();
 
-                    if (Input.GetKey(KeyCode.E)){
+                    if (Input.GetKeyDown(KeyCode.E)){
                         if (interactionScript.canBeInteracted){
                             interactionScript.GetComponent<PhotonView>().RPC("interact", RpcTarget.All);
                         }
@@ -71,7 +71,7 @@ namespace GooberInteraction{
                     interactionUi.SetActive(true);
                     Grabbable interactionScript = objectHit.GetComponent<Grabbable>();
 
-                    if (Input.GetKey(KeyCode.E)){
+                    if (Input.GetKeyDown(KeyCode.E)){
                         if (interactionScript.canBeInteracted){
                             interactionScript.getGrabPoint(grabPoint);
                             interactionScript.GetComponent<PhotonView>().RPC("interact", RpcTarget.All);

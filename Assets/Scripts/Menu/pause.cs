@@ -52,7 +52,7 @@ public class pause : MonoBehaviour
                         pauseMenu.SetActive(true);
                         mainAudioListener.enabled = false;
                         pauseAudioListener.SetActive(true);
-                        main.clearFlags = CameraClearFlags.Nothing; // Stop clearing old frames
+                        //main.clearFlags = CameraClearFlags.Nothing; // Stop clearing old frames // no more worky
                         paused = true;
                         playermovement.enabled = false;
                         pa.enabled = false;
@@ -65,7 +65,7 @@ public class pause : MonoBehaviour
                         pauseMenu.SetActive(false);
                         mainAudioListener.enabled = true;
                         pauseAudioListener.SetActive(false);
-                        main.clearFlags = CameraClearFlags.Skybox; // Resume clearing old frames
+                        //main.clearFlags = CameraClearFlags.Skybox; // Resume clearing old frames
                         paused = false;
                         playermovement.enabled = true;
                         pa.enabled = true;

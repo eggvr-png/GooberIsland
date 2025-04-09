@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/*
 using Discord;
 
 public class DiscordManager : MonoBehaviour
@@ -118,4 +119,7 @@ public class DiscordManager : MonoBehaviour
         }
     }
 }
+
+temporarly off cuz my school wifi doesnt like it -max
+*/ 
 # endif

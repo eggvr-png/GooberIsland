@@ -7126,6 +7126,11 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2400308932768907388, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3527065430243974302, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
         type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -7238,6 +7243,11 @@ PrefabInstance:
       objectReference: {fileID: 1102970249}
     - target: {fileID: 4096703755419819207, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
         type: 3}
+      propertyPath: main
+      value: 
+      objectReference: {fileID: 824938992}
+    - target: {fileID: 4096703755419819207, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
+        type: 3}
       propertyPath: mainAudioListener
       value: 
       objectReference: {fileID: 0}
@@ -7246,6 +7256,11 @@ PrefabInstance:
       propertyPath: pauseAudioListener
       value: 
       objectReference: {fileID: 1890858436}
+    - target: {fileID: 4931792862307346429, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5530929107234595268, guid: b6cc4ce155b92fc2b97c7049d70f32d1,
         type: 3}
       propertyPath: ls

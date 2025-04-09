@@ -95,6 +95,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
             ps.right.rotation = rightHand.rotation;
             }
         }
+
+        if (PhotonNetwork.OfflineMode)
+        {
+            status = connectionStatus.InLobby; //testing purposes -max
+        }
     }
 
     public void Connect()
