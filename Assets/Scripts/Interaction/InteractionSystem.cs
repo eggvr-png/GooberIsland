@@ -33,7 +33,7 @@ namespace GooberInteraction
         Vector3 ogGrabPoint;
 
         public float minScrollDistance = 1;
-        public float maxScrollDistance = 3f;  
+        public float maxScrollDistance = 3f;
 
         void Awake()
         {
@@ -49,28 +49,44 @@ namespace GooberInteraction
 
             if (isGrabbing)
             {
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
-            if (scroll != 0f)
-            {
-                Vector3 direction = (transform.position - grabPoint.position).normalized;
-               
-
-                float distance = Vector3.Distance(transform.position, grabPoint.position + (direction * scroll * 2f));
-                Debug.Log(distance);
-                Debug.Log(distance > minScrollDistance);
-                Debug.Log(distance > minScrollDistance  && distance < maxScrollDistance);
-
-
-                if (distance > minScrollDistance && distance < maxScrollDistance)
+                float scroll = Input.GetAxis("Mouse ScrollWheel");
+                if (scroll != 0f)
                 {
-                    grabPoint.position += direction * scroll * 2f;
+                    Vector3 direction = (transform.position - grabPoint.position).normalized;
+
+
+                    float distance = Vector3.Distance(transform.position, grabPoint.position + (direction * scroll * 2f));
+
+
+
+                    if (distance > minScrollDistance && distance < maxScrollDistance)
+                    {
+                        grabPoint.position += direction * scroll * 2f;
+                    }
+
                 }
-                
-            }
+
+
+                if (Input.GetMouseButtonDown(0))
+                {;
+                    if (lastGrabbable != null)
+                    {
+
+                        Vector3 direction = (transform.position - grabPoint.position).normalized;
+
+                        
+
+                        //ungrab it
+                        TryGrab(lastGrabbable.GetComponent<Grabbable>());
+
+                        //fling it
+                        lastGrabbable.GetComponent<Rigidbody>().AddForce(-direction * 500); //idk why it needs so much force but it works :/ -max
+                    }
+                }
             }
             else if (grabPoint.localPosition != ogGrabPoint)
             {
-            grabPoint.localPosition = ogGrabPoint;
+                grabPoint.localPosition = ogGrabPoint;
             }
         }
 
@@ -113,28 +129,12 @@ namespace GooberInteraction
                 {
                     interacting = true;
                     interactionUi.SetActive(true);
+
                     Grabbable interactionScript = objectHit.GetComponent<Grabbable>();
 
                     if (Input.GetKeyDown(KeyCode.E))
-                    {
-                        if (interactionScript.canBeInteracted)
-                        {
-                            interactionScript.getGrabPoint(grabPoint);
-                            interactionScript.GetComponent<PhotonView>().RPC("interact", RpcTarget.All);
+                    TryGrab(interactionScript);
 
-
-                            lastGrabbable = interactionScript;
-
-                            if (interactionScript.interacting)
-                            {
-                                isGrabbing = true;
-                            }
-                            else
-                            {
-                                isGrabbing = false;
-                            }
-                        }
-                    }
 
                     if (interactionScript.interacting)
                     {
@@ -157,6 +157,32 @@ namespace GooberInteraction
             {
                 interactionUi.SetActive(false);
             }
+        }
+        void TryGrab(Grabbable interactionScript)
+        {
+
+
+            if (interactionScript.canBeInteracted)
+            {
+                interactionScript.getGrabPoint(grabPoint);
+                interactionScript.GetComponent<PhotonView>().RPC("interact", RpcTarget.All);
+
+
+                lastGrabbable = interactionScript;
+
+                if (interactionScript.interacting)
+                {
+                    isGrabbing = true;
+                }
+                else
+                {
+                    isGrabbing = false;
+                }
+            }
+
+
+
+
         }
     }
 }
