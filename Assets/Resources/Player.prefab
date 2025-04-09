@@ -621,6 +621,8 @@ MonoBehaviour:
   tags:
   - INS Radio
   - INS Grab
+  minScrollDistance: 1
+  maxScrollDistance: 3
 --- !u!1 &6291030165147617533
 GameObject:
   m_ObjectHideFlags: 0
