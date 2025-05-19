@@ -5,12 +5,15 @@ using Photon.Realtime;
 using TMPro;
 using UnityEngine;
 using Fragsurf.Movement;
+using UnityEngine.UI;
+using GooberInteraction;
 
 public class PlayerSetup : MonoBehaviourPunCallbacks
 {
     public GameObject[] modelToDisable;
 
     public GameObject interactionUI;
+    public InteractionSystem interactionSystem;
     public TextMeshProUGUI interactionText;
     public NamingSystem ns;
     
@@ -19,6 +22,8 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     public Material blue;
     public Material pink;
     public Material yellow;
+
+    public RawImage keyIcon;
 
     public Renderer[] renderers;
 
@@ -57,6 +62,8 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             
         }
         UpdateColor();
+
+        interactionSystem.keyIcon = keyIcon;
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)

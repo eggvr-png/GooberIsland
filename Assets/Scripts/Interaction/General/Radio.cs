@@ -19,6 +19,11 @@ public class Radio : MonoBehaviourPunCallbacks
     [Header("Refrences")]
     public PhotonView pv;
     public AudioSource audioSource;
+    [Header("Materials")]
+    public Material[] onMaterials;
+    public Material[] offMaterials;
+    [Space]
+    public GameObject[] screenObjects;
 
     [PunRPC]
     public void interact() {
@@ -50,6 +55,9 @@ public class Radio : MonoBehaviourPunCallbacks
     IEnumerator Pitch(bool up){
         if (!up){
             int i = 0;
+            screenObjects[0].GetComponent<Renderer>().material = offMaterials[0];
+            screenObjects[1].GetComponent<Renderer>().material = offMaterials[1];
+            screenObjects[2].GetComponent<Renderer>().material = offMaterials[2];
             while (i != 100){
                 ++i;
                 audioSource.pitch = audioSource.pitch - 0.01f;
@@ -58,6 +66,9 @@ public class Radio : MonoBehaviourPunCallbacks
         }
         else {
             int i = 0;
+            screenObjects[0].GetComponent<Renderer>().material = onMaterials[0];
+            screenObjects[1].GetComponent<Renderer>().material = onMaterials[1];
+            screenObjects[2].GetComponent<Renderer>().material = onMaterials[2];
             while (i != 100){
                 ++i;
                 audioSource.pitch = audioSource.pitch + 0.01f;

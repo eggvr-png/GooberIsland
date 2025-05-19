@@ -12,6 +12,7 @@ using UnityEditor;
 
 public class SettingsSystem : MonoBehaviour
 {
+    public bool pausemenu;
     [Header("Pixelation Settings")]
     [SerializeField] private float pixelyness;
     [Space]
@@ -40,8 +41,8 @@ public class SettingsSystem : MonoBehaviour
     public AudioMixer saudioMixer;
     [Header("VR Settings")]
     public Toggle vrToggle;
-
-    public bool pausemenu;
+    [Header("Joke Settings")]
+    public Toggle hypercam2Toggle;
 
     // hey look at me not using a update function for this. this means im not a dumbo!!!!
     void Start(){
@@ -52,6 +53,7 @@ public class SettingsSystem : MonoBehaviour
         mvolSlider.onValueChanged.AddListener(delegate {changeMVolume(mvolSlider.value);});
         svolSlider.onValueChanged.AddListener(delegate {changeSVolume(svolSlider.value);});
         resChooser.onValueChanged.AddListener(delegate {changeRes(resChooser.value);});
+        hypercam2Toggle.onValueChanged.AddListener(delegate { hypercamEnable(hypercam2Toggle.isOn); });
         // vrToggle.onValueChanged.AddListener(delegate {enableVR(vrToggle.isOn);});
         // here we get all compatable resolutions
         resolutions = Screen.resolutions;
@@ -202,6 +204,15 @@ public class SettingsSystem : MonoBehaviour
         }
     }
 
+    // joke settings
+    void hypercamEnable(bool toggle)
+    {
+        if (toggle)
+            PlayerPrefs.SetInt("hypercam", 1);
+        else
+            PlayerPrefs.SetInt("hypercam", 0);
+    }
+
     // settings loader
     public void loadSettings(){
         if (Application.platform == RuntimePlatform.Android)
@@ -266,6 +277,11 @@ public class SettingsSystem : MonoBehaviour
         // loads resolution
         if (PlayerPrefs.GetInt("width") != 0 && PlayerPrefs.GetInt("height") == 0){
             Screen.SetResolution(PlayerPrefs.GetInt("width"), PlayerPrefs.GetInt("height"), fullscreenToggle.isOn);
+        }
+        // loads joke settings
+        if (PlayerPrefs.GetInt("hypercam") == 1)
+        {
+            hypercam2Toggle.isOn = true;
         }
     }
         }

@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using PlayFab;
 using Photon.Pun;
+using UnityEngine.UI;
 
 namespace GooberInteraction
 {
@@ -15,6 +16,8 @@ namespace GooberInteraction
         public Transform endPoint;
         public Transform grabPoint;
         [Space]
+        public RawImage keyIcon;
+        [Space]
         public GameObject interactionUi;
         public TextMeshProUGUI interactionTextPrompt;
         [Space]
@@ -25,9 +28,15 @@ namespace GooberInteraction
         /// tag 1: Radio
         /// tag 2: Grabbable
         /// </summary>
+        public Texture[] keyIcons;
+        /// <summary>
+        /// sprite 1: e
+        /// sprite 2: m1
+        /// </summary>
         bool interacting;
 
         bool isGrabbing;
+        [SerializeField] bool mousedown;
         Grabbable lastGrabbable;
 
         Vector3 ogGrabPoint;
@@ -66,22 +75,35 @@ namespace GooberInteraction
 
                 }
 
-
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(1))
                 {;
                     if (lastGrabbable != null)
                     {
 
                         Vector3 direction = (transform.position - grabPoint.position).normalized;
 
-                        
-
                         //ungrab it
                         TryGrab(lastGrabbable.GetComponent<Grabbable>());
+
+                        mousedown = false;
 
                         //fling it
                         lastGrabbable.GetComponent<Rigidbody>().AddForce(-direction * 500); //idk why it needs so much force but it works :/ -max
                     }
+                }
+
+                if (Input.GetMouseButtonUp(0) && mousedown)
+                {
+                    if (lastGrabbable != null)
+                    {
+                        TryGrab(lastGrabbable.GetComponent<Grabbable>());
+                        mousedown = false;
+                    }
+                }
+
+                if (mousedown)
+                {
+                    interactionUi.SetActive(true);
                 }
             }
             else if (grabPoint.localPosition != ogGrabPoint)
@@ -96,12 +118,13 @@ namespace GooberInteraction
             if (Physics.Linecast(startPoint.position, endPoint.position, out RaycastHit objectInfo))
             {
                 GameObject objectHit = objectInfo.collider.gameObject;
-
+                
                 // Radio
                 if (objectInfo.collider.gameObject.tag == tags[0])
                 {
                     interacting = true;
                     interactionUi.SetActive(true);
+                    keyIcon.texture = keyIcons[0];
                     Radio interactionScript = objectHit.GetComponent<Radio>();
 
                     if (Input.GetKeyDown(KeyCode.E))
@@ -129,12 +152,15 @@ namespace GooberInteraction
                 {
                     interacting = true;
                     interactionUi.SetActive(true);
-
+                    keyIcon.texture = keyIcons[1];
                     Grabbable interactionScript = objectHit.GetComponent<Grabbable>();
+                    interactionScript.getGrabPoint(grabPoint);
 
-                    if (Input.GetKeyDown(KeyCode.E))
-                    TryGrab(interactionScript);
-
+                    if (Input.GetMouseButtonDown(0) && !mousedown)
+                    {
+                        TryGrab(interactionScript);
+                        mousedown = true;
+                    }
 
                     if (interactionScript.interacting)
                     {
@@ -160,29 +186,24 @@ namespace GooberInteraction
         }
         void TryGrab(Grabbable interactionScript)
         {
-
-
             if (interactionScript.canBeInteracted)
             {
                 interactionScript.getGrabPoint(grabPoint);
                 interactionScript.GetComponent<PhotonView>().RPC("interact", RpcTarget.All);
-
 
                 lastGrabbable = interactionScript;
 
                 if (interactionScript.interacting)
                 {
                     isGrabbing = true;
+                    mousedown = true;
                 }
                 else
                 {
                     isGrabbing = false;
+                    mousedown = false;
                 }
             }
-
-
-
-
         }
     }
 }

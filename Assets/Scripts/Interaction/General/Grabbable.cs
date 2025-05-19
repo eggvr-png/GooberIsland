@@ -14,6 +14,9 @@ public class Grabbable : MonoBehaviourPunCallbacks
     [Header("Settings")]
     public float debounceTime = 0.1f;
     [Space]
+    public float dampFactor = 0.98f;
+    public float force = 100;
+    [Space]
     public bool canBeInteracted = true;
     public bool interacting; // this bool checks if the object has been interacted with or is being interacted.
     [Header("Refrences")]
@@ -32,7 +35,8 @@ public class Grabbable : MonoBehaviourPunCallbacks
     void Update()
     {
         if (interacting) {
-            transform.position = Vector3.Lerp(transform.position, gp.position, Time.deltaTime * 10);
+            Vector3 direction = gp.position - transform.position;
+            rb.AddForce(direction * force);
 
             if (Input.GetKey(KeyCode.Q)){ // i was gonna make rotation r but the place ment system uses r, fix later -max
                 PlayerAiming.allowMouseMovement = false;
@@ -53,8 +57,8 @@ public class Grabbable : MonoBehaviourPunCallbacks
                 isRotating = false;
             }
 
-            
-
+            rb.velocity *= dampFactor;
+            rb.angularVelocity *= dampFactor;
         }
     }
 
@@ -87,7 +91,7 @@ public class Grabbable : MonoBehaviourPunCallbacks
 
     void changeGrabStatus(){
         if (interacting) {
-            rb.isKinematic = true;
+            rb.isKinematic = false;
         }
         else {
             rb.isKinematic = false;

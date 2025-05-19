@@ -22,9 +22,9 @@ public class IntroTimer : MonoBehaviour
 
     public float introLength;
 
-    bool onWarning = true;
-    bool onPriv = false;
-    bool onIntro = false;
+    public bool onWarning = true;
+    public bool onPriv = false;
+    public bool onIntro = false;
 
     bool ableToSkip = false;
 
@@ -34,7 +34,7 @@ public class IntroTimer : MonoBehaviour
 
     void Update()
     {
-        if (Input.anyKey && onWarning){
+        if (Input.anyKey && !Input.GetKey(KeyCode.Z) && onWarning){
             int isPrivDone = PlayerPrefs.GetInt("privacyPolicyAccept");
             if (isPrivDone == 1){
                 PlayerPrefs.SetInt("offline", 0);
@@ -111,6 +111,33 @@ public class IntroTimer : MonoBehaviour
                     StopCoroutine(musicPitchDown());
                     StartCoroutine(musicPitchQuick());
                 }
+            }
+        }
+
+        if (PlayerPrefs.GetInt("RTMFG") == 1)
+        {
+            PlayerPrefs.SetInt("RTMFG", 0);
+            PlayerPrefs.SetInt("offline", 0);
+            pfManager.Login();
+            introMusic.Play();
+            introMusic.time = introLength;
+            warning.SetActive(false);
+            intro.SetActive(false);
+            menu.SetActive(true);
+            onIntro = false;
+            introSkipped = true;
+
+            if (!fade)
+            {
+                menuAnimator.Play("FadeOut", 0, 0);
+                fade = true;
+                this.enabled = false;
+            }
+
+            if (noWifi)
+            {
+                StopCoroutine(musicPitchDown());
+                StartCoroutine(musicPitchQuick());
             }
         }
     }

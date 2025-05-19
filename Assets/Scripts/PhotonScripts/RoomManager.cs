@@ -45,6 +45,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     [Space]
     public TextMeshProUGUI inText;
     public GameObject inUI;
+    public RawImage keyIcon;
     [Space]
     public GameObject tbtHolder;
     public Image talkBox;
@@ -185,6 +186,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // spawns in player
         player = PhotonNetwork.Instantiate(playerPrefab.name, spawn.position, Quaternion.identity);
         PlayerSetup ps = player.GetComponent<PlayerSetup>();
+        ps.keyIcon = keyIcon;
         // sets the interaction ui and text to the playersetup so the interaction system can use it
         ps.getInteractionUI(inUI, inText);
         // enables movement and other stuff
