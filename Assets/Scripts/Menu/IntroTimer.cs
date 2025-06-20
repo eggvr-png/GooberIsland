@@ -32,10 +32,25 @@ public class IntroTimer : MonoBehaviour
 
     bool fade = false;
 
+    int isPrivDone;
+
+    private void Start()
+    {
+        RuntimePlatform currentPlatform = Application.platform;
+        
+        if (currentPlatform == RuntimePlatform.WebGLPlayer)
+        {
+            isPrivDone = 1;
+        }
+        else
+        {
+            isPrivDone = PlayerPrefs.GetInt("privacyPolicyAccept");
+        }
+    }
+
     void Update()
     {
         if (Input.anyKey && !Input.GetKey(KeyCode.Z) && onWarning){
-            int isPrivDone = PlayerPrefs.GetInt("privacyPolicyAccept");
             if (isPrivDone == 1){
                 PlayerPrefs.SetInt("offline", 0);
                 warning.SetActive(false);
@@ -145,17 +160,26 @@ public class IntroTimer : MonoBehaviour
     bool noWifi;
 
     IEnumerator checkIfConnected2Wifi() {
-        using (UnityWebRequest www = UnityWebRequest.Head("https://www.google.com")) {
-            yield return www.SendWebRequest();
+        RuntimePlatform currentPlatform = Application.platform;
+        
+        if (currentPlatform != RuntimePlatform.WebGLPlayer)
+        {
+            using (UnityWebRequest www = UnityWebRequest.Head("https://www.google.com"))
+            {
+                yield return www.SendWebRequest();
 
-            if (www.result == UnityWebRequest.Result.Success) {
-                Debug.Log("player is connected to wifi :D");
-            } else {
-                Debug.Log("player isn't connected to wifi D:");
-                pfManager.enabled = false;
-                noWifi = true;
-                wifidownMenu.SetActive(true);
-                StartCoroutine(musicPitchDown());
+                if (www.result == UnityWebRequest.Result.Success)
+                {
+                    Debug.Log("player is connected to wifi :D");
+                }
+                else
+                {
+                    Debug.Log("player isn't connected to wifi D:");
+                    pfManager.enabled = false;
+                    noWifi = true;
+                    wifidownMenu.SetActive(true);
+                    StartCoroutine(musicPitchDown());
+                }
             }
         }
     }

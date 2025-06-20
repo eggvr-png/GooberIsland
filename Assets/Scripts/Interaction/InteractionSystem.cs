@@ -188,20 +188,44 @@ namespace GooberInteraction
         {
             if (interactionScript.canBeInteracted)
             {
-                interactionScript.getGrabPoint(grabPoint);
-                interactionScript.GetComponent<PhotonView>().RPC("interact", RpcTarget.All);
-
-                lastGrabbable = interactionScript;
-
-                if (interactionScript.interacting)
+                if (!interactionScript.interacting)
                 {
-                    isGrabbing = true;
-                    mousedown = true;
+                    interactionScript.getGrabPoint(grabPoint);
+                    interactionScript.GetComponent<PhotonView>().RPC("interact", RpcTarget.All);
+
+                    lastGrabbable = interactionScript;
+
+                    if (interactionScript.interacting)
+                    {
+                        isGrabbing = true;
+                        mousedown = true;
+                    }
+                    else
+                    {
+                        isGrabbing = false;
+                        mousedown = false;
+                    }
                 }
                 else
                 {
-                    isGrabbing = false;
-                    mousedown = false;
+                    if (interactionScript.GetComponentInParent<PhotonView>().IsMine)
+                    {
+                        interactionScript.getGrabPoint(grabPoint);
+                        interactionScript.GetComponent<PhotonView>().RPC("interact", RpcTarget.All);
+
+                        lastGrabbable = interactionScript;
+
+                        if (interactionScript.interacting)
+                        {
+                            isGrabbing = true;
+                            mousedown = true;
+                        }
+                        else
+                        {
+                            isGrabbing = false;
+                            mousedown = false;
+                        }
+                    }
                 }
             }
         }

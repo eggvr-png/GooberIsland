@@ -29,14 +29,25 @@ public class PlayfabManager : MonoBehaviour
     string art3;
 
     public void Login(){
-        var request = new LoginWithCustomIDRequest{
-            CustomId = SystemInfo.deviceUniqueIdentifier,
-            CreateAccount = true,
-            InfoRequestParameters = new GetPlayerCombinedInfoRequestParams {
-                GetPlayerProfile = true
-            }
-        };
-        PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginError);
+        RuntimePlatform currentPlatform = Application.platform;
+
+        if (currentPlatform != RuntimePlatform.WebGLPlayer)
+        {
+            var request = new LoginWithCustomIDRequest
+            {
+                CustomId = SystemInfo.deviceUniqueIdentifier,
+                CreateAccount = true,
+                InfoRequestParameters = new GetPlayerCombinedInfoRequestParams
+                {
+                    GetPlayerProfile = true
+                }
+            };
+            PlayFabClientAPI.LoginWithCustomID(request, OnLoginSuccess, OnLoginError);
+        }
+        else
+        {
+            Debug.Log("user not logged in due to playing on the WEBGL build :/");
+        }
     }
 
     void getPlayerData(){

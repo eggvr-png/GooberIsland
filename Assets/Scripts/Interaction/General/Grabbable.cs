@@ -35,6 +35,7 @@ public class Grabbable : MonoBehaviourPunCallbacks
     void Update()
     {
         if (interacting) {
+            pv.TransferOwnership(PhotonNetwork.LocalPlayer);
             Vector3 direction = gp.position - transform.position;
             rb.AddForce(direction * force);
 
