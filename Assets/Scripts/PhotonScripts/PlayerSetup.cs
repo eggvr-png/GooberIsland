@@ -37,8 +37,10 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     public Camera playercamera;
     public AudioListener al;
 
-    public void IsLocalPlayer(){
-        foreach (GameObject parts in modelToDisable){
+    public void IsLocalPlayer()
+    {
+        foreach (GameObject parts in modelToDisable)
+        {
             parts.SetActive(false);
         }
         playercameraholder.SetActive(true);
@@ -73,7 +75,10 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     }
 
     void Update(){
-        
+        if (EmotesController.IsEmoting() && Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.LeftShift)) //terrible
+        {
+            EmotesController.Instance.StopEmote();
+        }
     }
 
     void UpdateColor(){

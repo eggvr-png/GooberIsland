@@ -8,14 +8,24 @@ public class EmotesController : MonoBehaviourPunCallbacks
     public Animator animator;
     public PhotonView View;
 
-    Camera mainCamera;
+    public Camera mainCamera;
+    public Camera emoteCam;
+
+    public GameObject playerModel;
+
+    public static EmotesController Instance;
+
+    private void Awake()
+    {
+        if (photonView.IsMine)
+        {
+            Instance = this;
+        }
+    }
+
     // Save the currently playing emote names
     List<string> currentEmotes = new List<string>();
 
-    void Awake()
-    {
-        mainCamera = Camera.main;
-    }
 
     public void PlayEmote(string emoteName)
     {
@@ -36,9 +46,11 @@ public class EmotesController : MonoBehaviourPunCallbacks
     [PunRPC]
     void PlayEmoteRPC(string emoteName)
     {
-        if (photonView.IsMine) {
+        if (photonView.IsMine)
+        {
             //GetComponent<PlayerSetup>().modelToDisable.SetActive(true);
-            transform.GetComponentInChildren<Camera>().enabled = true;
+            playerModel.SetActive(true);
+            emoteCam.enabled = true;
             mainCamera.enabled = false;
         }
         // Save the currently playing emote
@@ -49,13 +61,20 @@ public class EmotesController : MonoBehaviourPunCallbacks
     [PunRPC]
     void StopEmoteRPC()
     {
-        if (photonView.IsMine) {
+        if (photonView.IsMine)
+        {
             //GetComponent<PlayerSetup>().modelToDisable.SetActive(false);
-            transform.GetComponentInChildren<Camera>().enabled = false;
+            playerModel.SetActive(false);
+            emoteCam.enabled = false;
             mainCamera.enabled = true;
         }
         animator.Play("Idle");
         // Clear the list of current emotes as the emote stops
         currentEmotes.Clear();
+    }
+    
+    public static bool IsEmoting()
+    {
+        return Instance.currentEmotes.Count > 0;
     }
 }

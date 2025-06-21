@@ -8,29 +8,16 @@ public class EmotesMenu : MonoBehaviour
 {
     bool mightBeEmoting;
 
-    EmotesController emotesController;
-
-    void TryFindController()
-    {
-        foreach (EmotesController emotes in FindObjectsByType<EmotesController>(FindObjectsSortMode.None))
-        {
-            if (emotes.photonView.IsMine)
-            {
-                emotesController = emotes; //ah yes very big sense make
-                break;
-            }
-        }
-    }
     void Update()
     {
-        if (!emotesController)
+        if (!EmotesController.Instance)
         {
-            TryFindController();
             return;
         }
         if (Input.GetKeyDown(KeyCode.B)) mightBeEmoting = false;
         bool shouldBeOpen = Input.GetKey(KeyCode.B) && !mightBeEmoting; //wacky but works (i havent tested at the time of writing)
-        foreach (Transform child in transform)
+        transform.GetChild(0).gameObject.SetActive(shouldBeOpen);
+        foreach (Transform child in transform.GetChild(0))
         {
             if (child.gameObject.activeSelf && !shouldBeOpen)
             {
@@ -42,7 +29,7 @@ public class EmotesMenu : MonoBehaviour
                     //is the mouse hovering emote thingy
                     if (rectTransform.rect.Contains(localMousePosition))
                     {
-                        emotesController.PlayEmote(child.GetComponentInChildren<TextMeshProUGUI>().text);
+                        EmotesController.Instance.PlayEmote(child.GetComponentInChildren<TextMeshProUGUI>().text);
                         mightBeEmoting = true;
                     }
 
@@ -73,7 +60,7 @@ public class EmotesMenu : MonoBehaviour
                         //the 4th nested if statement in a foreach loop im going insane
                         if (Input.GetMouseButtonDown(0))
                         {
-                            emotesController.PlayEmote(child.GetComponentInChildren<TextMeshProUGUI>().text);
+                            EmotesController.Instance.PlayEmote(child.GetComponentInChildren<TextMeshProUGUI>().text);
                             mightBeEmoting = true;
 
                         }
