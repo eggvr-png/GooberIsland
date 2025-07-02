@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 172078062761138263}
   - component: {fileID: 5299113463929924832}
-  - component: {fileID: 158527994521982254}
   m_Layer: 0
   m_Name: RoomManager
   m_TagString: Untagged
@@ -47,43 +46,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   code: 
-  name: 
+  username: 
   status: 0
   playerPrefab: {fileID: 2962008037067395727, guid: b9a31f827eacca645b8ea02277ca575b,
     type: 3}
   spawn: {fileID: 172078062761138263}
   player: {fileID: 2962008037067395727, guid: b9a31f827eacca645b8ea02277ca575b, type: 3}
-  cameraHolder: {fileID: 0}
-  camera: {fileID: 0}
-  codeAndNameHolder: {fileID: 158527994521982254}
+  leftHand: {fileID: 0}
+  rightHand: {fileID: 0}
   connectingCamera: {fileID: 0}
   connectingCanvas: {fileID: 0}
-  hostMenu: {fileID: 0}
+  pr: {fileID: 0}
   inText: {fileID: 0}
   inUI: {fileID: 0}
+  keyIcon: {fileID: 0}
   tbtHolder: {fileID: 0}
   talkBox: {fileID: 0}
+  tph: {fileID: 0}
   talktext: {fileID: 0}
-  inSys: {fileID: 0}
   cffp: {fileID: 0}
---- !u!114 &158527994521982254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719332279099002688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 037b802f45d451851a426044db90168e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  namePP: name
-  codePP: code
-  name: Goober
-  code: CFC12423
-  newName: 
-  newCode: 
+  pMenu: {fileID: 0}
 --- !u!1 &8213411032734287167
 GameObject:
   m_ObjectHideFlags: 0

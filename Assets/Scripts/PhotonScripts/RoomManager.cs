@@ -41,7 +41,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public GameObject connectingCamera;
     public GameObject connectingCanvas;
     [Header("In Game UI")]
-    public GameObject hostMenu;
+    public PlayerReady pr;
     [Space]
     public TextMeshProUGUI inText;
     public GameObject inUI;
@@ -187,6 +187,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         player = PhotonNetwork.Instantiate(playerPrefab.name, spawn.position, Quaternion.identity);
         PlayerSetup ps = player.GetComponent<PlayerSetup>();
         ps.keyIcon = keyIcon;
+        player.GetComponent<PhotonView>().RPC("setCosmetic", RpcTarget.AllBuffered, InterSceneDataKeeper.Instance.cosmeticId);
         // sets the interaction ui and text to the playersetup so the interaction system can use it
         ps.getInteractionUI(inUI, inText);
         // enables movement and other stuff
@@ -195,12 +196,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // checks for first play
         cffp.Check();
         ps.setNameForAll();
-        // check if player is host
-        if (PhotonNetwork.IsMasterClient)
-        {
-            hostMenu.SetActive(true);
-        }
         StartCoroutine(finshJoin());
+        pr.enabled = true;
     }
 
     public IEnumerator finshJoin()
@@ -210,18 +207,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
         // finally, we delete connecting screen
         Destroy(connectingCamera);
         Destroy(connectingCanvas);
-    }
-
-    public override void OnMasterClientSwitched(Player newMasterClient)
-    {
-        base.OnMasterClientSwitched(newMasterClient);
-
-        Debug.Log("Master Client Changed.");
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            hostMenu.SetActive(true);
-        }
     }
 
     public override void OnDisconnected(DisconnectCause cause)

@@ -77,12 +77,14 @@ public class IntroTimer : MonoBehaviour
         }
 
         AnimatorStateInfo stateInfo = introAnimator.GetCurrentAnimatorStateInfo(0);
-    
-        if (stateInfo.IsName("intro") && stateInfo.normalizedTime >= 1f) {
+
+        if (stateInfo.IsName("intro") && stateInfo.normalizedTime >= 1f)
+        {
             intro.SetActive(false);
             menu.SetActive(true);
             onIntro = false;
-            if (!fade){
+            if (!fade)
+            {
                 menuAnimator.Play("FadeOut", 0, 0);
                 fade = true;
                 this.enabled = false;

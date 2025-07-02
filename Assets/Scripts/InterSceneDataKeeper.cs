@@ -10,6 +10,8 @@ public class InterSceneDataKeeper : MonoBehaviour
 
     public string playerName;
 
+    public int cosmeticId;
+
     public static string errorText;
     
 

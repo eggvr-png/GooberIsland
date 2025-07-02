@@ -8,6 +8,8 @@ public class EmotesMenu : MonoBehaviour
 {
     bool mightBeEmoting;
 
+    public Color selectColor;
+
     void Update()
     {
         if (!EmotesController.Instance)
@@ -56,7 +58,7 @@ public class EmotesMenu : MonoBehaviour
                     //is the mouse hovering emote thingy
                     if (rectTransform.rect.Contains(localMousePosition))
                     {
-                        child.GetComponent<Image>().color = Color.blue;
+                        child.GetComponent<Image>().color = selectColor;
                         //the 4th nested if statement in a foreach loop im going insane
                         if (Input.GetMouseButtonDown(0))
                         {
