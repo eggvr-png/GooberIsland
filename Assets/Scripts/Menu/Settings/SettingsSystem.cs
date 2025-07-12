@@ -143,7 +143,7 @@ public class SettingsSystem : MonoBehaviour
         PlayerPrefs.SetFloat("musicVol", sliderVal);
         float textValue = sliderVal * 10;
         textValue = Mathf.Round(textValue);
-        textValue = textValue / 10;
+        textValue = textValue * 10;
         mvolInput.text = textValue.ToString();
     }
 
@@ -152,7 +152,7 @@ public class SettingsSystem : MonoBehaviour
         PlayerPrefs.SetFloat("sfxVol", sliderVal);
         float textValue = sliderVal * 10;
         textValue = Mathf.Round(textValue);
-        textValue = textValue / 10;
+        textValue = textValue * 10;
         svolInput.text = textValue.ToString();
     }
 

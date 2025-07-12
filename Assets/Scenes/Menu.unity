@@ -1295,7 +1295,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: DO NOT PRESS
+  m_text: mark e pliers
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b78c1a83a62c302187c5fe06df6ecfb, type: 2}
   m_sharedMaterial: {fileID: 1614167361358533777, guid: 7b78c1a83a62c302187c5fe06df6ecfb,
@@ -1436,6 +1436,11 @@ MonoBehaviour:
   - tf2 is a good game
   - oh those dudes? their the goobers!
   - pencil.
+  - HEY THAT BUMP IS SHAPED LIKE A DEER!
+  - goober island will release april 90th 1732
+  - goober island mobile version is real (it isnt)
+  - i dunno what 2 put here
+  - goobert
   tmpUG: {fileID: 1230731807}
 --- !u!1 &159278891
 GameObject:
@@ -1702,7 +1707,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 183531853}
         m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
-        m_MethodName: switchScene
+        m_MethodName: switchSceneChangeRes
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2318,7 +2323,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 261905366}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1503, y: 1.1503, z: 1.1503}
   m_ConstrainProportionsScale: 0
@@ -2329,12 +2334,12 @@ RectTransform:
   - {fileID: 1202277074}
   - {fileID: 686280800}
   - {fileID: 89463549}
-  m_Father: {fileID: 866757005}
+  m_Father: {fileID: 377656846}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 361, y: -0}
-  m_SizeDelta: {x: -909.349, y: -179.8899}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1416.6752, y: 747.0375}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &261905368
 MonoBehaviour:
@@ -2564,7 +2569,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'time left (hours): 123456687'
+  m_text: 'time left (hours): ???'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b78c1a83a62c302187c5fe06df6ecfb, type: 2}
   m_sharedMaterial: {fileID: 1614167361358533777, guid: 7b78c1a83a62c302187c5fe06df6ecfb,
@@ -3334,7 +3339,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 0fa4acfcb7cac2e86ab1dbf700c062c6,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: 1b0a72b37ff3a3942a456b588ad37724, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 2c5aa3ddf1cf5e04c961aa7e61252cb8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3596,6 +3601,42 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -0.00098228, y: -1470}
   m_SizeDelta: {x: 184.05, y: 28.4798}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &377656845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 377656846}
+  m_Layer: 0
+  m_Name: SidePanels
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &377656846
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377656845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 261905367}
+  m_Father: {fileID: 866757005}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 361, y: 0}
+  m_SizeDelta: {x: -1046.0242, y: -206.92735}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &378322905
 GameObject:
@@ -6125,7 +6166,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 508436077}
         m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
-        m_MethodName: switchScene
+        m_MethodName: switchSceneChangeRes
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6399,7 +6440,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!224 &544685884
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6529,7 +6570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00004069, y: -316.1}
+  m_AnchoredPosition: {x: 0.00004069, y: -123.1}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &547464644
@@ -6578,7 +6619,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 547464647}
         m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
-        m_MethodName: switchScene
+        m_MethodName: switchSceneChangeRes
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10388,7 +10429,7 @@ RectTransform:
   - {fileID: 1871457140}
   - {fileID: 1110102533}
   - {fileID: 1365012748}
-  - {fileID: 261905367}
+  - {fileID: 377656846}
   - {fileID: 1651952158}
   - {fileID: 1914200150}
   - {fileID: 786820075}
@@ -11673,10 +11714,14 @@ MonoBehaviour:
     --
     Currently, there are 4
 
-    - Remade the entire raft
+    - Added stuff to the raft :P
 
-    - Remade the loading
-    screen'
+    - Added the room
+    list
+
+    -- Replaced the random room button
+
+    - Remade the loading screen'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b78c1a83a62c302187c5fe06df6ecfb, type: 2}
   m_sharedMaterial: {fileID: 1614167361358533777, guid: 7b78c1a83a62c302187c5fe06df6ecfb,
@@ -11811,7 +11856,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'reason: uhh, being a poopoo'
+  m_text: 'reason: ???'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b78c1a83a62c302187c5fe06df6ecfb, type: 2}
   m_sharedMaterial: {fileID: 1614167361358533777, guid: 7b78c1a83a62c302187c5fe06df6ecfb,
@@ -14797,7 +14842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.008055916, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.35884205, b: 0.3537736, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -15093,7 +15138,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1306865305
 Transform:
   m_ObjectHideFlags: 0
@@ -16516,7 +16561,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1280, y: 720}
+  m_ReferenceResolution: {x: 640, y: 480}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -18001,6 +18046,11 @@ MonoBehaviour:
   - what do you MEAN i have to pay taxes?
   - chicken jockey!1!!
   - sometimes you gotta close a door to open a window
+  - DRIVING IN MY CAR, RIGHT AFTER A BEER
+  - the kings chariot cant be stopped
+  - why does unity always crash
+  - thanks kofi supporters
+  - that would be your mother - spy tf2
   tmpUG: {fileID: 1338869721}
 --- !u!1 &1466240597
 GameObject:
@@ -21398,7 +21448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.9372549}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -22682,7 +22732,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1775296045
 Transform:
   m_ObjectHideFlags: 0
@@ -23414,9 +23464,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1af98ac63dff74ebe7363bb3832f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doNotPressButton: {fileID: 0}
-  UI: {fileID: 0}
-  music: {fileID: 0}
+  doNotPressButton: {fileID: 1385287300}
+  UI: {fileID: 876973981}
+  music: {fileID: 346476967}
 --- !u!114 &1813832409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23439,6 +23489,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1822270607}
   - component: {fileID: 1822270609}
+  - component: {fileID: 1822270612}
+  - component: {fileID: 1822270611}
+  - component: {fileID: 1822270610}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -23476,7 +23529,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 0fa4acfcb7cac2e86ab1dbf700c062c6,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: ad8bc9491099ea84c99ee50b4a8a75e8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: d3649b9261f511843b9697db735b96a2, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -23562,6 +23615,50 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!170 &1822270610
+AudioDistortionFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822270606}
+  m_Enabled: 1
+  m_DistortionLevel: 0.61
+--- !u!169 &1822270611
+AudioLowPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822270606}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_LowpassResonanceQ: 1
+  lowpassLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.22727273
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!165 &1822270612
+AudioHighPassFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1822270606}
+  m_Enabled: 1
+  m_CutoffFrequency: 321
+  m_HighpassResonanceQ: 1
 --- !u!1 &1830694828
 GameObject:
   m_ObjectHideFlags: 0
@@ -31129,7 +31226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &5097441715950229235
 GameObject:
   m_ObjectHideFlags: 0
@@ -34416,7 +34513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &8086387869923277237
 MonoBehaviour:
   m_ObjectHideFlags: 0

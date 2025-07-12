@@ -17,10 +17,12 @@ public class Grabbable : MonoBehaviourPunCallbacks
     public float dampFactor = 0.98f;
     public float force = 100;
     [Space]
-    public bool canBeInteracted = true;
+    public bool canBeInteracted = true; // basically the debounce varaible.
     public bool interacting; // this bool checks if the object has been interacted with or is being interacted.
     [Header("Refrences")]
     public PhotonView pv;
+    [Header("Preset")]
+    public PresetMaker preset;
 
     Rigidbody rb;
     Transform gp;
@@ -30,6 +32,12 @@ public class Grabbable : MonoBehaviourPunCallbacks
     {
         // gets the grabbables rigidbody since it doesnt need 2 be public
         rb = this.gameObject.GetComponent<Rigidbody>();
+        if (preset != null )
+        {
+            rb.mass = preset.mass;
+            dampFactor = preset.damping;
+            force = preset.force;
+        }
     }
 
     void Update()

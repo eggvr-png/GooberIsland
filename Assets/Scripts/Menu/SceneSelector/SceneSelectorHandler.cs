@@ -21,6 +21,7 @@ public class SceneSelectorHandler : MonoBehaviour
             {
                 sceneSwitcher.SetActive(true);
                 disclaimer.SetActive(false);
+                Screen.SetResolution(640, 480, false);
             }
         }
     }
