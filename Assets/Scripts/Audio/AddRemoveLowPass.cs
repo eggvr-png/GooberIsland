@@ -13,7 +13,7 @@ public class AddRemoveLowPass : MonoBehaviour
         if (add){
             AudioLowPassFilter lowpass = audioObj.AddComponent<AudioLowPassFilter>();
             AudioReverbFilter reverb = audioObj.AddComponent<AudioReverbFilter>();
-            reverb.reverbPreset = AudioReverbPreset.Psychotic;
+            reverb.reverbPreset = AudioReverbPreset.Generic;
             return;
         }
         if (remove){

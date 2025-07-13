@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Photon.Pun;
 
-public class ChunkManager : MonoBehaviour
+public class ChunkManager : MonoBehaviourPunCallbacks
 {
     public static ChunkManager instance;
     public Vector2 worldSize;
@@ -18,7 +19,7 @@ public class ChunkManager : MonoBehaviour
         seed = UnityEngine.Random.Range(1, 10000000);
     }
 
-    void Start()
+    public void startGenerating()
     {
         worldCenter = new Vector2((worldSize.x / 2) * 128, (worldSize.y / 2) * 128);
         StartCoroutine(GenerateChunks());
@@ -33,9 +34,15 @@ public class ChunkManager : MonoBehaviour
                 current.transform.localPosition = new Vector3(x * 128, 0, y * 128);
                 tg.Init(current);
                 tg.Generate(material);
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0);
             }
         }
+    }
+
+    [PunRPC]
+    public void ShareSeed(int seedSent)
+    {
+        seed = seedSent;
     }
 }
 

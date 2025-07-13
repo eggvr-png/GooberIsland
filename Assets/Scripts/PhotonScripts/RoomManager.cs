@@ -51,10 +51,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public Image talkBox;
     public TutorialPromptHandler tph;
     public TextMeshProUGUI talktext;
+    public GameObject healthbars;
     [Header("Other")]
     //public InteractionSystem inSys;
     public CheckForFirstPlay cffp;
     public pause pMenu;
+    public ChunkManager chunkManager;
 
     Animator playerAnims;
 
@@ -159,9 +161,12 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinLobby();
     }
 
+    bool pub;
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 4;
         if (code != null)
         {
             // hmm, i think its totally not obvious what this does!
@@ -170,7 +175,8 @@ public class RoomManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            PhotonNetwork.JoinRandomOrCreateRoom(null, 0, MatchmakingMode.FillRoom, new TypedLobby(SceneManager.GetActiveScene().name, LobbyType.Default));
+            pub = true;
+            PhotonNetwork.JoinRandomOrCreateRoom(null, 4, MatchmakingMode.FillRoom, new TypedLobby(SceneManager.GetActiveScene().name, LobbyType.Default));
             Debug.Log("Joining Random Room!");
         }
 
@@ -197,7 +203,23 @@ public class RoomManager : MonoBehaviourPunCallbacks
         cffp.Check();
         ps.setNameForAll();
         StartCoroutine(finshJoin());
-        pr.enabled = true;
+        if (SceneManager.GetActiveScene().name == "Raft")
+        {
+            pr.enabled = true;
+        }
+        else
+        {
+            healthbars.SetActive(true);
+        }
+        if (PhotonNetwork.IsMasterClient && !pub)
+            PhotonNetwork.CurrentRoom.IsVisible = false;
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            chunkManager.GetComponentInParent<PhotonView>().RPC("ShareSeed", RpcTarget.AllBuffered, chunkManager.seed);
+        }
+
+        chunkManager.startGenerating();
     }
 
     public IEnumerator finshJoin()

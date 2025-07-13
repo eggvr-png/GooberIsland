@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
@@ -11,6 +12,9 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     [Space]
     public GameObject hostMenuNormal;
     public GameObject hostMenuReady;
+    public GameObject startingMenu;
+    [Space]
+    public GameObject raftObjects;
     [Space]
     public TextMeshProUGUI[] playerCountTexts;
     public TextMeshProUGUI[] readyTexts;
@@ -23,13 +27,22 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     [Header("Master")]
     public bool master;
     public bool normal;
+    [Header("Loader")]
+    public LoadScene sceneLoader;
 
     bool debounce;
 
     bool readyed;
 
+    bool started;
+
     void Start()
     {
+        if (SceneManager.GetActiveScene().name == "Raft")
+        {
+            raftObjects.SetActive(true);
+        }
+
         if (PhotonNetwork.IsMasterClient)
         {
             master = true;
@@ -74,14 +87,20 @@ public class PlayerReady : MonoBehaviourPunCallbacks
             }
         }
 
-        if (playersReady >= numberOfPlayersNeededToStart && PhotonNetwork.IsMasterClient)
+        if (Input.GetKey(KeyCode.N) && canStart && !started)
+        {
+            started = true;
+            this.GetComponentInParent<PhotonView>().RPC("startGame", RpcTarget.All);
+        }
+
+        if (playersReady >= numberOfPlayersNeededToStart && PhotonNetwork.IsMasterClient && !started)
         {
             hostMenuNormal.SetActive(false);
             hostMenuReady.SetActive(true);
 
             canStart = true;
         }
-        else if (playersReady != numberOfPlayersNeededToStart && PhotonNetwork.IsMasterClient)
+        else if (playersReady != numberOfPlayersNeededToStart && PhotonNetwork.IsMasterClient && !started)
         {
             hostMenuNormal.SetActive(true);
             hostMenuReady.SetActive(false);
@@ -143,5 +162,27 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(0.5f);
         debounce = false;
+    }
+
+    [PunRPC]
+    public void startGame()
+    {
+        if (canStart)
+        {
+            Debug.Log("starting game :D");
+            hostMenuNormal.SetActive(false);
+            hostMenuReady.SetActive(false);
+            startingMenu.SetActive(true);
+            StartCoroutine(waitTime(2.5f));
+        } else
+        {
+            Debug.Log("cant start just yet D:");
+        }
+    }
+
+    IEnumerator waitTime(float wait)
+    {
+        yield return new WaitForSeconds(wait);
+        sceneLoader.SwitchScene();
     }
 }

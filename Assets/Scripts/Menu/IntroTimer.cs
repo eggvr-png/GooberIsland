@@ -82,6 +82,8 @@ public class IntroTimer : MonoBehaviour
         {
             intro.SetActive(false);
             menu.SetActive(true);
+            Destroy(introMusic.GetComponentInParent<AudioReverbFilter>());
+            Destroy(introMusic.GetComponentInParent<AudioLowPassFilter>());
             onIntro = false;
             if (!fade)
             {
@@ -118,6 +120,9 @@ public class IntroTimer : MonoBehaviour
                 onIntro = false;
                 introSkipped = true;
 
+                Destroy(introMusic.GetComponentInParent<AudioReverbFilter>());
+                Destroy(introMusic.GetComponentInParent<AudioLowPassFilter>());
+
                 if (!fade){
                     menuAnimator.Play("FadeOut", 0, 0);
                     fade = true;
@@ -143,6 +148,9 @@ public class IntroTimer : MonoBehaviour
             menu.SetActive(true);
             onIntro = false;
             introSkipped = true;
+
+            Destroy(introMusic.GetComponentInParent<AudioReverbFilter>());
+            Destroy(introMusic.GetComponentInParent<AudioLowPassFilter>());
 
             if (!fade)
             {
