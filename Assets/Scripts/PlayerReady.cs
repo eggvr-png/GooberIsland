@@ -167,17 +167,11 @@ public class PlayerReady : MonoBehaviourPunCallbacks
     [PunRPC]
     public void startGame()
     {
-        if (canStart)
-        {
-            Debug.Log("starting game :D");
-            hostMenuNormal.SetActive(false);
-            hostMenuReady.SetActive(false);
-            startingMenu.SetActive(true);
-            StartCoroutine(waitTime(2.5f));
-        } else
-        {
-            Debug.Log("cant start just yet D:");
-        }
+        Debug.Log("starting game :D");
+        hostMenuNormal.SetActive(false);
+        hostMenuReady.SetActive(false);
+        startingMenu.SetActive(true);
+        StartCoroutine(waitTime(2.5f));
     }
 
     IEnumerator waitTime(float wait)
