@@ -7,9 +7,8 @@ TagManager:
   - InvisBarrier
   - INS Radio
   - INS Grab
-  - INS ED
-  - Store
-  - INS Talk
+  - INS Enabler
+  - INS Event
   layers:
   - Default
   - TransparentFX

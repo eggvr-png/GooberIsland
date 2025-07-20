@@ -1,8 +1,9 @@
+// for some reason linux DOES NOT like the discord thing im using :/
 #if !UNITY_STANDALONE_LINUX
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-/*
+
 using Discord;
 
 public class DiscordManager : MonoBehaviour
@@ -96,6 +97,15 @@ public class DiscordManager : MonoBehaviour
         }
     }
 
+    public void InGame()
+    {
+        if (discordRunning)
+        {
+            ChangeActivity("In Game", "epic gaming", null, null);
+            ChangeSmallImageColor();
+        }
+    }
+
     // color changes in game
     public void ChangeSmallImageColor() {
         if (discordRunning) {
@@ -119,7 +129,4 @@ public class DiscordManager : MonoBehaviour
         }
     }
 }
-
-temporarly off cuz my school wifi doesnt like it -max
-*/ 
 # endif

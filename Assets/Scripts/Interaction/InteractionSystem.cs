@@ -27,6 +27,8 @@ namespace GooberInteraction
         /// <summary>
         /// tag 1: Radio
         /// tag 2: Grabbable
+        /// tag 3: Enabler
+        /// tag 4: UnityEvent
         /// </summary>
         public Texture[] keyIcons;
         /// <summary>
@@ -170,6 +172,57 @@ namespace GooberInteraction
                     {
                         interactionTextPrompt.text = interactionScript.interaction1;
                     }
+
+                    return;
+                }
+                else if (objectInfo.collider.gameObject.tag == tags[2])
+                {
+                    interacting = true;
+                    interactionUi.SetActive(true);
+                    keyIcon.texture = keyIcons[0];
+                    Enabler interactionScript = objectHit.GetComponent<Enabler>();
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        if (interactionScript.canBeInteracted)
+                        {
+                            interactionScript.GetComponent<PhotonView>().RPC("interact", RpcTarget.All);
+                        }
+                    }
+
+                    if (interactionScript.interacting)
+                    {
+                        interactionTextPrompt.text = interactionScript.interaction2;
+                    }
+                    else
+                    {
+                        interactionTextPrompt.text = interactionScript.interaction1;
+                    }
+                    interactionUi.SetActive(true);
+
+                    return;
+                }
+                else if (objectInfo.collider.gameObject.tag == tags[3])
+                {
+                    interacting = true;
+                    interactionUi.SetActive(true);
+                    keyIcon.texture = keyIcons[0];
+                    UnityEventInteraction interactionScript = objectHit.GetComponent<UnityEventInteraction>();
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        if (interactionScript.canBeInteracted && !interactionScript.notSynced)
+                        {
+                            interactionScript.GetComponent<PhotonView>().RPC("interact", RpcTarget.All);
+                        }
+                        else if (interactionScript.canBeInteracted && interactionScript.notSynced)
+                        {
+                            interactionScript.interact();
+                        }
+                    }
+
+                    interactionTextPrompt.text = interactionScript.interaction1;
+                    interactionUi.SetActive(true);
 
                     return;
                 }

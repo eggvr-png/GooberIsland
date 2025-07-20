@@ -9,7 +9,7 @@ public class DisableOnJoin : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
 

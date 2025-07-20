@@ -19,6 +19,7 @@ public class Grabbable : MonoBehaviourPunCallbacks
     [Space]
     public bool canBeInteracted = true; // basically the debounce varaible.
     public bool interacting; // this bool checks if the object has been interacted with or is being interacted.
+    public bool otherPlayerHolding;
     [Header("Refrences")]
     public PhotonView pv;
     [Header("Preset")]

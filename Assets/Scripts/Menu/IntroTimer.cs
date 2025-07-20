@@ -18,7 +18,9 @@ public class IntroTimer : MonoBehaviour
     public Animator menuAnimator;
     [Space]
     public PlayfabManager pfManager;
-    //public DiscordManager discord;
+#if !UNITY_STANDALONE_LINUX
+    public DiscordManager discord;
+#endif
 
     public float introLength;
 
@@ -61,10 +63,11 @@ public class IntroTimer : MonoBehaviour
                 onWarning = false;
                 onPriv = false;
                 onIntro = true;
-
-                //if (discord.discordRunning){
-                    //discord.InMenu();
-                //}
+#if !UNITY_STANDALONE_LINUX
+                if (discord.discordRunning){
+                    discord.InMenu();
+                }
+#endif
             }
             else {
                 PlayerPrefs.SetInt("offline", 0);
@@ -105,10 +108,11 @@ public class IntroTimer : MonoBehaviour
         pfManager.Login();
         intro.SetActive(true);
         onPriv = false;
-
-        //if (discord.discordRunning){
+#if !UNITY_STANDALONE_LINUX
+        if (discord.discordRunning){
             //discord.InMenu();
-        //}
+        }
+#endif
     }
 
     public void skipIntro(){

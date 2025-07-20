@@ -11,6 +11,7 @@ using GooberInteraction;
 public class PlayerSetup : MonoBehaviourPunCallbacks
 {
     public GameObject[] modelToDisable;
+    public int unviewableLayer;
 
     public GameObject interactionUI;
     public InteractionSystem interactionSystem;
@@ -26,6 +27,8 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     public RawImage keyIcon;
 
     public Renderer[] renderers;
+
+    public Renderer[] rendererstoHide;
 
     public Transform left;
     public Transform right;
@@ -43,6 +46,12 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         {
             parts.SetActive(false);
         }
+
+        foreach (Renderer renderer in rendererstoHide)
+        {
+            renderer.gameObject.layer = unviewableLayer;
+        }
+
         playercameraholder.SetActive(true);
         playerMovement.enabled = true;
     }

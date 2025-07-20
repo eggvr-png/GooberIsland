@@ -301,10 +301,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1436736160}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 17ce7b489f9ef0e4393cdc855198ef98,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1436736159}
   m_SourcePrefab: {fileID: 100100000, guid: 17ce7b489f9ef0e4393cdc855198ef98, type: 3}
 --- !u!1 &30210405 stripped
 GameObject:
@@ -803,22 +799,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1427029520}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &615180048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 615180046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 1
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &615180049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,7 +835,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 615180049}
-  - {fileID: 615180048}
   sceneViewId: 6
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -878,6 +857,7 @@ MonoBehaviour:
   force: 100
   canBeInteracted: 1
   interacting: 0
+  otherPlayerHolding: 0
   pv: {fileID: 615180050}
   preset: {fileID: 11400000, guid: bb9c59cdab3a0a2438d15c5143afc030, type: 2}
 --- !u!54 &615180052
@@ -2810,10 +2790,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a41d9a22a38c7314a32dcb6981d5f45,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1784643474}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a41d9a22a38c7314a32dcb6981d5f45,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1784643475}
   m_SourcePrefab: {fileID: 100100000, guid: 5a41d9a22a38c7314a32dcb6981d5f45, type: 3}
 --- !u!4 &1172626933 stripped
@@ -2949,53 +2925,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 877332017}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1218061481
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1218061483}
-  - component: {fileID: 1218061482}
-  m_Layer: 0
-  m_Name: DevISDK
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1218061482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218061481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec5a42e04c6834dd48c916b6378f58dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomCode: Dev
-  playerName: Dev
-  cosmeticId: 4
---- !u!4 &1218061483
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1218061481}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.0506124, y: -321.82968, z: 1408.7416}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1235006481 stripped
 MonoBehaviour:
@@ -3451,22 +3380,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1569306266}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1373018643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1373018641}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 1
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &1373018644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3503,7 +3416,6 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1373018644}
-  - {fileID: 1373018643}
   sceneViewId: 8
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -3526,6 +3438,7 @@ MonoBehaviour:
   force: 100
   canBeInteracted: 1
   interacting: 0
+  otherPlayerHolding: 0
   pv: {fileID: 1373018645}
   preset: {fileID: 11400000, guid: 4d9397f8298810e48b99839ca7c85115, type: 2}
 --- !u!54 &1373018647
@@ -4107,10 +4020,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 615180049}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 17ce7b489f9ef0e4393cdc855198ef98,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 615180048}
   m_SourcePrefab: {fileID: 100100000, guid: 17ce7b489f9ef0e4393cdc855198ef98, type: 3}
 --- !u!1 &1436736157 stripped
 GameObject:
@@ -4124,22 +4033,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5196656}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1436736159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1436736157}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 1
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &1436736160
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4176,7 +4069,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1436736160}
-  - {fileID: 1436736159}
+  - {fileID: 0}
   sceneViewId: 7
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -4199,6 +4092,7 @@ MonoBehaviour:
   force: 100
   canBeInteracted: 1
   interacting: 0
+  otherPlayerHolding: 0
   pv: {fileID: 1436736161}
   preset: {fileID: 11400000, guid: a123fc47681636f4288c1d7dcc617118, type: 2}
 --- !u!54 &1436736163
@@ -5022,10 +4916,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1373018644}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 17ce7b489f9ef0e4393cdc855198ef98,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1373018643}
   m_SourcePrefab: {fileID: 100100000, guid: 17ce7b489f9ef0e4393cdc855198ef98, type: 3}
 --- !u!1 &1643459325
 GameObject:
@@ -6616,26 +6506,10 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1784643472}
-  - {fileID: 1784643474}
+  - {fileID: 0}
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &1784643474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1784643467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 1
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &1784643475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6655,6 +6529,7 @@ MonoBehaviour:
   force: 100
   canBeInteracted: 1
   interacting: 0
+  otherPlayerHolding: 0
   pv: {fileID: 1784643473}
   preset: {fileID: 11400000, guid: 4d9397f8298810e48b99839ca7c85115, type: 2}
 --- !u!1 &1806242290
@@ -7392,10 +7267,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a41d9a22a38c7314a32dcb6981d5f45,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1859521646}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5a41d9a22a38c7314a32dcb6981d5f45,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 1859521652}
   m_SourcePrefab: {fileID: 100100000, guid: 5a41d9a22a38c7314a32dcb6981d5f45, type: 3}
 --- !u!4 &1859521644 stripped
@@ -7410,22 +7281,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1859521643}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1859521646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1859521645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizeVelocity: 0
-  m_SynchronizeAngularVelocity: 0
-  m_TeleportEnabled: 0
-  m_TeleportIfDistanceGreaterThan: 3
 --- !u!114 &1859521647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7462,7 +7317,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1859521647}
-  - {fileID: 1859521646}
+  - {fileID: 0}
   sceneViewId: 5
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -7533,6 +7388,7 @@ MonoBehaviour:
   force: 100
   canBeInteracted: 1
   interacting: 0
+  otherPlayerHolding: 0
   pv: {fileID: 1859521648}
   preset: {fileID: 11400000, guid: 4d9397f8298810e48b99839ca7c85115, type: 2}
 --- !u!4 &1861168996 stripped
@@ -8912,4 +8768,3 @@ SceneRoots:
   - {fileID: 1514398770}
   - {fileID: 1852232123}
   - {fileID: 5510337989387613923}
-  - {fileID: 1218061483}

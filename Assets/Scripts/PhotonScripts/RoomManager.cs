@@ -57,6 +57,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     public CheckForFirstPlay cffp;
     public pause pMenu;
     public ChunkManager chunkManager;
+    public CosmeticSystem cosmeticSystem;
 
     Animator playerAnims;
 
@@ -194,6 +195,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         PlayerSetup ps = player.GetComponent<PlayerSetup>();
         ps.keyIcon = keyIcon;
         player.GetComponent<PhotonView>().RPC("setCosmetic", RpcTarget.AllBuffered, InterSceneDataKeeper.Instance.cosmeticId);
+        cosmeticSystem = player.GetComponent<CosmeticSystem>();
         // sets the interaction ui and text to the playersetup so the interaction system can use it
         ps.getInteractionUI(inUI, inText);
         // enables movement and other stuff
@@ -214,12 +216,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient && !pub)
             PhotonNetwork.CurrentRoom.IsVisible = false;
 
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient && SceneManager.GetActiveScene().name == "Island")
         {
             chunkManager.GetComponentInParent<PhotonView>().RPC("ShareSeed", RpcTarget.AllBuffered, chunkManager.seed);
         }
 
-        chunkManager.startGenerating();
+        if (SceneManager.GetActiveScene().name == "Island")
+        {
+            chunkManager.startGenerating();
+        }
     }
 
     public IEnumerator finshJoin()
