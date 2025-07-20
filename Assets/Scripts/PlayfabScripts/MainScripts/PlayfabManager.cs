@@ -15,6 +15,7 @@ public class PlayfabManager : MonoBehaviour
     [SerializeField] private string playerName;
     [Header("Player Data Objects")]
     public GameObject kofiColor;
+    public GameObject kofiCosmetic;
     public TMP_InputField nameField;
     [Header("Community")]
     public RawImage[] artRawImages;
@@ -105,6 +106,7 @@ public class PlayfabManager : MonoBehaviour
             if (result.Data["KOFI"].Value.ToString() == "1"){
                 Debug.Log("Player is Kofi supporter");
                 kofiColor.SetActive(true);
+                kofiCosmetic.SetActive(true);
             }
         }
         else {
