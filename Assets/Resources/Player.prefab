@@ -281,7 +281,7 @@ Transform:
   m_GameObject: {fileID: 2655535313020064374}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.398}
+  m_LocalPosition: {x: 0, y: 0, z: 0.403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -801,17 +801,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5467285083954485886}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 70b26e0c59453a34ca5d0631d7cf1955, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cubeprefab: {fileID: 6192848993113698459, guid: d5a34f9d18d7b154ea1dcd812fffaeab,
+  objectToSpawn: {fileID: 5067196614353176350, guid: bed9812cebffe144dab9e56bbecfc570,
     type: 3}
-  canraycast: 0
-  unplaceableLayer: 15
-  red: {fileID: 2100000, guid: d14eea6c8114b6e12b8ee7ac9ebdbfb7, type: 2}
-  white: {fileID: 2100000, guid: 1911cbaef7b600ace9530fe9bcb36325, type: 2}
+  horizontalSnapPointPrefab: {fileID: 8685003515314322532, guid: 3b59911889811ec49af21291c2c8d7c1,
+    type: 3}
+  previewMaterial: {fileID: 2100000, guid: 1911cbaef7b600ace9530fe9bcb36325, type: 2}
+  rayStartPos: {fileID: 8926217855553647247}
+  inPlaceMode: 0
 --- !u!114 &1279713338141005931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,7 +1110,7 @@ Transform:
   m_GameObject: {fileID: 5467285085316221438}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.389, z: 0}
+  m_LocalPosition: {x: 0, y: 0.307, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1311,7 +1312,7 @@ Transform:
   m_GameObject: {fileID: 7629490043834405055}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.70710576, z: -0, w: 0.70710784}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.076, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

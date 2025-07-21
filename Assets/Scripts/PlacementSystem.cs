@@ -1,88 +1,87 @@
 using System.Collections;
-using System.Collections.Generic;
-using ExitGames.Client.Photon.StructWrapping;
-using Photon.Pun;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class cuberaycaster : MonoBehaviour
+public class PlacementSystem : MonoBehaviour
 {
-    public GameObject cubeprefab;
-    public bool canraycast;
-
-    public int unplaceableLayer;
-
-    public Material red;
-    public Material white;
-
+    [Header("Refrences")]
+    public GameObject objectToSpawn;
+    [Space]
+    public GameObject horizontalSnapPointPrefab;
+    [Space]
+    public Material previewMaterial;
+    [Header("Settings")]
+    public Transform rayStartPos;
+    [SerializeField]private bool inPlaceMode;
+    
+    bool debounceEntering;
+    bool debouncePlacing;
+    bool createdPreview;
     GameObject preview;
-    bool unplaceable;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        canraycast = false;
+        // theres way to many if statements in here holy shit :sob:
+        if (Input.GetKey(KeyCode.R) && !debounceEntering)
+        {
+            inPlaceMode = !inPlaceMode; // js learned you can do this :sob:
+            debounceEntering = true;
+            StartCoroutine(debounceEnter());
+        }
+
+        // manages the preview. this should work i hope :P
+        if (inPlaceMode && preview == null)
+        {
+            preview = Instantiate(objectToSpawn, Vector3.zero, Quaternion.identity);
+            preview.GetComponent<Renderer>().material = previewMaterial;
+        }
+        if (!inPlaceMode && preview != null)
+        {
+            Destroy(preview);
+        }
+
+        if (preview != null && inPlaceMode)
+        {
+            Ray ray = new Ray(rayStartPos.position, rayStartPos.forward);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                preview.transform.position = hit.point;
+                Collider[] hits = Physics.OverlapSphere(preview.transform.position, 0.5f);
+
+                foreach (Collider hited in hits)
+                {
+                    if (hited.CompareTag("SnapPoint"))
+                    {
+                        preview.transform.position = hited.transform.position;
+                        preview.transform.rotation = hited.transform.rotation;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (preview != null && inPlaceMode && !debouncePlacing)
+        {
+            if (Input.GetMouseButton(0))
+            {
+                debouncePlacing = true;
+                GameObject placedObject = Instantiate(objectToSpawn, preview.transform.position, preview.transform.rotation);
+                placedObject.tag = "Placed";
+                placedObject.GetComponent<BoxCollider>().enabled = true;
+                Instantiate(horizontalSnapPointPrefab, placedObject.transform);
+                StartCoroutine(debouncePlace());
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator debounceEnter()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            canraycast = !canraycast;
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (canraycast == true)
-            {
-                Vector3 ScreenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
-                Ray ray = Camera.main.ScreenPointToRay(ScreenCenter);
-                RaycastHit hit;
-                
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (!unplaceable){
-                        Instantiate(cubeprefab, hit.point, Quaternion.identity);
-                    }
-                    Debug.Log ("hit: " + hit.collider.gameObject.name);
-                
-                }
-                else
-                {
-                    Debug.Log("no hit");
-                }
-            }
-        }
-
-        if (canraycast) {
-            if (preview == null) {
-                preview = Instantiate(cubeprefab, new Vector3(0,0,0), Quaternion.identity);
-                Destroy(preview.GetComponent<Collider>());
-            }
-            else {
-                Vector3 ScreenCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f);
-                Ray ray = Camera.main.ScreenPointToRay(ScreenCenter);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit)){
-                    preview.transform.position = hit.point;
-                    if (hit.collider.gameObject.layer == unplaceableLayer){
-                        unplaceable = true;
-                        preview.GetComponent<Renderer>().material = red;
-                    }
-                    else {
-                        unplaceable = false;
-                        preview.GetComponent<Renderer>().material = white;
-                    }
-                }
-            }
-        }
-        else {
-            if (preview != null){
-                Destroy(preview);
-            }
-        }
+        yield return new WaitForSeconds(0.2f);
+        debounceEntering = false;
+    }
+    IEnumerator debouncePlace()
+    {
+        yield return new WaitForSeconds(1);
+        debouncePlacing = false;
     }
 }
