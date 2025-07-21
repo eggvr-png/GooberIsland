@@ -9,6 +9,7 @@ TagManager:
   - INS Grab
   - INS Enabler
   - INS Event
+  - SnapPoint
   layers:
   - Default
   - TransparentFX
