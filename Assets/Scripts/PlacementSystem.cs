@@ -1,31 +1,32 @@
 using System.Collections;
 using UnityEngine;
-using Photon.Pun;
-using Photon.Realtime;
-using System.Collections.Generic;
-//thank you chatgpt - max 09/21/25
-[RequireComponent(typeof(PhotonView))]
-public class PlacementSystem : MonoBehaviourPunCallbacks
+
+public class PlacementSystem : MonoBehaviour
 {
     [Header("Refrences")]
     public GameObject objectToSpawn;
     [Space]
     public GameObject horizontalSnapPointPrefab;
+    public GameObject wallFloorSnapPointPrefab;
+    public GameObject wallSnapPointPrefab;
     [Space]
     public Material previewMaterial;
     [Header("Settings")]
     public Transform rayStartPos;
     [SerializeField] private bool inPlaceMode;
-
-    // debounce variables to prevent spamming
+    public enum objectToPlace
+    {
+        Floor,
+        Wall
+    }
+    public objectToPlace typeOfObject;
+    
     bool debounceEntering;
     bool debouncePlacing;
+    bool debounceRotate;
     bool createdPreview;
+    int wallRot;
     GameObject preview;
-
-    // History of placed objects for synchronization
-    struct PlacementData { public Vector3 position; public Quaternion rotation; }
-    private List<PlacementData> placementHistory = new List<PlacementData>();
 
     private void Update()
     {
@@ -35,6 +36,44 @@ public class PlacementSystem : MonoBehaviourPunCallbacks
             inPlaceMode = !inPlaceMode; // js learned you can do this :sob:
             debounceEntering = true;
             StartCoroutine(debounceEnter());
+        }
+
+        if (Input.GetKey(KeyCode.F) && !debounceEntering)
+        {
+            if (typeOfObject == objectToPlace.Floor)
+            {
+                typeOfObject = objectToPlace.Wall;
+            }
+            else { 
+                typeOfObject = objectToPlace.Floor;
+            }
+            debounceEntering = true;
+            StartCoroutine(debounceEnter());
+        }
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0f && !debounceRotate && typeOfObject == objectToPlace.Wall)
+        {
+            if (scroll > 0f)
+            {
+                wallRot = wallRot + 45;
+                if (wallRot > 360)
+                {
+                    wallRot = 0;
+                }
+                debounceRotate = true;
+                StartCoroutine(debounceRot());
+            }
+            if (scroll < 0f)
+            {
+                wallRot = wallRot - 45;
+                if (wallRot > 360)
+                {
+                    wallRot = 0;
+                }
+                debounceRotate = true;
+                StartCoroutine(debounceRot());
+            }
         }
 
         // manages the preview. this should work i hope :P
@@ -48,22 +87,59 @@ public class PlacementSystem : MonoBehaviourPunCallbacks
             Destroy(preview);
         }
 
+        if (preview != null && typeOfObject == objectToPlace.Wall)
+        {
+            preview.transform.rotation = Quaternion.Euler(0, wallRot, 90);
+        } 
+        else if (preview != null && typeOfObject == objectToPlace.Floor)
+        {
+            preview.transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
         if (preview != null && inPlaceMode)
         {
             Ray ray = new Ray(rayStartPos.position, rayStartPos.forward);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit))
             {
-                preview.transform.position = hit.point;
+                Vector3 wallPos = new Vector3(hit.point.x, hit.point.y + 1, hit.point.z);
+                if (typeOfObject == objectToPlace.Wall)
+                {
+                    preview.transform.position = wallPos;
+                }
+                else
+                {
+                    preview.transform.position = hit.point;
+                }
                 Collider[] hits = Physics.OverlapSphere(preview.transform.position, 0.5f);
 
                 foreach (Collider hited in hits)
                 {
                     if (hited.CompareTag("SnapPoint"))
                     {
-                        preview.transform.position = hited.transform.position;
-                        preview.transform.rotation = hited.transform.rotation;
+                        Vector3 snappedWallPos = new Vector3(hited.transform.position.x, hited.transform.position.y + 1, hited.transform.position.z);
+                        if (typeOfObject == objectToPlace.Wall)
+                        {
+                            preview.transform.position = snappedWallPos;
+                        }
+                        else
+                        {
+                            preview.transform.position = hited.transform.position;
+                        }
                         break;
+                    }
+                    else if (hited.CompareTag("SnapPointVertical") && typeOfObject == objectToPlace.Wall)
+                    {
+                        Vector3 snappedWallPos = new Vector3(hited.transform.position.x, hited.transform.position.y + 1, hited.transform.position.z);
+                        SnapPoint sp = hited.gameObject.GetComponent<SnapPoint>();
+                        if (sp.vertical == true)
+                        {
+                            preview.transform.position = snappedWallPos;
+                        }
+                        else if (sp.connectedToWall == true)
+                        {
+                            preview.transform.position = hited.transform.position;
+                        }
                     }
                 }
             }
@@ -71,52 +147,20 @@ public class PlacementSystem : MonoBehaviourPunCallbacks
 
         if (preview != null && inPlaceMode && !debouncePlacing)
         {
-            /*
-            // not working yet
-            if (Input.GetMouseButtonDown(0) && Input.GetKey(KeyCode.LeftShift))
-            {
-                Ray ray = new Ray(rayStartPos.position, rayStartPos.forward);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit))
-                {
-                    GameObject hitObject = hit.collider.gameObject;
-                    PlacementData? dataToRemove = null;
-
-                    foreach (var data in placementHistory)
-                    {
-                        if (data.position == hitObject.transform.position && data.rotation == hitObject.transform.rotation)
-                        {
-                            dataToRemove = data;
-                            break;
-                        }
-                    }
-
-                    if (dataToRemove.HasValue)
-                    {
-                        if (PhotonNetwork.IsMasterClient)
-                        {
-                            photonView.RPC("Destroy", RpcTarget.All, hitObject, dataToRemove.Value);
-                        }
-                        else
-                        {
-                            photonView.RPC("RequestDestroy", RpcTarget.MasterClient, hitObject, dataToRemove.Value);
-                        }
-                    }
-                }
-            }
-            else */if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))
             {
                 debouncePlacing = true;
-                Vector3 pos = preview.transform.position;
-                Quaternion rot = preview.transform.rotation;
-                // Master places directly, others request placement
-                if (PhotonNetwork.IsMasterClient)
+                GameObject placedObject = Instantiate(objectToSpawn, preview.transform.position, preview.transform.rotation);
+                placedObject.tag = "Placed";
+                placedObject.GetComponent<BoxCollider>().enabled = true;
+                if (typeOfObject == objectToPlace.Floor)
                 {
-                    photonView.RPC("SpawnAt", RpcTarget.All, pos, rot);
+                    Instantiate(horizontalSnapPointPrefab, placedObject.transform);
+                    Instantiate(wallFloorSnapPointPrefab, placedObject.transform);
                 }
                 else
                 {
-                    photonView.RPC("RequestPlace", RpcTarget.MasterClient, pos, rot);
+                    Instantiate(wallSnapPointPrefab, placedObject.transform);
                 }
                 StartCoroutine(debouncePlace());
             }
@@ -133,42 +177,9 @@ public class PlacementSystem : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(1);
         debouncePlacing = false;
     }
-
-    [PunRPC]
-    void SpawnAt(Vector3 position, Quaternion rotation)
+    IEnumerator debounceRot()
     {
-        GameObject placedObject = Instantiate(objectToSpawn, position, rotation);
-        placedObject.tag = "Placed";
-        placedObject.GetComponent<BoxCollider>().enabled = true;
-        Instantiate(horizontalSnapPointPrefab, placedObject.transform);
+        yield return new WaitForSeconds(0.1f);
+        debounceRotate = false;
     }
-
-    [PunRPC]
-    void RequestPlace(Vector3 position, Quaternion rotation, PhotonMessageInfo info)
-    {
-        if (info.Sender != PhotonNetwork.LocalPlayer)
-        {
-            photonView.RPC("SpawnAt", info.Sender, position, rotation);
-        }
-    }
-    /*
-
-    [PunRPC]
-    void Destroy(GameObject hitObject, PlacementData data)
-    {
-        if (placementHistory.Contains(data))
-        {
-            placementHistory.Remove(data);
-            Destroy(hitObject);
-        }
-    }
-
-    [PunRPC]
-    void RequestDestroy(GameObject hitObject, PlacementData data, PhotonMessageInfo info)
-    {
-        if (info.Sender != PhotonNetwork.LocalPlayer)
-        {
-            photonView.RPC("Destroy", info.Sender, hitObject, data);
-        }
-    }*/
 }
