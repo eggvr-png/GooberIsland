@@ -1,7 +1,11 @@
 using System.Collections;
 using UnityEngine;
-
-public class PlacementSystem : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+using System.Collections.Generic;
+//thank you chatgpt - max 09/21/25
+[RequireComponent(typeof(PhotonView))]
+public class PlacementSystem : MonoBehaviourPunCallbacks
 {
     [Header("Refrences")]
     public GameObject objectToSpawn;
@@ -11,12 +15,17 @@ public class PlacementSystem : MonoBehaviour
     public Material previewMaterial;
     [Header("Settings")]
     public Transform rayStartPos;
-    [SerializeField]private bool inPlaceMode;
-    
+    [SerializeField] private bool inPlaceMode;
+
+    // debounce variables to prevent spamming
     bool debounceEntering;
     bool debouncePlacing;
     bool createdPreview;
     GameObject preview;
+
+    // History of placed objects for synchronization
+    struct PlacementData { public Vector3 position; public Quaternion rotation; }
+    private List<PlacementData> placementHistory = new List<PlacementData>();
 
     private void Update()
     {
@@ -62,13 +71,53 @@ public class PlacementSystem : MonoBehaviour
 
         if (preview != null && inPlaceMode && !debouncePlacing)
         {
-            if (Input.GetMouseButton(0))
+            /*
+            // not working yet
+            if (Input.GetMouseButtonDown(0) && Input.GetKey(KeyCode.LeftShift))
+            {
+                Ray ray = new Ray(rayStartPos.position, rayStartPos.forward);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    GameObject hitObject = hit.collider.gameObject;
+                    PlacementData? dataToRemove = null;
+
+                    foreach (var data in placementHistory)
+                    {
+                        if (data.position == hitObject.transform.position && data.rotation == hitObject.transform.rotation)
+                        {
+                            dataToRemove = data;
+                            break;
+                        }
+                    }
+
+                    if (dataToRemove.HasValue)
+                    {
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            photonView.RPC("Destroy", RpcTarget.All, hitObject, dataToRemove.Value);
+                        }
+                        else
+                        {
+                            photonView.RPC("RequestDestroy", RpcTarget.MasterClient, hitObject, dataToRemove.Value);
+                        }
+                    }
+                }
+            }
+            else */if (Input.GetMouseButton(0))
             {
                 debouncePlacing = true;
-                GameObject placedObject = Instantiate(objectToSpawn, preview.transform.position, preview.transform.rotation);
-                placedObject.tag = "Placed";
-                placedObject.GetComponent<BoxCollider>().enabled = true;
-                Instantiate(horizontalSnapPointPrefab, placedObject.transform);
+                Vector3 pos = preview.transform.position;
+                Quaternion rot = preview.transform.rotation;
+                // Master places directly, others request placement
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    photonView.RPC("SpawnAt", RpcTarget.All, pos, rot);
+                }
+                else
+                {
+                    photonView.RPC("RequestPlace", RpcTarget.MasterClient, pos, rot);
+                }
                 StartCoroutine(debouncePlace());
             }
         }
@@ -84,4 +133,42 @@ public class PlacementSystem : MonoBehaviour
         yield return new WaitForSeconds(1);
         debouncePlacing = false;
     }
+
+    [PunRPC]
+    void SpawnAt(Vector3 position, Quaternion rotation)
+    {
+        GameObject placedObject = Instantiate(objectToSpawn, position, rotation);
+        placedObject.tag = "Placed";
+        placedObject.GetComponent<BoxCollider>().enabled = true;
+        Instantiate(horizontalSnapPointPrefab, placedObject.transform);
+    }
+
+    [PunRPC]
+    void RequestPlace(Vector3 position, Quaternion rotation, PhotonMessageInfo info)
+    {
+        if (info.Sender != PhotonNetwork.LocalPlayer)
+        {
+            photonView.RPC("SpawnAt", info.Sender, position, rotation);
+        }
+    }
+    /*
+
+    [PunRPC]
+    void Destroy(GameObject hitObject, PlacementData data)
+    {
+        if (placementHistory.Contains(data))
+        {
+            placementHistory.Remove(data);
+            Destroy(hitObject);
+        }
+    }
+
+    [PunRPC]
+    void RequestDestroy(GameObject hitObject, PlacementData data, PhotonMessageInfo info)
+    {
+        if (info.Sender != PhotonNetwork.LocalPlayer)
+        {
+            photonView.RPC("Destroy", info.Sender, hitObject, data);
+        }
+    }*/
 }

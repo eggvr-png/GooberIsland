@@ -58,6 +58,12 @@ MonoBehaviour:
   - unready
   - setCosmetic
   - ShareSeed
+  - RequestPlace
+  - SpawnAt
+  - DeleteAt
+  - RequestDelete
+  - Destroy
+  - RequestDestroy
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
