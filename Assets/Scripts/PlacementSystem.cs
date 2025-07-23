@@ -1,16 +1,22 @@
 using System.Collections;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlacementSystem : MonoBehaviour
+public class PlacementSystem : MonoBehaviourPunCallbacks
 {
     [Header("Refrences")]
     public GameObject objectToSpawn;
+    public GameObject doorTile;
+    public GameObject windowsTile;
     [Space]
     public GameObject horizontalSnapPointPrefab;
     public GameObject wallFloorSnapPointPrefab;
     public GameObject wallSnapPointPrefab;
     [Space]
     public Material previewMaterial;
+    [Space]
+    public AudioClip placeSound;
+    public AudioClip startSound;
     [Header("Settings")]
     public Transform rayStartPos;
     [SerializeField] private bool inPlaceMode;
@@ -19,12 +25,19 @@ public class PlacementSystem : MonoBehaviour
         Floor,
         Wall
     }
+    public enum typeOfWall
+    {
+        Normal,
+        Door,
+        Window
+    }
     public objectToPlace typeOfObject;
-    
+    public typeOfWall typeOfWallVar;
+
     bool debounceEntering;
     bool debouncePlacing;
     bool debounceRotate;
-    bool createdPreview;
+
     int wallRot;
     GameObject preview;
 
@@ -43,9 +56,49 @@ public class PlacementSystem : MonoBehaviour
             if (typeOfObject == objectToPlace.Floor)
             {
                 typeOfObject = objectToPlace.Wall;
+                this.gameObject.GetComponent<AudioSource>().clip = startSound;
+                this.gameObject.GetComponent<AudioSource>().Play();
             }
-            else { 
+            else {
+                Destroy(preview);
                 typeOfObject = objectToPlace.Floor;
+                preview = Instantiate(objectToSpawn, Vector3.zero, Quaternion.identity);
+                preview.GetComponent<Renderer>().material = previewMaterial;
+                this.gameObject.GetComponent<AudioSource>().clip = startSound;
+                this.gameObject.GetComponent<AudioSource>().Play();
+            }
+            debounceEntering = true;
+            StartCoroutine(debounceEnter());
+        }
+
+        if (Input.GetKey(KeyCode.T) && !debounceEntering && typeOfObject == objectToPlace.Wall)
+        {
+            if (typeOfWallVar == typeOfWall.Normal)
+            {
+                Destroy(preview);
+                typeOfWallVar = typeOfWall.Door;
+                preview = Instantiate(doorTile, Vector3.zero, Quaternion.identity);
+                preview.GetComponent<Renderer>().material = previewMaterial;
+                this.gameObject.GetComponent<AudioSource>().clip = startSound;
+                this.gameObject.GetComponent<AudioSource>().Play();
+            }
+            else if (typeOfWallVar == typeOfWall.Door)
+            {
+                Destroy(preview);
+                typeOfWallVar = typeOfWall.Window;
+                preview = Instantiate(windowsTile, Vector3.zero, Quaternion.identity);
+                preview.GetComponent<Renderer>().material = previewMaterial;
+                this.gameObject.GetComponent<AudioSource>().clip = startSound;
+                this.gameObject.GetComponent<AudioSource>().Play();
+            }
+            else if (typeOfWallVar == typeOfWall.Window)
+            {
+                Destroy(preview);
+                typeOfWallVar = typeOfWall.Normal;
+                preview = Instantiate(objectToSpawn, Vector3.zero, Quaternion.identity);
+                preview.GetComponent<Renderer>().material = previewMaterial;
+                this.gameObject.GetComponent<AudioSource>().clip = startSound;
+                this.gameObject.GetComponent<AudioSource>().Play();
             }
             debounceEntering = true;
             StartCoroutine(debounceEnter());
@@ -81,6 +134,9 @@ public class PlacementSystem : MonoBehaviour
         {
             preview = Instantiate(objectToSpawn, Vector3.zero, Quaternion.identity);
             preview.GetComponent<Renderer>().material = previewMaterial;
+
+            this.gameObject.GetComponent<AudioSource>().clip = startSound;
+            this.gameObject.GetComponent<AudioSource>().Play();
         }
         if (!inPlaceMode && preview != null)
         {
@@ -140,6 +196,7 @@ public class PlacementSystem : MonoBehaviour
                         {
                             preview.transform.position = hited.transform.position;
                         }
+                        break;
                     }
                 }
             }
@@ -150,21 +207,64 @@ public class PlacementSystem : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 debouncePlacing = true;
-                GameObject placedObject = Instantiate(objectToSpawn, preview.transform.position, preview.transform.rotation);
-                placedObject.tag = "Placed";
-                placedObject.GetComponent<BoxCollider>().enabled = true;
+                // yummy rpcs
                 if (typeOfObject == objectToPlace.Floor)
                 {
-                    Instantiate(horizontalSnapPointPrefab, placedObject.transform);
-                    Instantiate(wallFloorSnapPointPrefab, placedObject.transform);
+                    this.gameObject.GetComponent<PhotonView>().RPC("SpawnFloor", RpcTarget.AllBuffered, preview.transform.position, preview.transform.rotation);
                 }
                 else
                 {
-                    Instantiate(wallSnapPointPrefab, placedObject.transform);
+                    if (typeOfWallVar == typeOfWall.Normal)
+                    {
+                        this.gameObject.GetComponent<PhotonView>().RPC("SpawnWall", RpcTarget.AllBuffered, preview.transform.position, preview.transform.rotation, "normal");
+                    }
+                    else if (typeOfWallVar == typeOfWall.Door)
+                    {
+                        this.gameObject.GetComponent<PhotonView>().RPC("SpawnWall", RpcTarget.AllBuffered, preview.transform.position, preview.transform.rotation, "door");
+                    }
+                    else if (typeOfWallVar == typeOfWall.Window)
+                    {
+                        this.gameObject.GetComponent<PhotonView>().RPC("SpawnWall", RpcTarget.AllBuffered, preview.transform.position, preview.transform.rotation, "window");
+                    }
                 }
+                this.gameObject.GetComponent<AudioSource>().clip = placeSound;
+                this.gameObject.GetComponent<AudioSource>().Play();
                 StartCoroutine(debouncePlace());
             }
         }
+    }
+
+    [PunRPC]
+    public void SpawnFloor(Vector3 spawnPos, Quaternion spawnRot)
+    {
+        GameObject placedObject = Instantiate(objectToSpawn, spawnPos, spawnRot);
+        placedObject.tag = "Placed";
+        placedObject.GetComponent<BoxCollider>().enabled = true;
+        Instantiate(horizontalSnapPointPrefab, placedObject.transform);
+        Instantiate(wallFloorSnapPointPrefab, placedObject.transform);
+    }
+
+    [PunRPC]
+    public void SpawnWall(Vector3 spawnPos, Quaternion spawnRot, string type)
+    {
+        GameObject placedObject = null;
+        if (type == "normal")
+        {
+            placedObject = Instantiate(objectToSpawn, spawnPos, spawnRot);
+            placedObject.GetComponent<BoxCollider>().enabled = true;
+        }
+        else if (type == "door")
+        {
+            placedObject = Instantiate(doorTile, spawnPos, spawnRot);
+            placedObject.GetComponentInChildren<MeshCollider>().enabled = true;
+        }
+        else if (type == "window")
+        {
+            placedObject = Instantiate(windowsTile, spawnPos, spawnRot);
+            placedObject.GetComponentInChildren<MeshCollider>().enabled = true;
+        }
+        placedObject.tag = "Placed";
+        Instantiate(wallSnapPointPrefab, placedObject.transform);
     }
 
     IEnumerator debounceEnter()
