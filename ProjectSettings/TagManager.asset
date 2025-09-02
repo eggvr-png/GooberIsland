@@ -3,32 +3,24 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - InvisBarrier
-  - INS Radio
-  - INS Grab
-  - INS Enabler
-  - INS Event
-  - SnapPoint
-  - Placed
-  - SnapPointVertical
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
   - 
   - 
-  - Ground
-  - No Collide
-  - Directional
-  - Interactable
-  - Player
-  - invisToMine
   - 
-  - NoPlace
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 
