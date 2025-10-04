@@ -34,8 +34,7 @@ public class BuoyantObject : MonoBehaviour
     {
         // Get rigidbody
         rb = GetComponent<Rigidbody>();
-        rb.useGravity = false;
-
+        
         effectorProjections = new Vector3[effectors.Length];
         for (var i = 0; i < effectors.Length; i++) effectorProjections[i] = effectors[i].position;
     }
@@ -48,6 +47,8 @@ public class BuoyantObject : MonoBehaviour
     private void FixedUpdate()
     {
         var effectorAmount = effectors.Length;
+        
+        rb.useGravity = false;
 
         for (var i = 0; i < effectorAmount; i++)
         {
@@ -63,7 +64,7 @@ public class BuoyantObject : MonoBehaviour
             var effectorHeight = effectorPosition.y;
 
             if (!(effectorHeight < waveHeight)) continue; // submerged
-            
+
             var submersion = Mathf.Clamp01(waveHeight - effectorHeight) / objectDepth;
             var buoyancy = Mathf.Abs(Physics.gravity.y) * submersion * strength;
 

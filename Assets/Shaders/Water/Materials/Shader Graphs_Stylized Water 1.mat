@@ -52,7 +52,7 @@ Material:
     m_Ints: []
     m_Floats:
     - WORLD_SPACE_UV: 1
-    - _Depth_Fade_Distance: 3.49
+    - _Depth_Fade_Distance: 20
     - _Foam_Blend: 1
     - _Horizon_Distance: 3.79
     - _Intersection_Foam_Blend: 0
@@ -92,7 +92,7 @@ Material:
     - _Horizon_Color: {r: 0, g: 0.18867925, b: 0.3773585, a: 1}
     - _Intersection_Foam_Color: {r: 1, g: 1, b: 1, a: 1}
     - _Refraction_Movement: {r: 0, g: 0, b: 0, a: 0}
-    - _Shallow_Color: {r: 0, g: 0.5754717, b: 0.5754717, a: 0.43137255}
+    - _Shallow_Color: {r: 0, g: 0.3013438, b: 0.3013438, a: 0.43137255}
     - _Shore_Color: {r: 0, g: 0, b: 0, a: 0}
     - _Specular_Color: {r: 1, g: 1, b: 1, a: 0.1764706}
     - _Surface_Foam_Color: {r: 1, g: 1, b: 1, a: 0.02745098}

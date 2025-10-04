@@ -16,6 +16,8 @@ public class DayNightSwitcher : MonoBehaviour
 
     bool night;
 
+    public bool forceNight;
+
     void Update()
     {
         DateTime currentTime = DateTime.Now;
@@ -29,10 +31,19 @@ public class DayNightSwitcher : MonoBehaviour
             StartCoroutine(changePitch());
             night = true;
         }
+        else if (forceNight && !night && ss.screenOn == StartingScreens.screen.None){
+            DirectionalLight.colorTemperature = nightColor;
+            RenderSettings.skybox = nightSky;
+            water.GetComponent<Renderer>().material = waterMat;
+            StartCoroutine(changePitch());
+            night = true;
+        }
         else
         {
             return;
         }
+
+        
 
         Debug.Log(currentHour);
     }
