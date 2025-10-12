@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/TestScene.unity
     guid: 6b0af96839e5c264ba44795ee1e3e54f
+  - enabled: 1
+    path: Assets/Scenes/Raft.unity
+    guid: 1b77bc6809eed7e669331a45069ab715
+  - enabled: 1
+    path: Assets/Scenes/EvilRaft.unity
+    guid: b94e440c07003e6d1b6d8769e68da6ca
   m_configObjects: {}
