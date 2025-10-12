@@ -1995,6 +1995,7 @@ MonoBehaviour:
   interacting: 0
   otherPlayerHolding: 0
   gp: {fileID: 12015465}
+  grabOffset: 0
 --- !u!54 &708650496
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2076,6 +2077,7 @@ MonoBehaviour:
   interacting: 0
   otherPlayerHolding: 0
   gp: {fileID: 12015465}
+  grabOffset: 0
 --- !u!54 &730227445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2519,6 +2521,7 @@ MonoBehaviour:
   interacting: 0
   otherPlayerHolding: 0
   gp: {fileID: 12015465}
+  grabOffset: 0
 --- !u!4 &833401868 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bfed72d485a762442a1e737f4d246990,
@@ -2585,6 +2588,7 @@ MonoBehaviour:
   interacting: 0
   otherPlayerHolding: 0
   gp: {fileID: 12015465}
+  grabOffset: 0
 --- !u!65 &850044883
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2757,6 +2761,7 @@ MonoBehaviour:
   interacting: 0
   otherPlayerHolding: 0
   gp: {fileID: 12015465}
+  grabOffset: 0
 --- !u!1001 &912187847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3081,6 +3086,7 @@ MonoBehaviour:
   interacting: 0
   otherPlayerHolding: 0
   gp: {fileID: 12015465}
+  grabOffset: 0
 --- !u!1 &975242504 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eeae0899ab3c31e45bc326bcce696cee,
@@ -3162,6 +3168,7 @@ MonoBehaviour:
   interacting: 0
   otherPlayerHolding: 0
   gp: {fileID: 12015465}
+  grabOffset: 0
 --- !u!1001 &990312026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5769,6 +5776,10 @@ MonoBehaviour:
   cameraTransform: {fileID: 2110912058}
   startPos: {fileID: 2110912058}
   endPos: {fileID: 12015465}
+  grabbing: 0
+  zoomSpeed: 0.5
+  rotationSpeed: 50
+  maxZoom: 5
 --- !u!1 &2136593421 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eeae0899ab3c31e45bc326bcce696cee,
@@ -5802,6 +5813,7 @@ MonoBehaviour:
   interacting: 0
   otherPlayerHolding: 0
   gp: {fileID: 12015465}
+  grabOffset: 0
 --- !u!54 &2136593424
 Rigidbody:
   m_ObjectHideFlags: 0

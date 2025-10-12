@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
+    InteractionSystem IS;
+
     void Awake() {
         rb = GetComponent<Rigidbody>();
     }
@@ -168,6 +170,12 @@ public class PlayerMovement : MonoBehaviour {
     
     private float desiredX;
     private void Look() {
+        if (IS == null){
+            IS = Camera.main.GetComponent<InteractionSystem>();
+            return; //wait for interaction system to load - max
+        }
+        if (IS.grabbing && Input.GetMouseButton(1)) return; //bad code, sorry - max
+
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 

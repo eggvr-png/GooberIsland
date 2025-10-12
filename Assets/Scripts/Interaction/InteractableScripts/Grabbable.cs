@@ -22,7 +22,10 @@ public class Grabbable : MonoBehaviour, IGrabbable
     Rigidbody rb;
     public Transform gp;
 
-    bool isRotating;
+
+    public float grabOffset; //for zoom  <-- changed from Vector3 to float
+
+    Vector3 lastMousePos;
     void Start()
     {
         // gets the grabbables rigidbody since it doesnt need 2 be public
@@ -33,18 +36,23 @@ public class Grabbable : MonoBehaviour, IGrabbable
         //     dampFactor = preset.damping;
         //     force = preset.force;
         //   }
+
+        
     }
 
     void Update()
     {
         if (interacting)
         {
-            Vector3 direction = gp.position - transform.position;
+            Vector3 targetPos = gp.position + gp.forward * grabOffset; // automatically use direction of gp
+            Vector3 direction = targetPos - transform.position;
             rb.AddForce(direction * force);
 
             rb.velocity *= dampFactor;
             rb.angularVelocity *= dampFactor;
         }
+
+        
     }
 
     public void getGrabPoint(Transform grabpoint)
@@ -67,6 +75,7 @@ public class Grabbable : MonoBehaviour, IGrabbable
         changeGrabStatus();
         canBeInteracted = false;
         StartCoroutine(debounce());
+        grabOffset = 0f; // reset for float
     }
 
     IEnumerator debounce()
@@ -84,6 +93,14 @@ public class Grabbable : MonoBehaviour, IGrabbable
         else
         {
             rb.isKinematic = false;
+        }
+    }
+
+    public void Rotate(Vector3 rot)
+    {
+        if (interacting)
+        {
+            rb.AddTorque(rot * force);
         }
     }
 }

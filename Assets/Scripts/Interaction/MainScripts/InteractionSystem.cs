@@ -22,8 +22,13 @@ public class InteractionSystem : MonoBehaviour
     public Transform startPos;
     public Transform endPos;
 
-    bool grabbing;
+    public bool grabbing;
     Grabbable currentGrabable;
+
+    public float zoomSpeed = 0.5f;
+    public float rotationSpeed = 10f;
+
+    public float maxZoom = 2f;
 
     void Update()
     {
@@ -45,17 +50,37 @@ public class InteractionSystem : MonoBehaviour
                     grabbing = true;
                     grabbable.grab();
                     currentGrabable = grabbable as Grabbable; // thanks gee pee tee for this part right here
+                    //lmao grabable=grabbable as Grabbable - max
                 }
             }
         }
 
-        if (grabbing)
+        if (grabbing && currentGrabable != null)
         {
             if (!Input.GetMouseButton(0))
             {
                 currentGrabable.stop();
                 grabbing = false;
                 currentGrabable = null;
+            }
+
+            if (Input.GetMouseButton(1))
+            {
+                float mouseX = Input.GetAxis("Mouse X") * Time.fixedDeltaTime;
+                float mouseY = Input.GetAxis("Mouse Y") * Time.fixedDeltaTime;
+
+                Vector3 rotation = cameraTransform.up * mouseX + cameraTransform.right * -mouseY;
+                currentGrabable.Rotate(rotation * rotationSpeed);
+            }
+
+
+            if (Input.mouseScrollDelta.y != 0)
+            {
+                //zoom
+
+                float newGrabOffset = currentGrabable.grabOffset + (-Input.mouseScrollDelta.y * zoomSpeed); // use float
+                if (Mathf.Abs(newGrabOffset) < maxZoom)
+                    currentGrabable.grabOffset = newGrabOffset;
             }
         }
     }
