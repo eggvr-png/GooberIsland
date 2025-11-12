@@ -27,6 +27,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
 
     // private stuff
     string playerPrefabName = "Player";
+    GameObject devIsdk;
 
     // the start of the actual code. like functions and stuff.
     void Start()
@@ -34,7 +35,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         if (InterSceneDataKeeper.Instance == null)
         {
             Debug.Log("no isdk. creating one for development.");
-            GameObject devIsdk = new GameObject("DevISDK");
+            devIsdk = new GameObject("DevISDK");
             InterSceneDataKeeper isdk = devIsdk.AddComponent<InterSceneDataKeeper>();
             isdk.playerName = "dev";
             isdk.roomCode = "dev";
@@ -80,6 +81,16 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         connectionStatus = connection.JoiningRoom;
     }
 
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        base.OnDisconnected(cause);
+        if (devIsdk != null)
+        {
+            Destroy(devIsdk);
+            devIsdk = null;
+        }
+    }
+
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
@@ -95,8 +106,9 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         playerMovement.playerCam = GameObject.Find("CameraHolder").transform;
         // disable rendering the parts so they dont get in the way of the camera
         playerObject.GetComponent<PlayerSetup>().isLocal();
-        // username stuff
+        // username + cosmetic stuff
         playerObject.GetComponent<PhotonView>().RPC("sendUsername", RpcTarget.AllBuffered);
+        playerObject.GetComponent<PhotonView>().RPC("setColor", RpcTarget.AllBuffered, PlayerPrefs.GetInt("clr"));
         // camera stuff lol. again if we just kept these enabled, the game would die.
         GameObject.FindGameObjectWithTag("PreviewCamera").SetActive(false);
         GameObject.Find("CameraHolder").transform.GetChild(0).gameObject.SetActive(true); // WHY ARE YOU LIKE THIS

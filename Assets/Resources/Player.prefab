@@ -242,6 +242,13 @@ MonoBehaviour:
   - {fileID: 3432706883196395314}
   - {fileID: 1466301509639097544}
   - {fileID: 8031846767326450115}
+  limbRenderers:
+  - {fileID: 3992910060705276431}
+  - {fileID: 1856923526698636496}
+  - {fileID: 4479938200054914725}
+  - {fileID: 3432706883196395314}
+  blue: {fileID: 2100000, guid: d7eba5c0939d90e418a0f22028acf457, type: 2}
+  pink: {fileID: 2100000, guid: b9fd0c00fa0c06c4da1310f981bace18, type: 2}
 --- !u!1 &71082612775898565
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +34,7 @@ public class Pause : MonoBehaviour
     public void leaveLobby()
     {
         PlayerPrefs.SetInt("autoSkip", 1);
+        PhotonNetwork.Disconnect();
         StartCoroutine(leave());
     }
     

@@ -43,6 +43,7 @@ MonoBehaviour:
   - rpcDrop
   - rpcGrab
   - sendUsername
+  - setColor
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
