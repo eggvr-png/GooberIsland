@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,6 +35,34 @@ public class StartingScreens : MonoBehaviour
 
     bool fade = false;
 
+    bool deboucne2Int = false;
+
+    int acceptedPrivacy;
+
+    public void Start()
+    {
+        acceptedPrivacy = PlayerPrefs.GetInt("privAccept");
+
+        int autoSkip = PlayerPrefs.GetInt("autoSkip");
+
+        if (autoSkip == 1)
+        {
+            music.Play();
+            warning.SetActive(false);
+            menu.SetActive(true);
+            screenOn = screen.None;
+            music.time = 10.5f;
+            if (!fade)
+            {
+                menuFade.Play("FadeOut", 0, 0);
+                fade = true;
+                this.enabled = false;
+            }
+
+            PlayerPrefs.DeleteKey("autoSkip");
+        }
+    }
+
     private void Update()
     {
         if (screenOn == screen.Epilepsy)
@@ -41,8 +70,15 @@ public class StartingScreens : MonoBehaviour
             if (Input.anyKeyDown)
             {
                 screenOn = screen.Privacy;
-                warning.SetActive(false);
-                privacy.SetActive(true);
+                if (acceptedPrivacy == 0)
+                {
+                    warning.SetActive(false);
+                    privacy.SetActive(true);
+                }
+                else
+                {
+                    GoToIntro();
+                }
             }
         }
 
@@ -88,7 +124,7 @@ public class StartingScreens : MonoBehaviour
 
         if (screenOn == screen.Intro)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) && deboucne2Int != true)
             {
                 intro.SetActive(false);
                 menu.SetActive(true);
@@ -111,5 +147,24 @@ public class StartingScreens : MonoBehaviour
         privacy.SetActive(false);
         intro.SetActive(true);
         music.Play();
+        deboucne2Int = true;
+        StartCoroutine(deboucne()); // debounce of doom and despair
+    }
+
+    public void GoToIntroPriv()
+    {
+        PlayerPrefs.SetInt("privAccept", 1);
+        screenOn = screen.Intro;
+        warning.SetActive(false);
+        privacy.SetActive(false);
+        intro.SetActive(true);
+        music.Play();
+        
+    }
+
+    public IEnumerator deboucne()
+    {
+        yield return new WaitForSeconds(1);
+        deboucne2Int = false;
     }
 }

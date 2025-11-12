@@ -22,8 +22,15 @@ public class InterSceneDataKeeper : MonoBehaviour
     public AudioClip currentSong;
     public string currentSongTitle;
 
+
+
     private void Awake()
     {
+        if (InterSceneDataKeeper.Instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        
         Application.targetFrameRate = -1;
         if (Instance == null)
         {
@@ -37,6 +44,12 @@ public class InterSceneDataKeeper : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
             loadlastSong();
+        }
+
+        string lastUser = PlayerPrefs.GetString("playerName");
+        if (lastUser != null || lastUser != "")
+        {
+            playerName = lastUser;
         }
     }
 
@@ -73,6 +86,8 @@ public class InterSceneDataKeeper : MonoBehaviour
 
     public void SaveUser(string value){
         playerName = value;
+        PlayerPrefs.SetString("playerName", value);
+        PlayerPrefs.Save();
     }
 
     void Update()

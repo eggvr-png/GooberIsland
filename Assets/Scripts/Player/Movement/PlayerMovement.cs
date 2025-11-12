@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour {
     //Movement
     public float moveSpeed = 4500;
     public float maxSpeed = 20;
+    public float currentSpeed;
     public bool grounded;
     public LayerMask whatIsGround;
     
@@ -41,6 +42,9 @@ public class PlayerMovement : MonoBehaviour {
     //Input
     float x, y;
     bool jumping, sprinting, crouching;
+
+    // animations
+    public Animator animations4Player;
     
     //Sliding
     private Vector3 normalVector = Vector3.up;
@@ -61,11 +65,31 @@ public class PlayerMovement : MonoBehaviour {
     
     private void FixedUpdate() {
         Movement();
+        currentSpeed = rb.velocity.magnitude;
     }
 
     private void Update() {
         MyInput();
         Look();
+
+        
+        if (currentSpeed > 0.1f)
+        {
+            animations4Player.SetBool("walking", true);
+        }
+        else
+        {
+            animations4Player.SetBool("walking", false);
+        }
+
+        if (jumping)
+        {
+            animations4Player.SetBool("jumping", true);
+        }
+        else
+        {
+            return;
+        }
     }
 
     /// <summary>
@@ -171,7 +195,7 @@ public class PlayerMovement : MonoBehaviour {
     private float desiredX;
     private void Look() {
         if (IS == null){
-            IS = Camera.main.GetComponent<InteractionSystem>();
+            IS = Camera.main.gameObject.GetComponent<InteractionSystem>();
             return; //wait for interaction system to load - max
         }
         if (IS.grabbing && Input.GetMouseButton(1)) return; //bad code, sorry - max
@@ -259,6 +283,7 @@ public class PlayerMovement : MonoBehaviour {
                 grounded = true;
                 cancellingGrounded = false;
                 normalVector = normal;
+                animations4Player.SetBool("jumping", false);
                 CancelInvoke(nameof(StopGrounded));
             }
         }

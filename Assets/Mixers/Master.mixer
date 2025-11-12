@@ -68,3 +68,19 @@ AudioMixerSnapshotController:
   m_SnapshotID: 7e7e8aa9aed100439b9fec64c19f7789
   m_FloatValues: {}
   m_TransitionOverrides: {}
+--- !u!244 &7252225372619397327
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 38802703fe373b7ed9cec38a3a598deb
+  m_EffectName: Highpass Simple
+  m_MixLevel: be4ae4e16c08e126c94dd0d231922075
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: 4e6b00c32191e8aaba19469e567786fa
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0

@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Grabbable : MonoBehaviour, IGrabbable
 {
-    // this is the text that shows when you look at the object
-    [Header("Interaction Text")]
-    public string interaction1; // this for example would be: "grab"
-    public string interaction2; // this for example would be: "drop"
+    public string interactionText => interacting ? "Drop" : "Grab"; // this for example would be: "grab"
     [Header("Settings")]
     public float debounceTime = 0.1f;
     [Space]
@@ -17,10 +15,10 @@ public class Grabbable : MonoBehaviour, IGrabbable
     [Space]
     public bool canBeInteracted = true; // basically the debounce varaible.
     public bool interacting; // this bool checks if the object has been interacted with or is being interacted.
-    public bool otherPlayerHolding;
 
     Rigidbody rb;
     public Transform gp;
+    public PhotonView pv;
 
 
     public float grabOffset; //for zoom  <-- changed from Vector3 to float
@@ -62,15 +60,16 @@ public class Grabbable : MonoBehaviour, IGrabbable
 
     public void grab()
     {
+        pv.TransferOwnership(PhotonNetwork.LocalPlayer);
         interacting = true;
         changeGrabStatus();
         canBeInteracted = false;
         StartCoroutine(debounce());
     }
-
+    
     public void stop()
     {
-        //pv.TransferOwnership(PhotonNetwork.LocalPlayer);
+        pv.TransferOwnership(PhotonNetwork.LocalPlayer);
         interacting = false;
         changeGrabStatus();
         canBeInteracted = false;
