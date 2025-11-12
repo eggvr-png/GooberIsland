@@ -109,6 +109,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         // username + cosmetic stuff
         playerObject.GetComponent<PhotonView>().RPC("sendUsername", RpcTarget.AllBuffered);
         playerObject.GetComponent<PhotonView>().RPC("setColor", RpcTarget.AllBuffered, PlayerPrefs.GetInt("clr"));
+        playerObject.GetComponent<PhotonView>().RPC("setHat", RpcTarget.AllBuffered, PlayerPrefs.GetInt("hat"));
         // camera stuff lol. again if we just kept these enabled, the game would die.
         GameObject.FindGameObjectWithTag("PreviewCamera").SetActive(false);
         GameObject.Find("CameraHolder").transform.GetChild(0).gameObject.SetActive(true); // WHY ARE YOU LIKE THIS

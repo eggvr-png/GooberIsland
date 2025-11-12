@@ -50,6 +50,8 @@ public class PlayerMovement : MonoBehaviour {
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
+    int hatid;
+
     InteractionSystem IS;
 
     void Awake() {
@@ -60,6 +62,8 @@ public class PlayerMovement : MonoBehaviour {
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        hatid = PlayerPrefs.GetInt("hat");
     }
 
     
@@ -72,7 +76,11 @@ public class PlayerMovement : MonoBehaviour {
         MyInput();
         Look();
 
-        
+        if (hatid == 5)
+        {
+            animations4Player.SetBool("error", true);
+        }
+
         if (currentSpeed > 0.1f)
         {
             animations4Player.SetBool("walking", true);

@@ -8,6 +8,8 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     public Renderer[] bodyPartRenderers;
     public Renderer[] limbRenderers;
     [Space]
+    public GameObject[] hats;
+    [Space]
     public Material blue;
     public Material pink;
 
@@ -38,7 +40,20 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             foreach (Renderer r in limbRenderers)
             {
                 r.material = pink;
-            }   
+            }
+        }
+    }
+    
+    [PunRPC]
+    public void setHat(int hatId)
+    {
+        if (hatId == 0)
+        {
+            return;
+        }
+        else
+        {
+            hats[hatId - 1].SetActive(true);
         }
     }
 }
