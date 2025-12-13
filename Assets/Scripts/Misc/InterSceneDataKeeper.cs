@@ -16,6 +16,7 @@ public class InterSceneDataKeeper : MonoBehaviour
     public int cosmeticId;
 
     public static string errorText;
+    public bool iskofi;
 
     [Space]
 

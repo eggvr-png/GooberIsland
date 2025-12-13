@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +25,12 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     [Header("UI Elements")]
     public GameObject loadingScreen;
     public Pause pauseMenu;
+    [Space]
+    [Header("Raft-Specific")]
+    public bool isRaft;
+    [Space]
+    public GameObject notHostUi;
+    public GameObject hostUi;
 
     // private stuff
     string playerPrefabName = "Player";
@@ -32,6 +39,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     // the start of the actual code. like functions and stuff.
     void Start()
     {
+        // if there is no isdk, it makes a temp one.
         if (InterSceneDataKeeper.Instance == null)
         {
             Debug.Log("no isdk. creating one for development.");
@@ -40,7 +48,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
             isdk.playerName = "dev";
             isdk.roomCode = "dev";
         }
-
+        // not obvious.
         connectToServers();
 
         roomCode = InterSceneDataKeeper.Instance.roomCode;
@@ -83,6 +91,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
+        // this deletes the devisdk if there was one.
         base.OnDisconnected(cause);
         if (devIsdk != null)
         {
@@ -110,16 +119,31 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         playerObject.GetComponent<PhotonView>().RPC("sendUsername", RpcTarget.AllBuffered);
         playerObject.GetComponent<PhotonView>().RPC("setColor", RpcTarget.AllBuffered, PlayerPrefs.GetInt("clr"));
         playerObject.GetComponent<PhotonView>().RPC("setHat", RpcTarget.AllBuffered, PlayerPrefs.GetInt("hat"));
+        // kofi exclusive nametag
+        if (InterSceneDataKeeper.Instance.iskofi)
+        {
+            playerObject.GetComponent<PhotonView>().RPC("kofiTag", RpcTarget.AllBuffered);
+        }
         // camera stuff lol. again if we just kept these enabled, the game would die.
         GameObject.FindGameObjectWithTag("PreviewCamera").SetActive(false);
         GameObject.Find("CameraHolder").transform.GetChild(0).gameObject.SetActive(true); // WHY ARE YOU LIKE THIS
         GameObject.Find("CameraHolder").GetComponent<MoveCamera>().enabled = true;
         // really long camera thing
         GameObject.Find("CameraHolder").GetComponent<MoveCamera>().player = playerObject.transform.GetChild(0).transform;
-        // destory the loading screen cuz fuck the loading screen
+        // destory the loading screen cuz FUCK the loading screen
         Destroy(loadingScreen);
         // since we dont want the pause menu enabling while loading, a var controls ability to pause
         pauseMenu.isPlayerConnected = true;
-    }
+        // now we need to check if the player is the server host (but only do this if on raft)
+        if (isRaft) {
+            if (PhotonNetwork.LocalPlayer.IsMasterClient)
+            {
+                hostUi.SetActive(true);
+            }
+            else
+            {
+                notHostUi.SetActive(true);
+            }
+    }   }
 }
 

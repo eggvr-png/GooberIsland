@@ -9,9 +9,11 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     public Renderer[] limbRenderers;
     [Space]
     public GameObject[] hats;
+    public GameObject hatsholer;
     [Space]
     public Material blue;
     public Material pink;
+    public Material kofi;
 
     public void isLocal()
     {
@@ -19,6 +21,8 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         {
             r.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.ShadowsOnly;
         }
+
+        hatsholer.SetActive(false);
     }
 
     [PunRPC]
@@ -40,6 +44,13 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
             foreach (Renderer r in limbRenderers)
             {
                 r.material = pink;
+            }
+        }
+        else if (colorVal == 3)
+        {
+            foreach (Renderer r in limbRenderers)
+            {
+                r.material = kofi;
             }
         }
     }

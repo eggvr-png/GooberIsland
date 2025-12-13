@@ -33,6 +33,10 @@ public class StartingScreens : MonoBehaviour
     [Header("What are screens on")]
     public screen screenOn = screen.Epilepsy;
 
+    public PlayfabManager pm;
+
+    public bool introSkipped;
+
     bool fade = false;
 
     bool deboucne2Int = false;
@@ -41,7 +45,7 @@ public class StartingScreens : MonoBehaviour
 
     public void Start()
     {
-        acceptedPrivacy = PlayerPrefs.GetInt("privAccept");
+        acceptedPrivacy = PlayerPrefs.GetInt("privAcceptNew");
 
         int autoSkip = PlayerPrefs.GetInt("autoSkip");
 
@@ -126,6 +130,7 @@ public class StartingScreens : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) && deboucne2Int != true)
             {
+                introSkipped = true;
                 intro.SetActive(false);
                 menu.SetActive(true);
                 screenOn = screen.None;
@@ -143,6 +148,7 @@ public class StartingScreens : MonoBehaviour
     public void GoToIntro()
     {
         screenOn = screen.Intro;
+        pm.Login();
         warning.SetActive(false);
         privacy.SetActive(false);
         intro.SetActive(true);
@@ -153,7 +159,8 @@ public class StartingScreens : MonoBehaviour
 
     public void GoToIntroPriv()
     {
-        PlayerPrefs.SetInt("privAccept", 1);
+        PlayerPrefs.SetInt("privAcceptNew", 1);
+        pm.Login();
         screenOn = screen.Intro;
         warning.SetActive(false);
         privacy.SetActive(false);

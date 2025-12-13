@@ -11,6 +11,7 @@ public class MenuCosmeticSys : MonoBehaviour
     public Material green;
     public Material blue;
     public Material pink;
+    public Material kofi;
 
     public int cosId;
 
@@ -40,6 +41,13 @@ public class MenuCosmeticSys : MonoBehaviour
             foreach (Renderer renderer in limbs)
             {
                 renderer.material = pink;
+            }
+        }
+        else if (savedClr == 3)
+        {
+            foreach (Renderer renderer in limbs)
+            {
+                renderer.material = kofi;
             }
         }
     }
@@ -97,6 +105,16 @@ public class MenuCosmeticSys : MonoBehaviour
             }
 
             PlayerPrefs.SetInt("clr", 2);
+            PlayerPrefs.Save();
+        }
+        if (color == 3)
+        {
+            foreach (Renderer renderer in limbs)
+            {
+                renderer.material = kofi;
+            }
+
+            PlayerPrefs.SetInt("clr", 3);
             PlayerPrefs.Save();
         }
     }
