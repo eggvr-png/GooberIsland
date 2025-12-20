@@ -76,7 +76,9 @@ public class PlayerMovement : MonoBehaviour {
         MyInput();
         Look();
 
-        if (hatid == 5)
+        if (animations4Player != null)
+        {
+            if (hatid == 5)
         {
             animations4Player.SetBool("error", true);
         }
@@ -97,6 +99,7 @@ public class PlayerMovement : MonoBehaviour {
         else
         {
             return;
+        }
         }
     }
 
@@ -291,7 +294,8 @@ public class PlayerMovement : MonoBehaviour {
                 grounded = true;
                 cancellingGrounded = false;
                 normalVector = normal;
-                animations4Player.SetBool("jumping", false);
+                if (animations4Player != null)
+                    animations4Player.SetBool("jumping", false);
                 CancelInvoke(nameof(StopGrounded));
             }
         }

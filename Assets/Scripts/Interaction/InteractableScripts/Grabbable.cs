@@ -4,7 +4,7 @@ using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Grabbable : MonoBehaviour, IGrabbable
+public class Grabbable : MonoBehaviourPunCallbacks, IGrabbable
 {
     public string interactionText => interacting ? "Drop" : "Grab"; // this for example would be: "grab"
     [Header("Settings")]
@@ -60,7 +60,8 @@ public class Grabbable : MonoBehaviour, IGrabbable
 
     public void grab()
     {
-        pv.TransferOwnership(PhotonNetwork.LocalPlayer);
+        if (PhotonNetwork.IsConnected)
+            pv.TransferOwnership(PhotonNetwork.LocalPlayer);
         interacting = true;
         changeGrabStatus();
         canBeInteracted = false;
@@ -69,7 +70,8 @@ public class Grabbable : MonoBehaviour, IGrabbable
     
     public void stop()
     {
-        pv.TransferOwnership(PhotonNetwork.LocalPlayer);
+        if (PhotonNetwork.IsConnected)
+            pv.TransferOwnership(PhotonNetwork.LocalPlayer);
         interacting = false;
         changeGrabStatus();
         canBeInteracted = false;

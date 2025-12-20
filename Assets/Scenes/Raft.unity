@@ -6804,8 +6804,8 @@ MonoBehaviour:
   loadingScreen: {fileID: 942668510}
   pauseMenu: {fileID: 448265321}
   isRaft: 0
-  notHostUi: {fileID: 0}
-  hostUi: {fileID: 0}
+  notHostUi: {fileID: 1873917451}
+  hostUi: {fileID: 857854103}
 --- !u!4 &1640049107
 Transform:
   m_ObjectHideFlags: 0

@@ -57,7 +57,15 @@ public class InteractionSystem : MonoBehaviour
                 if (Input.GetKeyDown(interactKey))
                 {
                     PhotonView pv = hit.collider.gameObject.GetComponent<PhotonView>();
-                    pv.RPC("interact", RpcTarget.All);
+                    if (pv == null)
+                    {
+                        hit.collider.gameObject.TryGetComponent<IInteractable>(out var inter);
+                        inter.interact();
+                    }
+                    else
+                    {
+                        pv.RPC("interact", RpcTarget.All);
+                    }
                 }
             }
 
