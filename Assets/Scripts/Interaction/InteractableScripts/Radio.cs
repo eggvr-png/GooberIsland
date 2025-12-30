@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // also can be used for other audio related interactions
 
@@ -27,7 +28,7 @@ public class Radio : MonoBehaviourPunCallbacks, IInteractable
 
     public void Start()
     {
-        if (InterSceneDataKeeper.Instance.currentSong != null)
+        if (InterSceneDataKeeper.Instance.currentSong != null && SceneManager.GetActiveScene().name != "Tutorial")
         {
             audioSource.clip = InterSceneDataKeeper.Instance.currentSong;
             Debug.Log("playing custom radio music");
@@ -38,7 +39,8 @@ public class Radio : MonoBehaviourPunCallbacks, IInteractable
     [PunRPC]
     public void interact() {
         if (!interacting) {
-            pv.TransferOwnership(PhotonNetwork.LocalPlayer);
+            if (pv != null)
+                pv.TransferOwnership(PhotonNetwork.LocalPlayer);
 
             StartCoroutine(Pitch(false));
 
@@ -47,7 +49,8 @@ public class Radio : MonoBehaviourPunCallbacks, IInteractable
             StartCoroutine(debounce());
         }
         else {
-            pv.TransferOwnership(PhotonNetwork.LocalPlayer);
+            if (pv != null)
+                pv.TransferOwnership(PhotonNetwork.LocalPlayer);
 
             StartCoroutine(Pitch(true));
 
