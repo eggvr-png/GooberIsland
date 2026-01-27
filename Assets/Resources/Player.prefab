@@ -508,12 +508,12 @@ MonoBehaviour:
   m_margin: {x: -6.8105726, y: 0, z: -6.3766937, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 4375881693582391070}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 4375881693582391070}
+  m_maskType: 0
 --- !u!1 &6444406708416846064
 GameObject:
   m_ObjectHideFlags: 0

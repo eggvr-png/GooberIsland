@@ -1,6 +1,8 @@
+using System.Collections;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 interface IInteractable
 {
@@ -33,10 +35,19 @@ public class InteractionSystem : MonoBehaviour
     [Space]
     public GameObject interactionUI;
     public TextMeshProUGUI iText;
+    [Space]
+    public ConnectionManager cm;
 
     public bool grabbing;
     Grabbable currentGrabable;
     IInteractable currentInteractable;
+
+    bool stashed;
+    bool stashDebounce;
+    GameObject stashedObj;
+    public AudioSource soundPlayer;
+    public AudioClip[] sounds;
+    public TextMeshProUGUI stashText;
 
     void Update()
     {
@@ -54,7 +65,7 @@ public class InteractionSystem : MonoBehaviour
                 textToShow = interactable.interactionText;
                 showUI = true;
 
-                if (Input.GetKeyDown(interactKey))
+                if (Input.GetKeyDown(interactKey) || Input.GetButtonDown("Interact"))
                 {
                     PhotonView pv = hit.collider.gameObject.GetComponent<PhotonView>();
                     if (pv == null)
@@ -78,7 +89,21 @@ public class InteractionSystem : MonoBehaviour
                     showUI = true;
                 }
 
-                if (Input.GetMouseButton(0) && !grabbing)
+                if (Input.GetJoystickNames().Length > 0) {
+                    if (Input.GetButton("Interact") && !grabbing)
+                    {
+                        grabbing = true;
+                        grabbable.grab();
+                        currentGrabable = grabbable as Grabbable;
+                    }
+                    else if (Input.GetMouseButton(0) && !grabbing)
+                    {
+                        grabbing = true;
+                        grabbable.grab();
+                        currentGrabable = grabbable as Grabbable;
+                    }
+                }
+                else if (Input.GetMouseButton(0) && !grabbing)
                 {
                     grabbing = true;
                     grabbable.grab();
@@ -99,12 +124,54 @@ public class InteractionSystem : MonoBehaviour
         {
             interactionUI.SetActive(true);
 
-            if (!Input.GetMouseButton(0))
+            if (Input.GetJoystickNames().Length > 0)
+            {
+                if (!Input.GetButton("Interact"))
+                {
+                    currentGrabable.stop();
+                    grabbing = false;
+                    currentGrabable = null;
+                    interactionUI.SetActive(false);
+                }
+                else if (!Input.GetMouseButton(0))
+                {
+                    currentGrabable.stop();
+                    grabbing = false;
+                    currentGrabable = null;
+                    interactionUI.SetActive(false);
+                }
+            }
+            else if (!Input.GetMouseButton(0))
             {
                 currentGrabable.stop();
                 grabbing = false;
                 currentGrabable = null;
                 interactionUI.SetActive(false);
+            }
+
+            if (PhotonNetwork.IsConnected) {
+                if (Input.GetKeyDown(KeyCode.Q) && !stashDebounce && !stashed)
+                {
+                    GameObject player = cm.playerPub;
+                    GameObject grabbableObj = currentGrabable.gameObject;
+
+                    stashText.text = grabbableObj.name;
+
+                    soundPlayer.PlayOneShot(sounds[1]);
+
+                    currentGrabable.interacting = false;
+                    
+                    grabbableObj.GetComponent<PhotonView>().RPC("stash", RpcTarget.All);
+                    grabbing = false;
+                    grabbableObj.transform.SetParent(player.transform);
+                    stashedObj = grabbableObj;
+
+                    stashed = true;
+                    stashDebounce = true;
+                    StartCoroutine(stashDebouncer());
+
+                    Debug.Log("stashed object");
+                }
             }
 
             if (Input.GetMouseButton(1))
@@ -122,6 +189,30 @@ public class InteractionSystem : MonoBehaviour
                     currentGrabable.grabOffset = newGrabOffset;
             }
         }
+
+        if (!grabbing && stashed && !stashDebounce)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                GameObject grabbableObj = currentGrabable.gameObject;
+                Debug.Log("unstashed object");
+                stashedObj.transform.parent = null;
+                grabbableObj.GetComponent<PhotonView>().RPC("unstash", RpcTarget.All, endPos.position.x, endPos.position.y, endPos.position.z);
+                stashed = false;
+                stashDebounce = true;
+
+                stashText.text= "Nothing Stashed";
+
+                soundPlayer.PlayOneShot(sounds[0]);
+
+                StartCoroutine(stashDebouncer());
+            }
+        }
     }
 
+    IEnumerator stashDebouncer()
+    {
+        yield return new WaitForSeconds(1f);
+        stashDebounce = false;
+    }
 }

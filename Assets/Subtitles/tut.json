@@ -1,10 +1,26 @@
 {
-  "Mr. Goobulation": {
-    "1": "Hello, I am Mr. Goobulation the Third, and welcome to Goobulation.",
-    "2": "After 1 month of reviewing your resume, and your rigorous interview, we hope it was worth the wait."
+  "MrGoobulation": {
+    "1": {
+      "text": "Hello, I am Mr. Goobulation the Third, and welcome to Goobulation.",
+      "audioLength": 3.2,
+      "continueToNextLine": true
+    },
+    "2": {
+      "text": "After 1 month of reviewing your resume, and your rigorous interview, we hope it was worth the wait.",
+      "audioLength": 5.1,
+      "continueToNextLine": false
+    }
   },
   "Intern": {
-    "1": "Unfortunately, Mr. Goobulation is too busy abusing his money to actually record more than one line.",
-    "2": "So I, the minimum wage intern, will train you."
+    "1": {
+      "text": "Unfortunately, Mr. Goobulation is too busy abusing his money to actually record more than one line.",
+      "audioLength": 4.6,
+      "continueToNextLine": true
+    },
+    "2": {
+      "text": "So I, the minimum wage intern, will train you.",
+      "audioLength": 2.4,
+      "continueToNextLine": false
+    }
   }
 }

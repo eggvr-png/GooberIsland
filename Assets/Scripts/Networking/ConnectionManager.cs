@@ -31,6 +31,9 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     [Space]
     public GameObject notHostUi;
     public GameObject hostUi;
+    [Space]
+    [Header("Player Refrences")]
+    public GameObject playerPub;
 
     // private stuff
     string playerPrefabName = "Player";
@@ -106,6 +109,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         connectionStatus = connection.InGame;
         // spawns player prefab in :0
         GameObject playerObject = PhotonNetwork.Instantiate(playerPrefabName, transform.position, Quaternion.identity);
+        playerPub = playerObject;
         // if the movement was enabled it would make the game be buggy, so we need to enable it right here instead.
         PlayerMovement playerMovement = playerObject.GetComponent<PlayerMovement>();
         // real quick we put the player movement in the pause script

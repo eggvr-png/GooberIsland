@@ -97,6 +97,19 @@ public class Grabbable : MonoBehaviourPunCallbacks, IGrabbable
         }
     }
 
+    [PunRPC]
+    public void stash()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    [PunRPC]
+    public void unstash(float xpos, float ypos, float zpos)
+    {
+        this.gameObject.SetActive(true);
+        this.gameObject.transform.position = new Vector3(xpos,ypos,zpos);
+    }
+
     public void Rotate(Vector3 rot)
     {
         if (interacting)
