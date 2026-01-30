@@ -20,6 +20,11 @@ public class InterSceneDataKeeper : MonoBehaviour
 
     [Space]
 
+    public int maxplayers = 4;
+    public bool canWearCosmetics = true;
+
+    [Space]
+
     public AudioClip currentSong;
     public string currentSongTitle;
 
@@ -89,6 +94,16 @@ public class InterSceneDataKeeper : MonoBehaviour
         playerName = value;
         PlayerPrefs.SetString("playerName", value);
         PlayerPrefs.Save();
+    }
+
+    public void SaveMaxPlayer(string text)
+    {
+        maxplayers = int.Parse(text);
+    }
+
+    public void SaveUseCosmetics(bool boolofdoom)
+    {
+        canWearCosmetics = boolofdoom;
     }
 
     void Update()

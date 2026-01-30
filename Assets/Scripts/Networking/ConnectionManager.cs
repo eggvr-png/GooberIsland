@@ -1,8 +1,8 @@
 using Photon.Pun;
 using Photon.Realtime;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using ExitGames.Client.Photon;
 
 public class ConnectionManager : MonoBehaviourPunCallbacks
 {
@@ -78,9 +78,21 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         base.OnJoinedLobby();
         if (roomCode == null || roomCode == "")
         {
-            // joins a random room for the player i think. just a guess. more of a hypothesis
-            PhotonNetwork.JoinRandomOrCreateRoom(null, 0, MatchmakingMode.FillRoom, new TypedLobby(SceneManager.GetActiveScene().name, LobbyType.Default));
-            Debug.Log("Joining a random room! :0");
+            // unless you somehow join a room without a code, this makes a code for you :P
+            roomCode = codeGenerator();
+
+            Hashtable customSettings = new Hashtable();
+            customSettings["canWearCosmetics"] = InterSceneDataKeeper.Instance.canWearCosmetics;
+
+            RoomOptions options = new RoomOptions();
+            options.MaxPlayers = InterSceneDataKeeper.Instance.maxplayers;
+            options.CustomRoomProperties = customSettings;
+            options.CustomRoomPropertiesForLobby = new string[]{
+                "canWearCosmetics" 
+            };
+            
+            PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name + roomCode, options, new TypedLobby(SceneManager.GetActiveScene().name, LobbyType.Default));
+            Debug.Log("Joining private room. Code: " + roomCode + " :0");
         }
         else if (roomCode != null || roomCode != "")
         {
@@ -147,7 +159,22 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
             else
             {
                 notHostUi.SetActive(true);
-            }
-    }   }
+        }
+        }
+    }
+
+    string codeGenerator()
+    {
+        string code = "";
+        int length = 6;
+        // generates the room code :P
+        string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        for (int i = 0; i < length; i++)
+        {
+            int index = Random.Range(0, chars.Length);
+            code += chars[index];
+        }
+        return code;
+    }
 }
 

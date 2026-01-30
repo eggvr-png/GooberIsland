@@ -33,7 +33,7 @@ public class codeNameCheck : MonoBehaviour
             ranCodeButton.interactable = false;
         }
 
-        if (nameField.text.Length >= 3 && codeField.text.Length != 0)
+        if (nameField.text.Length >= 3)
         {
             joinCodeButton.interactable = true;
         }

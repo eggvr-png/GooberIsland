@@ -58,13 +58,28 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
     [PunRPC]
     public void setHat(int hatId)
     {
-        if (hatId == 0)
+        bool canWearCosmetics = false;
+
+        Debug.Log(hatId.ToString());
+
+        if (PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey("canWearCosmetics"))
         {
-            return;
+            canWearCosmetics = (bool)PhotonNetwork.CurrentRoom.CustomProperties["canWearCosmetics"];
+            Debug.Log(canWearCosmetics.ToString());
+            if (canWearCosmetics){
+                if (hatId == 0)
+                {
+                    return;
+                }
+                else
+                {
+                    hats[hatId - 1].SetActive(true);
+                }
+            }
         }
         else
         {
-            hats[hatId - 1].SetActive(true);
+            Debug.Log("Custom Prop 4 Cosmetics not found");
         }
     }
 }
