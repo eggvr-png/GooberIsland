@@ -1,6 +1,7 @@
 using System.Collections;
 using Photon.Pun;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -44,10 +45,21 @@ public class InteractionSystem : MonoBehaviour
 
     bool stashed;
     bool stashDebounce;
-    GameObject stashedObj;
+    public GameObject stashedObj;
     public AudioSource soundPlayer;
     public AudioClip[] sounds;
     public TextMeshProUGUI stashText;
+    public TutorialPrompt prompt;
+
+    bool showedPrompt;
+
+    void Start()
+    {
+        if (PlayerPrefs.GetInt("InteractionPrompt") == 1)
+        {
+            showedPrompt = true;
+        }
+    }
 
     void Update()
     {
@@ -62,6 +74,13 @@ public class InteractionSystem : MonoBehaviour
             // check interactable first because interactables take priotuy
             if (hasInteractable)
             {
+                if (!showedPrompt) {
+                    prompt.showPrompt("Interaction", "To interact, press E. To hold grabbables, hold left click.");
+                    showedPrompt = true;
+                    PlayerPrefs.SetInt("InteractionPrompt", 1);
+                    PlayerPrefs.Save();
+                }
+                
                 textToShow = interactable.interactionText;
                 showUI = true;
 
@@ -82,6 +101,13 @@ public class InteractionSystem : MonoBehaviour
 
             if (hasGrabbable)
             {
+                if (!showedPrompt) {
+                    prompt.showPrompt("Interaction", "To interact, press E. To hold grabbables, hold left click.");
+                    showedPrompt = true;
+                    PlayerPrefs.SetInt("InteractionPrompt", 1);
+                    PlayerPrefs.Save();
+                }
+                
                 // only swap to grabbable text while grabbing or if there's no interactable :D
                 if (grabbing || !hasInteractable)
                 {

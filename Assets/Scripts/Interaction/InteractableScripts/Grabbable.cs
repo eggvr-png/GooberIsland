@@ -35,7 +35,10 @@ public class Grabbable : MonoBehaviourPunCallbacks, IGrabbable
         //     force = preset.force;
         //   }
 
-        
+        if (gp == null)
+        {
+            gp = GrabbableSetter.Instance.grabPoint;
+        }
     }
 
     void Update()

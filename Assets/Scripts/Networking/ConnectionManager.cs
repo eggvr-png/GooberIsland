@@ -1,6 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement;
 using ExitGames.Client.Photon;
 
@@ -14,7 +15,6 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         JoiningRoom,
         InGame
     }
-
     [Header("Connection Status")]
     public connection connectionStatus;
     [Space]
@@ -29,20 +29,19 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     [Header("Raft-Specific")]
     public bool isRaft;
     [Space]
-    public GameObject notHostUi;
+    public TextMeshProUGUI roomCodeText;
+    [Space]
     public GameObject hostUi;
+    public HostStart hostStart;
     [Space]
     [Header("Player Refrences")]
     public GameObject playerPub;
 
-    // private stuff
     string playerPrefabName = "Player";
     GameObject devIsdk;
 
-    // the start of the actual code. like functions and stuff.
     void Start()
     {
-        // if there is no isdk, it makes a temp one.
         if (InterSceneDataKeeper.Instance == null)
         {
             Debug.Log("no isdk. creating one for development.");
@@ -51,9 +50,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
             isdk.playerName = "dev";
             isdk.roomCode = "dev";
         }
-        // not obvious.
         connectToServers();
-
         roomCode = InterSceneDataKeeper.Instance.roomCode;
         displayName = InterSceneDataKeeper.Instance.playerName;
     }
@@ -61,7 +58,6 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     public void connectToServers()
     {
         Debug.Log("Connecting to servers. :)");
-        // do i need to comment this?
         PhotonNetwork.ConnectUsingSettings();
         connectionStatus = connection.Connecting;
     }
@@ -78,35 +74,26 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         base.OnJoinedLobby();
         if (roomCode == null || roomCode == "")
         {
-            // unless you somehow join a room without a code, this makes a code for you :P
             roomCode = codeGenerator();
-
             Hashtable customSettings = new Hashtable();
             customSettings["canWearCosmetics"] = InterSceneDataKeeper.Instance.canWearCosmetics;
-
             RoomOptions options = new RoomOptions();
             options.MaxPlayers = InterSceneDataKeeper.Instance.maxplayers;
             options.CustomRoomProperties = customSettings;
-            options.CustomRoomPropertiesForLobby = new string[]{
-                "canWearCosmetics" 
-            };
-            
+            options.CustomRoomPropertiesForLobby = new string[]{ "canWearCosmetics" };
             PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name + roomCode, options, new TypedLobby(SceneManager.GetActiveScene().name, LobbyType.Default));
             Debug.Log("Joining private room. Code: " + roomCode + " :0");
         }
         else if (roomCode != null || roomCode != "")
         {
-            // the same thing but... code!1!1!!
             PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name + roomCode, null, new TypedLobby(SceneManager.GetActiveScene().name, LobbyType.Default));
             Debug.Log("Joining private room. Code: " + roomCode + " :0");
         }
-
         connectionStatus = connection.JoiningRoom;
     }
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        // this deletes the devisdk if there was one.
         base.OnDisconnected(cause);
         if (devIsdk != null)
         {
@@ -119,47 +106,49 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     {
         base.OnJoinedRoom();
         connectionStatus = connection.InGame;
-        // spawns player prefab in :0
+
+        if (isRaft)
+            roomCodeText.text = roomCode;
+
+        if (SceneManager.GetActiveScene().name == "Island")
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                int seed = UnityEngine.Random.Range(1, 10000000);
+                ChunkManager.instance.GetComponent<PhotonView>().RPC("StartGeneratingRPC", RpcTarget.AllBuffered, seed);
+            }
+            return;
+        }
+
+        SpawnPlayer();
+    }
+
+    public void SpawnPlayer()
+    {
         GameObject playerObject = PhotonNetwork.Instantiate(playerPrefabName, transform.position, Quaternion.identity);
         playerPub = playerObject;
-        // if the movement was enabled it would make the game be buggy, so we need to enable it right here instead.
         PlayerMovement playerMovement = playerObject.GetComponent<PlayerMovement>();
-        // real quick we put the player movement in the pause script
         pauseMenu.playerMovement = playerMovement;
-        // then we enable movement
         playerMovement.enabled = true;
         playerMovement.playerCam = GameObject.Find("CameraHolder").transform;
-        // disable rendering the parts so they dont get in the way of the camera
         playerObject.GetComponent<PlayerSetup>().isLocal();
-        // username + cosmetic stuff
         playerObject.GetComponent<PhotonView>().RPC("sendUsername", RpcTarget.AllBuffered);
         playerObject.GetComponent<PhotonView>().RPC("setColor", RpcTarget.AllBuffered, PlayerPrefs.GetInt("clr"));
         playerObject.GetComponent<PhotonView>().RPC("setHat", RpcTarget.AllBuffered, PlayerPrefs.GetInt("hat"));
-        // kofi exclusive nametag
         if (InterSceneDataKeeper.Instance.iskofi)
-        {
             playerObject.GetComponent<PhotonView>().RPC("kofiTag", RpcTarget.AllBuffered);
-        }
-        // camera stuff lol. again if we just kept these enabled, the game would die.
         GameObject.FindGameObjectWithTag("PreviewCamera").SetActive(false);
-        GameObject.Find("CameraHolder").transform.GetChild(0).gameObject.SetActive(true); // WHY ARE YOU LIKE THIS
+        GameObject.Find("CameraHolder").transform.GetChild(0).gameObject.SetActive(true);
         GameObject.Find("CameraHolder").GetComponent<MoveCamera>().enabled = true;
-        // really long camera thing
         GameObject.Find("CameraHolder").GetComponent<MoveCamera>().player = playerObject.transform.GetChild(0).transform;
-        // destory the loading screen cuz FUCK the loading screen
         Destroy(loadingScreen);
-        // since we dont want the pause menu enabling while loading, a var controls ability to pause
         pauseMenu.isPlayerConnected = true;
-        // now we need to check if the player is the server host (but only do this if on raft)
-        if (isRaft) {
+        if (isRaft)
+        {
             if (PhotonNetwork.LocalPlayer.IsMasterClient)
-            {
                 hostUi.SetActive(true);
-            }
-            else
-            {
-                notHostUi.SetActive(true);
-        }
+            
+            hostStart.enabled = true;
         }
     }
 
@@ -167,14 +156,12 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     {
         string code = "";
         int length = 6;
-        // generates the room code :P
         string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         for (int i = 0; i < length; i++)
         {
-            int index = Random.Range(0, chars.Length);
+            int index = UnityEngine.Random.Range(0, chars.Length);
             code += chars[index];
         }
         return code;
     }
 }
-

@@ -62,8 +62,7 @@ public class SettingsSystem : MonoBehaviour
         // clear dropdown just in case i did a dummy
         resChooser.ClearOptions();
         resChooser.AddOptions(resolutionList);
-        if (!pausemenu)
-            loadSettings();
+        loadSettings();
     }
 
     // pixelation settings
@@ -72,6 +71,13 @@ public class SettingsSystem : MonoBehaviour
         PlayerPrefs.SetFloat("PixelDensity", newPixelyness);
         // 0.5 is added so u dont get black lines at the top and sides of your screen.
         pixelFSS.SetFloat("_PS", (512 - pixelyness) + 0.5f);
+        PlayerPrefs.Save();
+    }
+
+    public void resetprompts()
+    {
+        PlayerPrefs.SetInt("InteractionPrompt", 0);
+        PlayerPrefs.Save();
     }
 
     // tbh i dunno why this is here lol
@@ -99,12 +105,14 @@ public class SettingsSystem : MonoBehaviour
         PlayerPrefs.SetInt("qSetting", qSetting + 1);
         QualitySettings.SetQualityLevel(qSetting);
         qualitySetting = qSetting;
+        PlayerPrefs.Save();
     }
 
     public void changeRes(int res) {
         Screen.SetResolution(resolutions[res].width, resolutions[res].height, fullscreenToggle.isOn);
         PlayerPrefs.SetInt("width", resolutions[res].width);
         PlayerPrefs.SetInt("height", resolutions[res].height);
+        PlayerPrefs.Save();
     }
 
     // vsync
@@ -113,11 +121,13 @@ public class SettingsSystem : MonoBehaviour
             QualitySettings.vSyncCount = 1;
             Debug.Log("VSync On");
             PlayerPrefs.SetInt("vsyncSetting", 1);
+            PlayerPrefs.Save();
         }
         else {
             QualitySettings.vSyncCount = 0;
             Debug.Log("VSync Off");
             PlayerPrefs.SetInt("vsyncSetting", 0);
+            PlayerPrefs.Save();
         }
     }
 
@@ -131,6 +141,7 @@ public class SettingsSystem : MonoBehaviour
         else {
             PlayerPrefs.SetInt("fullsSettings", 1);
         }
+        PlayerPrefs.Save();
     }
 
 
@@ -142,6 +153,7 @@ public class SettingsSystem : MonoBehaviour
         textValue = Mathf.Round(textValue);
         textValue = textValue * 10;
         mvolInput.text = textValue.ToString();
+        PlayerPrefs.Save();
     }
 
     public void changeSVolume(float sliderVal) {
@@ -151,6 +163,7 @@ public class SettingsSystem : MonoBehaviour
         textValue = Mathf.Round(textValue);
         textValue = textValue * 10;
         svolInput.text = textValue.ToString();
+        PlayerPrefs.Save();
     }
 
     public void changeMVolWithInput(string input) {
@@ -166,6 +179,7 @@ public class SettingsSystem : MonoBehaviour
         else {
             mvolSlider.value = newPixelyness;
         }
+        PlayerPrefs.Save();
     }
 
     public void changeSVolWithInput(string input) {
@@ -181,6 +195,7 @@ public class SettingsSystem : MonoBehaviour
         else {
             svolSlider.value = newPixelyness;
         }
+        PlayerPrefs.Save();
     }
 
     // joke settings
@@ -254,6 +269,7 @@ public class SettingsSystem : MonoBehaviour
         // loads resolution
         if (PlayerPrefs.GetInt("width") != 0 && PlayerPrefs.GetInt("height") == 0) {
             Screen.SetResolution(PlayerPrefs.GetInt("width"), PlayerPrefs.GetInt("height"), fullscreenToggle.isOn);
+            resText.text = PlayerPrefs.GetInt("width").ToString() + "x" + PlayerPrefs.GetInt("height").ToString();
         }
         // loads joke settings
         if (PlayerPrefs.GetInt("hypercam") == 1)

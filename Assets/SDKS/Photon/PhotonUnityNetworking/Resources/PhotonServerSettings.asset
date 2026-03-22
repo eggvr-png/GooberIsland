@@ -51,6 +51,10 @@ MonoBehaviour:
   - unready
   - stash
   - unstash
+  - ShareSeed
+  - StartGeneratingRPC
+  - SyncRaftPosition
+  - SwitchScene
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

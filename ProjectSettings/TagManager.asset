@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BuoyencyEnabler
   - PreviewCamera
+  - ThatOneLantern
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - UI
   - PhysicsObject
   - NotVisibleToMenuCam
-  - 
-  - 
+  - Lantern
+  - MenuGoober
   - 
   - 
   - 

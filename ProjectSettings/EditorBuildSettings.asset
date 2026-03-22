@@ -15,9 +15,22 @@ EditorBuildSettings:
     path: Assets/Scenes/Raft.unity
     guid: 1b77bc6809eed7e669331a45069ab715
   - enabled: 1
+    path: Assets/Scenes/Island.unity
+    guid: 0130094b20f3aeccc9c7d7993a5aac53
+  - enabled: 1
     path: Assets/Scenes/EvilRaft.unity
     guid: b94e440c07003e6d1b6d8769e68da6ca
   - enabled: 1
     path: Assets/Scenes/TestScene.unity
     guid: edbff9f2171e055e4969cead92d04a65
-  m_configObjects: {}
+  - enabled: 0
+    path: Assets/Scenes/Raft Varitaionms/AnimStarter.unity
+    guid: 7532dc992b875cb41ab56d208d6bc9fc
+  - enabled: 0
+    path: Assets/Scenes/Raft Varitaionms/Raft For Anims.unity
+    guid: 5cc7cc711dc4281449586343679299f6
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 0b96ea40022449740ba9bf79d5afe910,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 17a7d81012d2a814ba75d53e087925f1,
+      type: 2}
