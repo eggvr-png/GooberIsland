@@ -63,41 +63,50 @@ public class Grabbable : MonoBehaviourPunCallbacks, IGrabbable
 
     public void grab()
     {
+        if (!canBeInteracted) return;
+
         if (PhotonNetwork.IsConnected)
+        {
             pv.TransferOwnership(PhotonNetwork.LocalPlayer);
-        interacting = true;
-        changeGrabStatus();
-        canBeInteracted = false;
-        StartCoroutine(debounce());
+            pv.RPC("SetGrabState", RpcTarget.All, true);
+        }
+        else
+        {
+            interacting = true;
+            canBeInteracted = false;
+            StartCoroutine(debounce());
+        }
     }
-    
+
     public void stop()
     {
         if (PhotonNetwork.IsConnected)
+        {
             pv.TransferOwnership(PhotonNetwork.LocalPlayer);
-        interacting = false;
-        changeGrabStatus();
+            pv.RPC("SetGrabState", RpcTarget.All, false);
+        }
+        else
+        {
+            interacting = false;
+            grabOffset = 0f;
+            canBeInteracted = false;
+            StartCoroutine(debounce());
+        }
+    }
+
+    [PunRPC]
+    public void SetGrabState(bool grabbed)
+    {
+        interacting = grabbed;
+        if (!grabbed) grabOffset = 0f;
         canBeInteracted = false;
         StartCoroutine(debounce());
-        grabOffset = 0f; // reset for float
     }
 
     IEnumerator debounce()
     {
         yield return new WaitForSeconds(debounceTime);
         canBeInteracted = true;
-    }
-
-    void changeGrabStatus()
-    {
-        if (interacting)
-        {
-            rb.isKinematic = false;
-        }
-        else
-        {
-            rb.isKinematic = false;
-        }
     }
 
     [PunRPC]

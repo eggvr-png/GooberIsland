@@ -1,5 +1,5 @@
 // for some reason linux DOES NOT like the discord thing im using :/
-#if !UNITY_STANDALONE_LINUX
+#if !UNITY_STANDALONE_LINUX && !UNITY_ANDROID
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

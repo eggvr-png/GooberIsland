@@ -25,6 +25,8 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     [Header("UI Elements")]
     public GameObject loadingScreen;
     public Pause pauseMenu;
+    public TutorialPrompt prompt;
+
     [Space]
     [Header("Raft-Specific")]
     public bool isRaft;
@@ -42,6 +44,11 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
 
     void Start()
     {
+        int evilRaftCheck = Random.Range(0, 101);
+        if (evilRaftCheck == 100)
+        {
+            SceneManager.LoadScene("EvilRaft");
+        }
         if (InterSceneDataKeeper.Instance == null)
         {
             Debug.Log("no isdk. creating one for development.");
@@ -58,6 +65,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     public void connectToServers()
     {
         Debug.Log("Connecting to servers. :)");
+        PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = "us";
         PhotonNetwork.ConnectUsingSettings();
         connectionStatus = connection.Connecting;
     }
@@ -84,7 +92,7 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
             PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name + roomCode, options, new TypedLobby(SceneManager.GetActiveScene().name, LobbyType.Default));
             Debug.Log("Joining private room. Code: " + roomCode + " :0");
         }
-        else if (roomCode != null || roomCode != "")
+        else if (roomCode != null && roomCode != "")
         {
             PhotonNetwork.JoinOrCreateRoom(SceneManager.GetActiveScene().name + roomCode, null, new TypedLobby(SceneManager.GetActiveScene().name, LobbyType.Default));
             Debug.Log("Joining private room. Code: " + roomCode + " :0");
@@ -145,8 +153,15 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         pauseMenu.isPlayerConnected = true;
         if (isRaft)
         {
-            if (PhotonNetwork.LocalPlayer.IsMasterClient)
+            if (PhotonNetwork.LocalPlayer.IsMasterClient) {
                 hostUi.SetActive(true);
+                int hostFirstTime = PlayerPrefs.GetInt("hostFirst");
+                if (hostFirstTime == 0)
+                {
+                    PlayerPrefs.SetInt("hostFirst", 1);
+                    prompt.showPrompt("Host", "As a host, you can change the room settings and start the game!");
+                }
+            }
             
             hostStart.enabled = true;
         }

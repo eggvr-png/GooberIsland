@@ -5069,6 +5069,7 @@ MonoBehaviour:
   roomCode: 
   loadingScreen: {fileID: 942668510}
   pauseMenu: {fileID: 448265321}
+  prompt: {fileID: 448265324}
   isRaft: 1
   roomCodeText: {fileID: 1382112974}
   hostUi: {fileID: 1113754121}
@@ -6778,6 +6779,8 @@ GameObject:
   - component: {fileID: 2110912056}
   - component: {fileID: 2110912059}
   - component: {fileID: 2110912060}
+  - component: {fileID: 2110912062}
+  - component: {fileID: 2110912061}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -6926,6 +6929,10 @@ MonoBehaviour:
   endPos: {fileID: 12015465}
   interactionUI: {fileID: 404035824}
   iText: {fileID: 2001256710}
+  icon: {fileID: 2062997084}
+  icons:
+  - {fileID: 2800000, guid: bdc718924efc10a1dbcd5ac64486ad49, type: 3}
+  - {fileID: 2800000, guid: 544524b48910d8c4fa9ebe4aaf855a5f, type: 3}
   cm: {fileID: 1640049106}
   grabbing: 0
   stashedObj: {fileID: 0}
@@ -6935,6 +6942,37 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b2c4d952089592547b0d2d917771f0f9, type: 3}
   stashText: {fileID: 1068796655}
   prompt: {fileID: 448265324}
+--- !u!114 &2110912061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110912055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31d8c23788d4acb479d4b8e1c7c34770, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mover: {fileID: 2110912062}
+--- !u!114 &2110912062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2110912055}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a2a9c34df4095f47b9ca8f975175f5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Device: 0
+  m_PoseSource: 2
+  m_PoseProviderComponent: {fileID: 0}
+  m_TrackingType: 0
+  m_UpdateType: 0
+  m_UseRelativeTransform: 0
 --- !u!1 &2116642684
 GameObject:
   m_ObjectHideFlags: 0
@@ -8529,7 +8567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debounceTime: 0.1
   canBeInteracted: 1
-  interacting: 0
+  interacting: 1
   objToEnable:
   - {fileID: 3723594036110105332}
   objToDisable:
@@ -8548,7 +8586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debounceTime: 0.1
   canBeInteracted: 1
-  interacting: 0
+  interacting: 1
   objToEnable:
   - {fileID: 510659997450613476}
   objToDisable:

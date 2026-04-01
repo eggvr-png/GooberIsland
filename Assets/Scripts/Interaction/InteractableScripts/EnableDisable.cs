@@ -10,7 +10,7 @@ using UnityEngine;
 public class EnableDisable : MonoBehaviourPunCallbacks, IInteractable
 {
     // this is the text that shows when you look at the object
-    public string interactionText => interacting ? "Turn On" : "Turn Off"; // this for example would be: "grab"
+    public string interactionText => interacting ? "Turn Off" : "Turn On"; // this for example would be: "grab"
     [Header("Settings")]
     public float debounceTime = 0.1f;
     [Space]

@@ -4,6 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 interface IInteractable
 {
@@ -36,6 +37,8 @@ public class InteractionSystem : MonoBehaviour
     [Space]
     public GameObject interactionUI;
     public TextMeshProUGUI iText;
+    public RawImage icon;
+    public Texture2D[] icons;
     [Space]
     public ConnectionManager cm;
 
@@ -80,6 +83,8 @@ public class InteractionSystem : MonoBehaviour
                     PlayerPrefs.SetInt("InteractionPrompt", 1);
                     PlayerPrefs.Save();
                 }
+
+                icon.texture = icons[0];
                 
                 textToShow = interactable.interactionText;
                 showUI = true;
@@ -98,7 +103,7 @@ public class InteractionSystem : MonoBehaviour
                     }
                 }
             }
-
+            
             if (hasGrabbable)
             {
                 if (!showedPrompt) {
@@ -108,32 +113,41 @@ public class InteractionSystem : MonoBehaviour
                     PlayerPrefs.Save();
                 }
                 
-                // only swap to grabbable text while grabbing or if there's no interactable :D
                 if (grabbing || !hasInteractable)
                 {
                     textToShow = grabbable.interactionText;
                     showUI = true;
+                    icon.texture = icons[1];
                 }
 
                 if (Input.GetJoystickNames().Length > 0) {
                     if (Input.GetButton("Interact") && !grabbing)
                     {
-                        grabbing = true;
-                        grabbable.grab();
-                        currentGrabable = grabbable as Grabbable;
+                        Grabbable g = grabbable as Grabbable;
+                        if (g == null || g.canBeInteracted) {
+                            grabbing = true;
+                            grabbable.grab();
+                            currentGrabable = g;
+                        }
                     }
                     else if (Input.GetMouseButton(0) && !grabbing)
                     {
-                        grabbing = true;
-                        grabbable.grab();
-                        currentGrabable = grabbable as Grabbable;
+                        Grabbable g = grabbable as Grabbable;
+                        if (g == null || g.canBeInteracted) {
+                            grabbing = true;
+                            grabbable.grab();
+                            currentGrabable = g;
+                        }
                     }
                 }
                 else if (Input.GetMouseButton(0) && !grabbing)
                 {
-                    grabbing = true;
-                    grabbable.grab();
-                    currentGrabable = grabbable as Grabbable;
+                    Grabbable g = grabbable as Grabbable;
+                    if (g == null || g.canBeInteracted) {
+                        grabbing = true;
+                        grabbable.grab();
+                        currentGrabable = g;
+                    }
                 }
             }
 

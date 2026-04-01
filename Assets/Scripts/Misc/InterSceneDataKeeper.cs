@@ -44,13 +44,6 @@ public class InterSceneDataKeeper : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             loadlastSong();
         }
-        else
-        {
-            Destroy(Instance);
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            loadlastSong();
-        }
 
         string lastUser = PlayerPrefs.GetString("playerName");
         if (lastUser != null || lastUser != "")

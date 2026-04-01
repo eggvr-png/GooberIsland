@@ -34,7 +34,7 @@ public class VRMenuSwitch : MonoBehaviour
                 o.SetActive(false);
             }
 
-            pixelFSS.SetFloat("_PS", 600.5f);
+            pixelFSS.SetFloat("_PS", 1500.5f);
 
             standeredCam.SetActive(false);
             xr.SetActive(true);

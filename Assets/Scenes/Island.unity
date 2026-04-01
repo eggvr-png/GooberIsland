@@ -1198,6 +1198,7 @@ MonoBehaviour:
   defualtls: {fileID: 829563897}
   listener: {fileID: 141235047}
   music: {fileID: 141235045}
+  paused: 0
 --- !u!114 &723136385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1584,6 +1585,10 @@ MonoBehaviour:
   endPos: {fileID: 2032166057}
   interactionUI: {fileID: 507731098}
   iText: {fileID: 305146662}
+  icon: {fileID: 1599447889}
+  icons:
+  - {fileID: 2800000, guid: bdc718924efc10a1dbcd5ac64486ad49, type: 3}
+  - {fileID: 2800000, guid: 544524b48910d8c4fa9ebe4aaf855a5f, type: 3}
   cm: {fileID: 2009523134}
   grabbing: 0
   stashedObj: {fileID: 0}
