@@ -2224,6 +2224,11 @@ MonoBehaviour:
   - get goober island ultimate for only $2000
   - gordon dies in all dogs go to heaven 2
   - im running out of ideas please help me.
+  - hey gordon, its me, leonard from middle school
+  - windows 10 is cool
+  - linux is really cool
+  - my dog got on its hind legs and said "no one will believe you"
+  - this is random line 15.
   tmpUG: {fileID: 2077310710}
 --- !u!1 &185539170
 GameObject:
@@ -10202,39 +10207,43 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'hey wait a minute, is that an island in the distant? HOLY CRAP THE GOOBER
-    ISLAND IS REAL!!!!
+  m_text: 'hello!
+
+    so. goober island is canceled, im sure you know this by now.
+
+    however,
+    i want to tie up some loose ends and some lost features
+
+    so. lets do this
+    ONE last time :)
 
 
-    - added the island
+    - Added emotes back
 
-    -- added game starting, and
-    other key things for the island.
+    -- Wave
 
-    - added a new lobby system
+    -- Sit
 
-    -- instead
-    of creating your own code, a pregenerated one is made.
+    -- Boombox
+    (Random Dance)
 
-    - added room options
+    - Added the building system back
 
-    --
-    now you can be all alone if you wanna!
+    -- R to build, F to
+    swap, R to swap type of wall, ScrollWheel for rotate
 
-    - you can stash objects!
-
-    --
-    to stash objects, press Q
-
-    -- you can only stash small objects however
-
-    -
-    added NEW cosmetics that aren''t seasonal related
-
-    - new pause music
+    - Tutorial is finished
 
     -
-    tutorial prompts when you do certain things'
+    New tree mesh on island
+
+    -- The old one was ASS
+
+    - and alot more.
+
+
+    thanks
+    for playing my game :)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0f3d3162129a6549b80784e439c5b0c, type: 2}
   m_sharedMaterial: {fileID: -5223415700110494042, guid: e0f3d3162129a6549b80784e439c5b0c,
@@ -14735,6 +14744,11 @@ MonoBehaviour:
   - hisense 40 inch google tv. (im running out of ideas)
   - thank you ko-fi supporters!
   - sprite.
+  - wii u i just look like buddy holly
+  - thanks for playing my game :D
+  - iphone 4 port when?
+  - piggytoon said hi
+  - my dog is being weird please help
   tmpUG: {fileID: 950251023}
 --- !u!114 &1083778753 stripped
 MonoBehaviour:
@@ -18251,7 +18265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'version: B9.0.1'
+  m_text: 'version: B10'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0f3d3162129a6549b80784e439c5b0c, type: 2}
   m_sharedMaterial: {fileID: -5223415700110494042, guid: e0f3d3162129a6549b80784e439c5b0c,
@@ -22850,7 +22864,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: 0fa4acfcb7cac2e86ab1dbf700c062c6,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: a8fed84af2d3fb043a8112a56028e143, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 209fe503e7dbc9f4dbbab3b3b6dfd060, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -26788,7 +26802,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: thanks kofi supporters
+  m_text: thanks kofi supporters!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e0f3d3162129a6549b80784e439c5b0c, type: 2}
   m_sharedMaterial: {fileID: -5223415700110494042, guid: e0f3d3162129a6549b80784e439c5b0c,
