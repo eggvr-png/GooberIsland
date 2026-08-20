@@ -222,6 +222,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 230175058}
+        m_TargetAssemblyTypeName: DiscordManager, Assembly-CSharp
+        m_MethodName: InGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 210151}
         m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
         m_MethodName: SwitchScene
@@ -2780,6 +2792,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 230175058}
+        m_TargetAssemblyTypeName: DiscordManager, Assembly-CSharp
+        m_MethodName: InLobbySelecter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 206655693}
         m_TargetAssemblyTypeName: ChangeMenu, Assembly-CSharp
         m_MethodName: change
@@ -3445,6 +3469,7 @@ GameObject:
   - component: {fileID: 230175057}
   - component: {fileID: 230175056}
   - component: {fileID: 230175055}
+  - component: {fileID: 230175058}
   m_Layer: 0
   m_Name: DataKeeper
   m_TagString: Untagged
@@ -3596,6 +3621,19 @@ MonoBehaviour:
   canWearCosmetics: 1
   currentSong: {fileID: 0}
   currentSongTitle: 
+--- !u!114 &230175058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230175053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 175f4230c5cea9d08968be9440f73c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  discordRunning: 0
 --- !u!1 &236414121
 GameObject:
   m_ObjectHideFlags: 0
@@ -5026,6 +5064,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 230175058}
+        m_TargetAssemblyTypeName: DiscordManager, Assembly-CSharp
+        m_MethodName: InCustomizer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 338409325}
         m_TargetAssemblyTypeName: ChangeMenu, Assembly-CSharp
         m_MethodName: change
@@ -6009,6 +6059,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: MenuCosmeticSys, Assembly-CSharp
         m_MethodName: changeColor
         m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 230175058}
+        m_TargetAssemblyTypeName: DiscordManager, Assembly-CSharp
+        m_MethodName: ChangeSmallImageColor
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7761,6 +7823,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 230175058}
+        m_TargetAssemblyTypeName: DiscordManager, Assembly-CSharp
+        m_MethodName: InLobbySelecter
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 482683669}
         m_TargetAssemblyTypeName: ChangeMenu, Assembly-CSharp
         m_MethodName: change
@@ -8359,6 +8433,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 230175058}
+        m_TargetAssemblyTypeName: DiscordManager, Assembly-CSharp
+        m_MethodName: ChangeSmallImageColor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10033,6 +10119,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 230175058}
+        m_TargetAssemblyTypeName: DiscordManager, Assembly-CSharp
+        m_MethodName: ChangeSmallImageColor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -13042,6 +13140,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 230175058}
+        m_TargetAssemblyTypeName: DiscordManager, Assembly-CSharp
+        m_MethodName: InGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 901408268}
         m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
         m_MethodName: SwitchScene
@@ -26324,6 +26434,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 230175058}
+        m_TargetAssemblyTypeName: DiscordManager, Assembly-CSharp
+        m_MethodName: ChangeSmallImageColor
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2039081504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27265,6 +27387,7 @@ MonoBehaviour:
   menuFade: {fileID: 618749318}
   screenOn: 0
   pm: {fileID: 1964602098}
+  dm: {fileID: 230175058}
   introSkipped: 0
 --- !u!1 &2128772982
 GameObject:

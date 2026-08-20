@@ -34,6 +34,9 @@ public class StartingScreens : MonoBehaviour
     public screen screenOn = screen.Epilepsy;
 
     public PlayfabManager pm;
+    #if !UNITY_STANDALONE_LINUX && !UNITY_ANDROID
+    public DiscordManager dm;
+    #endif
 
     public bool introSkipped;
 
@@ -46,6 +49,9 @@ public class StartingScreens : MonoBehaviour
     public void Start()
     {
         acceptedPrivacy = PlayerPrefs.GetInt("privAcceptNew");
+        #if !UNITY_STANDALONE_LINUX && !UNITY_ANDROID
+        dm.InMenu();
+        #endif
 
         int autoSkip = PlayerPrefs.GetInt("autoSkip");
 

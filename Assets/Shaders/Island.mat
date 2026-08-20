@@ -24,6 +24,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _IslandTexture:
+        m_Texture: {fileID: 2800000, guid: 751be91ae914b403b9c65e08151b0963, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_7ae232816f654a3ab162953614aa55cc_Texture_1_Texture2D:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -45,11 +49,12 @@ Material:
     - _NoiseBlendAmount: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SeaLevel: 0.88
+    - _SeaLevel: 0.9
     - _SeaLevelExtend: 0
     m_Colors:
     - _BeachColor: {r: 0.754717, g: 0.73957145, b: 0.40939838, a: 0}
-    - _Color: {r: 0.3876824, g: 0.6792453, b: 0.39420992, a: 0}
+    - _Color: {r: 0, g: 0.3301887, b: 0.008924053, a: 0}
+    - _TextureTiling: {r: 0.3, g: 0.3, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &578633551885289662
 MonoBehaviour:
