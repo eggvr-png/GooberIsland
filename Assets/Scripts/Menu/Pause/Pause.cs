@@ -88,7 +88,7 @@ public class Pause : MonoBehaviour
             {
                 ++i;
                 music.pitch = music.pitch - 0.01f;
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.001f);
             }
         }
         else
@@ -99,7 +99,7 @@ public class Pause : MonoBehaviour
             {
                 ++i;
                 music.pitch = music.pitch + 0.01f;
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.001f);
             }
         }
     }

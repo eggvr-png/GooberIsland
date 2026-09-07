@@ -25,11 +25,13 @@ public class StartingScreens : MonoBehaviour
     [Header("Intro")]
     public GameObject intro;
     public AudioSource music;
+    public AudioClip fromCreditsMusic;
     [Space]
     public Animator introAnimator;
     [Header("Menu")]
     public GameObject menu;
     public Animator menuFade;
+    public RawImage fadeColor;
     [Header("What are screens on")]
     public screen screenOn = screen.Epilepsy;
 
@@ -70,6 +72,26 @@ public class StartingScreens : MonoBehaviour
             }
 
             PlayerPrefs.DeleteKey("autoSkip");
+        }
+
+        int cameFromCredits = PlayerPrefs.GetInt("cameFromCredits");
+
+        if (cameFromCredits == 1)
+        {
+            music.clip = fromCreditsMusic;
+            music.Play();
+            warning.SetActive(false);
+            menu.SetActive(true);
+            screenOn = screen.None;
+            fadeColor.color = Color.black;
+            if (!fade)
+            {
+                menuFade.Play("FadeOut", 0, 0);
+                fade = true;
+                this.enabled = false;
+            }
+
+            PlayerPrefs.DeleteKey("cameFromCredits");
         }
     }
 

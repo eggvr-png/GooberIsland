@@ -23,6 +23,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScene.unity
     guid: edbff9f2171e055e4969cead92d04a65
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: ab424ca6931ddd845b753c5a3a2eca3a
   - enabled: 0
     path: Assets/Scenes/Raft Varitaionms/AnimStarter.unity
     guid: 7532dc992b875cb41ab56d208d6bc9fc
